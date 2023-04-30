@@ -1,12 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bq8ljbxgajeeh"]
+[gd_scene load_steps=5 format=3 uid="uid://bw30yj4vv0n06"]
 
-[ext_resource type="Script" path="res://scripts/goNextLevel.gd" id="1_dkf0f"]
-[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/statsGrid.tscn" id="1_qsy4u"]
+[ext_resource type="Script" path="res://scripts/goNextLevel.gd" id="1_prox6"]
+[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/statsGrid.tscn" id="2_pfnes"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pusrk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t8ih"]
 
-[sub_resource type="Theme" id="Theme_xqt2h"]
-HSeparator/styles/separator = SubResource("StyleBoxEmpty_pusrk")
+[sub_resource type="Theme" id="Theme_fydem"]
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_0t8ih")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -36,20 +36,25 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
 
-[node name="HseparatorCustom" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-theme = SubResource("Theme_xqt2h")
-
-[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Level finished"
-horizontal_alignment = 1
-
 [node name="HseparatorCustom2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme = SubResource("Theme_xqt2h")
+theme = SubResource("Theme_fydem")
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "YOU WON !"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Thanks for playing"
+horizontal_alignment = 1
+
+[node name="HseparatorCustom" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_fydem")
 
 [node name="GridContainer2" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -57,15 +62,20 @@ size_flags_horizontal = 4
 
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
-text = "go to next level"
-script = ExtResource("1_dkf0f")
+text = "Return to menu"
+script = ExtResource("1_prox6")
+
+[node name="HseparatorCustom4" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_fydem")
+
+[node name="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("2_pfnes")]
+layout_mode = 2
 
 [node name="HseparatorCustom3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
-theme = SubResource("Theme_xqt2h")
-
-[node name="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("1_qsy4u")]
-layout_mode = 2
+theme = SubResource("Theme_fydem")
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" method="_on_pressed"]

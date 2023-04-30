@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://36hneilo82f0"]
+[gd_scene load_steps=4 format=3 uid="uid://36hneilo82f0"]
 
 [ext_resource type="Script" path="res://scripts/goToLevel1.gd" id="1_ngbjl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pjshm"]
+
+[sub_resource type="Theme" id="Theme_jshym"]
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_pjshm")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -30,18 +35,20 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+[node name="HseparatorCustom2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+theme = SubResource("Theme_jshym")
 
 [node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Menu"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+[node name="HseparatorCustom" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme = SubResource("Theme_jshym")
 
 [node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwxnxsg6lktxr"]
+[gd_scene load_steps=5 format=3 uid="uid://cwxnxsg6lktxr"]
 
 [ext_resource type="Script" path="res://scripts/goToMenu.gd" id="1_wrmt2"]
 [ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/statsGrid.tscn" id="2_7y3x2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mh5t"]
+
+[sub_resource type="Theme" id="Theme_sik0a"]
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_7mh5t")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -31,18 +36,20 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+[node name="HseparatorCustom" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+theme = SubResource("Theme_sik0a")
 
 [node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "You loose"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+[node name="HseparatorCustom2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+theme = SubResource("Theme_sik0a")
 
 [node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -53,9 +60,10 @@ layout_mode = 2
 text = "Return to menu"
 script = ExtResource("1_wrmt2")
 
-[node name="HSeparator3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+[node name="HseparatorCustom3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+theme = SubResource("Theme_sik0a")
 
 [node name="GridContainer2" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("2_7y3x2")]
 layout_mode = 2

@@ -10,7 +10,7 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@export var life = 10 : set = update_life
+@export var life = 16 : set = update_life
 var isDie= false
 signal life_update(life)
 

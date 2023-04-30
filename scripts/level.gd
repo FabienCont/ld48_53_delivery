@@ -2,14 +2,21 @@ extends Node3D
 
 var isFinish:bool = false
 
+
 @onready var hero: CharacterBody3D =$Player/PlayerCharacterBody3D
+@onready var allyScene = preload("res://characters/ally.tscn")
+@onready var ally_instance = allyScene.instantiate()
+@onready var allies_node: Node3D=$Allies
 # Called when the node enters the scene tree for the first time.
 var stats 
+var spawning:bool = false 
+@export var timeToSpawn: float = 2
+@export var nbAllyToSpawn:int = 1
+var spawnAllyCounter:int =0
 
 func _ready():
 	GlobalInfo.startLevel()
 	stats= GlobalInfo.stats
-	
 	pass # Replace with function body.
 
 	# Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +27,18 @@ func _physics_process(_delta):
 	elif hero:
 		get_tree().call_group("ennemies","update_target_location",hero)
 	pass
+	
+	if(not spawning && spawnAllyCounter<nbAllyToSpawn):
+		spawnAlly()
 
+func spawnAlly():
+	print("SPAWN ALLY")
+	spawning=true
+	spawnAllyCounter+=1
+	await get_tree().create_timer(timeToSpawn).timeout
+	allies_node.add_child(ally_instance.duplicate())
+	spawning=false
+	
 func loose():
 	if hasFinish():
 		return
@@ -52,7 +70,7 @@ func ally_escape(ally: Node3D):
 	stats.savedAllies+=1
 	var allies = get_tree().get_nodes_in_group("allies")
 	var ennemies = get_tree().get_nodes_in_group("ennemies")
-	if(ennemies.size()==0 && allies.size()==0):
+	if(allies.size()==0):
 		open_doors()
 	
 func ennemy_die(ennemy: Node3D):
@@ -60,7 +78,7 @@ func ennemy_die(ennemy: Node3D):
 	stats.killedEnnemies+=1
 	var ennemies = get_tree().get_nodes_in_group("ennemies")
 	var allies = get_tree().get_nodes_in_group("allies")
-	if(ennemies.size()==0 && allies.size()==0):
+	if(allies.size()==0):
 		open_doors()
 	pass
 
