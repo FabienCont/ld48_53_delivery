@@ -1,0 +1,171 @@
+[gd_scene load_steps=15 format=3 uid="uid://bkv74b18figfa"]
+
+[ext_resource type="Script" path="res://scripts/katana.gd" id="1_87fpx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxkf2"]
+albedo_color = Color(0.662745, 0.670588, 0.623529, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_rhjx0"]
+material = SubResource("StandardMaterial3D_dxkf2")
+size = Vector3(0.005, 0.05, 0.75)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jvna8"]
+points = PackedVector3Array(0.00318108, 0.0261364, 0.37682, -0.0043932, -0.0268939, -0.37682, 0.00318108, -0.0268939, -0.37682, -0.0043932, -0.0268939, 0.37682, -0.0043932, 0.0261364, -0.37682, 0.00318108, 0.0261364, -0.37682, 0.00318108, -0.0268939, 0.37682, -0.0043932, 0.0261364, 0.37682)
+
+[sub_resource type="Animation" id="Animation_igbia"]
+resource_name = "attack"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.32645, 0, 0), Vector3(-2.0944, 0.785398, 0), Vector3(-1.5708, 0, 0), Vector3(1.32645, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.2, 0.01, 0), Vector3(-0.4, -0.1, 0), Vector3(-0.7, -0.1, 0), Vector3(0.2, 0.01, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node3D/MeshInstance3D3/MeshInstance3D2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.349066), Vector3(1.5708, 1.0472, 0.698132), Vector3(1.5708, 1.0472, 0.698132), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fqvwb"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.32645, 0, 0), Vector3(1.22173, -0.349066, 0), Vector3(1.32645, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.2, 0, 0), Vector3(0.2, 0, 0), Vector3(0.2, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node3D/MeshInstance3D3/MeshInstance3D2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.349066)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xul54"]
+_data = {
+"attack": SubResource("Animation_igbia"),
+"idle": SubResource("Animation_fqvwb")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3fwpx"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ogv8"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwkj3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fljg8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_46abl"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pwjax"]
+states/Start/position = Vector2(199, 100)
+states/attack/node = SubResource("AnimationNodeAnimation_3fwpx")
+states/attack/position = Vector2(484, 76)
+states/idle/node = SubResource("AnimationNodeAnimation_4ogv8")
+states/idle/position = Vector2(355, 81)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qwkj3"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_fljg8"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_46abl")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_0w63t"]
+
+[node name="katana" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.151759, 0)
+script = ExtResource("1_87fpx")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(0.997084, -0.0736021, -0.0201532, 0, 0.264092, -0.964498, 0.0763114, 0.961685, 0.263322, 0.2, 0, 0)
+
+[node name="MeshInstance3D3" type="Node3D" parent="Node3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D/MeshInstance3D3"]
+transform = Transform3D(0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 0, 0, 1, -0.211028, 0.0456919, -0.285987)
+visible = false
+layers = 2
+mesh = SubResource("BoxMesh_rhjx0")
+skeleton = NodePath("../../../../..")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Node3D/MeshInstance3D3"]
+transform = Transform3D(-0.555836, -0.829731, -0.0509283, 0.826581, -0.545133, -0.13998, 0.0883833, -0.119902, 0.988845, -0.0510304, -0.13906, 0.0712033)
+layers = 2
+polygon = PackedVector2Array(0.194918, 0.075079, 0.189587, 0.0735406, 0.170344, 0.0962223)
+depth = 0.75
+smooth_faces = true
+material = SubResource("StandardMaterial3D_dxkf2")
+
+[node name="Area3D" type="Area3D" parent="Node3D/MeshInstance3D3"]
+transform = Transform3D(0.87948, -0.44401, -0.171378, 0.464768, 0.878778, 0.108347, 0.102496, -0.174941, 0.979229, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D3/Area3D"]
+transform = Transform3D(0.96927, -0.244159, 0.0300483, 0.245163, 0.96881, -0.0361288, -0.0202899, 0.0423854, 0.998896, -0.211728, 0.0449254, -0.285591)
+shape = SubResource("ConvexPolygonShape3D_jvna8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xul54")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_pwjax")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_0w63t")
+
+[connection signal="area_entered" from="Node3D/MeshInstance3D3/Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Node3D/MeshInstance3D3/Area3D" to="." method="_on_area_3d_body_entered"]

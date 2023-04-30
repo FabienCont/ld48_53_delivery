@@ -1,0 +1,58 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Binary
+*.bin filter=lfs diff=lfs merge=lfs -binary
+
+# 3D models
+*.gltf filter=lfs diff=lfs merge=lfs -text
+*.glb filter=lfs diff=lfs merge=lfs -binary
+*.3dm filter=lfs diff=lfs merge=lfs -text
+*.3ds filter=lfs diff=lfs merge=lfs -text
+*.blend filter=lfs diff=lfs merge=lfs -text
+*.c4d filter=lfs diff=lfs merge=lfs -text
+*.collada filter=lfs diff=lfs merge=lfs -text
+*.dae filter=lfs diff=lfs merge=lfs -text
+*.dxf filter=lfs diff=lfs merge=lfs -text
+*.fbx filter=lfs diff=lfs merge=lfs -text
+*.jas filter=lfs diff=lfs merge=lfs -text
+*.lws filter=lfs diff=lfs merge=lfs -text
+*.lxo filter=lfs diff=lfs merge=lfs -text
+*.ma filter=lfs diff=lfs merge=lfs -text
+*.max filter=lfs diff=lfs merge=lfs -text
+*.mb filter=lfs diff=lfs merge=lfs -text
+*.obj filter=lfs diff=lfs merge=lfs -text
+*.ply filter=lfs diff=lfs merge=lfs -text
+*.skp filter=lfs diff=lfs merge=lfs -text
+*.stl filter=lfs diff=lfs merge=lfs -text
+*.ztl filter=lfs diff=lfs merge=lfs -text
+
+# Audio
+*.aif filter=lfs diff=lfs merge=lfs -binary
+*.aiff filter=lfs diff=lfs merge=lfs -binary
+*.it filter=lfs diff=lfs merge=lfs -binary
+*.mod filter=lfs diff=lfs merge=lfs -binary
+*.mp3 filter=lfs diff=lfs merge=lfs -binary
+*.ogg filter=lfs diff=lfs merge=lfs -binary
+*.s3m filter=lfs diff=lfs merge=lfs -binary
+*.wav filter=lfs diff=lfs merge=lfs -binary
+*.xm filter=lfs diff=lfs merge=lfs -binary
+
+# Fonts
+*.otf filter=lfs diff=lfs merge=lfs -binary
+*.ttf filter=lfs diff=lfs merge=lfs -binary
+
+# Images
+*.bmp filter=lfs diff=lfs merge=lfs -binary
+*.exr filter=lfs diff=lfs merge=lfs -binary
+*.gif filter=lfs diff=lfs merge=lfs -binary
+*.hdr filter=lfs diff=lfs merge=lfs -binary
+*.iff filter=lfs diff=lfs merge=lfs -binary
+*.jpeg filter=lfs diff=lfs merge=lfs -binary
+*.jpg filter=lfs diff=lfs merge=lfs -binary
+*.png filter=lfs diff=lfs merge=lfs -binary
+*.pict filter=lfs diff=lfs merge=lfs -binary
+*.psd filter=lfs diff=lfs merge=lfs -binary
+*.tga filter=lfs diff=lfs merge=lfs -binary
+*.tif filter=lfs diff=lfs merge=lfs -binary
+*.tiff filter=lfs diff=lfs merge=lfs -binary
