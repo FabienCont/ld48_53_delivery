@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 3
+const SPEED = 3.5
 const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -26,11 +26,11 @@ func _ready():
 	pass
 	
 func die():
-	emit_signal("ennemy_die")
+	get_tree().call_group("level","ennemy_die",self)
 	queue_free()
 
 func get_random_time():
-	return rng.randf_range(0.8,1.1)
+	return rng.randf_range(0.8,2)
 
 func reload():
 	reloading= true
@@ -72,6 +72,8 @@ func _physics_process(delta):
 	nav_agent.set_velocity(newVelocity)
 	if target :
 		look_at(target.global_transform.origin, target.transform.basis.y)
+		rotation.x = 0
+		rotation.z = 0
 	
 
 func update_target_location(target_node: Node3D):
@@ -82,6 +84,6 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	velocity = safe_velocity
 
 func _on_navigation_agent_3d_target_reached():
-	print("in range")
+	#print("in range")
 	pass
 	

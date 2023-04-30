@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://swasqslxkood"]
+
+[sub_resource type="GDScript" id="GDScript_ppgx2"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	pass
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4y2vr"]
+albedo_color = Color(0, 0.580392, 0.00784314, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s2umm"]
+albedo_color = Color(1, 0.0705882, 0.0705882, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mie3u"]
+material = SubResource("StandardMaterial3D_s2umm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5t5bc"]
+albedo_color = Color(0.321569, 0.411765, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qb612"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[node name="Node3D" type="Node3D"]
+script = SubResource("GDScript_ppgx2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_4y2vr")
+mesh = SubResource("CapsuleMesh_mie3u")
+skeleton = NodePath("../../../..")
+metadata/_edit_lock_ = true
+
+[node name="eyeLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.25922, 0.440897, -0.261397)
+material_override = SubResource("StandardMaterial3D_5t5bc")
+mesh = SubResource("CylinderMesh_qb612")
+skeleton = NodePath("../..")
+
+[node name="eyeLeft2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.261496, 0.440897, -0.274238)
+material_override = SubResource("StandardMaterial3D_5t5bc")
+mesh = SubResource("CylinderMesh_qb612")
+skeleton = NodePath("../..")

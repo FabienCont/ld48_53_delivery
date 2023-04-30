@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw83dv00j8h7p"]
+
+[ext_resource type="Script" path="res://exit_door.gd" id="1_qtbyp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7iunm"]
+size = Vector3(1, 4, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dcvpr"]
+size = Vector3(1, 4, 3)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p4s3v"]
+data = PackedVector3Array(-0.5, 2, 1.5, 0.5, 2, 1.5, -0.5, -2, 1.5, 0.5, 2, 1.5, 0.5, -2, 1.5, -0.5, -2, 1.5, 0.5, 2, -1.5, -0.5, 2, -1.5, 0.5, -2, -1.5, -0.5, 2, -1.5, -0.5, -2, -1.5, 0.5, -2, -1.5, 0.5, 2, 1.5, 0.5, 2, -1.5, 0.5, -2, 1.5, 0.5, 2, -1.5, 0.5, -2, -1.5, 0.5, -2, 1.5, -0.5, 2, -1.5, -0.5, 2, 1.5, -0.5, -2, -1.5, -0.5, 2, 1.5, -0.5, -2, 1.5, -0.5, -2, -1.5, 0.5, 2, 1.5, -0.5, 2, 1.5, 0.5, 2, -1.5, -0.5, 2, 1.5, -0.5, 2, -1.5, 0.5, 2, -1.5, -0.5, -2, 1.5, 0.5, -2, 1.5, -0.5, -2, -1.5, 0.5, -2, 1.5, 0.5, -2, -1.5, -0.5, -2, -1.5)
+
+[node name="door" type="Node3D" groups=["doors"]]
+transform = Transform3D(-0.0657862, -0.0428289, 0.996914, 3.02155e-09, 0.999078, 0.0429219, -0.997834, 0.00282367, -0.0657256, 6.78622, -0.447409, 10.7543)
+script = ExtResource("1_qtbyp")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, -7.45058e-09, 0, 1, 0.998142, 0.902225, -1.17487)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 2.32831e-10, 1, 0, -4.47035e-08, 0, 1, -0.871598, 0.00246632, -0.0574107)
+shape = SubResource("BoxShape3D_7iunm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -2.66454e-15, 4.26326e-14, 0, 1, -9.70587e-24, 0, 1.06765e-22, 1, 0.998143, 0.902225, -1.17487)
+visible = false
+mesh = SubResource("BoxMesh_dcvpr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_p4s3v")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

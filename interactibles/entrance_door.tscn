@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bavs73ctp0h2b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dcvpr"]
+size = Vector3(1, 4, 3)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p4s3v"]
+data = PackedVector3Array(-0.5, 2, 1.5, 0.5, 2, 1.5, -0.5, -2, 1.5, 0.5, 2, 1.5, 0.5, -2, 1.5, -0.5, -2, 1.5, 0.5, 2, -1.5, -0.5, 2, -1.5, 0.5, -2, -1.5, -0.5, 2, -1.5, -0.5, -2, -1.5, 0.5, -2, -1.5, 0.5, 2, 1.5, 0.5, 2, -1.5, 0.5, -2, 1.5, 0.5, 2, -1.5, 0.5, -2, -1.5, 0.5, -2, 1.5, -0.5, 2, -1.5, -0.5, 2, 1.5, -0.5, -2, -1.5, -0.5, 2, 1.5, -0.5, -2, 1.5, -0.5, -2, -1.5, 0.5, 2, 1.5, -0.5, 2, 1.5, 0.5, 2, -1.5, -0.5, 2, 1.5, -0.5, 2, -1.5, 0.5, 2, -1.5, -0.5, -2, 1.5, 0.5, -2, 1.5, -0.5, -2, -1.5, 0.5, -2, 1.5, 0.5, -2, -1.5, -0.5, -2, -1.5)
+
+[node name="door" type="Node3D"]
+transform = Transform3D(-4.36711e-08, 0.0429219, -0.999078, 1.87618e-09, 0.999078, 0.0429219, 1, -4.44089e-15, -4.37114e-08, 4.192, -0.447409, -11.4695)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -2.66454e-15, 4.26326e-14, 0, 1, -9.70587e-24, 0, 1.06765e-22, 1, 0.998143, 0.902225, -1.17487)
+visible = false
+mesh = SubResource("BoxMesh_dcvpr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_p4s3v")

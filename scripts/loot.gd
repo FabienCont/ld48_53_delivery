@@ -1,5 +1,4 @@
-extends Button
-
+extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,7 +9,6 @@ func _ready():
 func _process(_delta):
 	pass
 
-
-func _on_pressed():
-	get_tree().change_scene_to_file("res://levels/Level1.tscn")
-	pass # Replace with function body.
+func _on_area_3d_body_entered(_body):
+	get_tree().call_group("level","loot",self)
+	queue_free()

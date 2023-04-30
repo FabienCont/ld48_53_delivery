@@ -12,9 +12,19 @@ func _ready():
 func _physics_process(_delta):
 	pass
 
-func _on_area_3d_body_entered(body):
+func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
+	var parent = node.get_parent()
+	if parent == get_tree().get_root() :
+		return false
+	elif parent == body:
+		return true
+	else:
+		return is_parent_recursive(parent,body)
+	
+func _on_area_3d_body_entered(body: Node3D):
 	if(body.get("life") && animationStateMachine.get_current_node() == "attack"):
-		body.life-=3
+		if(!is_parent_recursive(self,body)):
+			body.life-=3
 		
 func attack():
 	animationStateMachine.travel("attack")

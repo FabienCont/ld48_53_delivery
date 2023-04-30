@@ -48,6 +48,8 @@ func look_at_mouse():
 	
 	if not intersection.is_empty():
 		look_at(intersection.position)
+		rotation.x = 0
+		rotation.z = 0
 	
 func fps_movement () :
 	var input_dir = Input.get_vector("left", "right", "up", "down")
@@ -75,23 +77,24 @@ func top_down_movement():
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
-	move_and_slide()
 	look_at_mouse()
 	
 func _physics_process(delta):
 	if global_transform.origin.y < -50:
 		self.die()
 		return
-		
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
 	
-	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-	
-	if Input.is_action_just_pressed("action1"):
-		self.attack()
+	if life > 0:
+		# Add the gravity.
+		if not is_on_floor():
+			velocity.y -= gravity * delta
 		
-	self.top_down_movement()
+		# Handle Jump.
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+		
+		if Input.is_action_just_pressed("action1"):
+			self.attack()
+			
+		self.top_down_movement()
+	move_and_slide()
