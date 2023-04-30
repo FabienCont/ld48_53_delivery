@@ -12,5 +12,8 @@ func _process(_delta):
 
 
 func _on_pressed():
-	get_tree().change_scene_to_file("res://levels/Level1.tscn")
+	if GlobalInfo.stats.level>0 :
+		get_tree().change_scene_to_file("res://levels/Level2.tscn")
+	else:
+		get_tree().change_scene_to_file("res://levels/Level1.tscn")
 	pass # Replace with function body.

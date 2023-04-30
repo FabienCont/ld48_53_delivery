@@ -91,8 +91,16 @@ func top_down_movement():
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	look_at_mouse()
+	
+	var input_look_dir = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	var direction_look = (camera.global_transform.basis * Vector3(input_look_dir.x, 0, input_look_dir.y)).normalized()
+	
+	if(direction_look.x!= 0 && direction_look.y!= 0):
+		look_at(position + direction_look)
+		rotation.x = 0
+		rotation.z = 0
+	else:
+		look_at_mouse()
 	
 func _physics_process(delta):
 	if global_transform.origin.y < -50:

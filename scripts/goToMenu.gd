@@ -11,4 +11,5 @@ func _process(_delta):
 	pass
 	
 func _on_pressed():
+	GlobalInfo.reset()
 	get_tree().change_scene_to_file("res://Menu.tscn")
