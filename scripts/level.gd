@@ -1,11 +1,15 @@
 extends Node3D
 
-var level_parameters :={
-	"loot":""
-}
+var isFinish:bool = false
+
 @onready var hero: CharacterBody3D =$Player/PlayerCharacterBody3D
 # Called when the node enters the scene tree for the first time.
+var stats 
+
 func _ready():
+	GlobalInfo.startLevel()
+	stats= GlobalInfo.stats
+	
 	pass # Replace with function body.
 
 	# Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,37 +22,63 @@ func _physics_process(_delta):
 	pass
 
 func loose():
+	if hasFinish():
+		return
+	isFinish=true
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://levels/LooseScreen.tscn")
 	
 func win():
+	if hasFinish():
+		return
+	isFinish=true
+	GlobalInfo.endLevel()
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://levels/WinScreen.tscn")
 	
-func _on_player_character_body_3d_player_die():
+func player_die(_player: Node3D):
 	loose()
 	
 func ally_die(ally: Node3D):
+	ally.remove_from_group("allies")
 	var allies = get_tree().get_nodes_in_group("allies")
-	if(allies.size()==1 && allies[0] == ally ):
+	if(allies.size()==0):
 		loose()
 	pass
 
-func ally_escape(_ally: Node3D):
-	pass
+func ally_escape(ally: Node3D):
+	ally.remove_from_group("allies")
+	ally.call("escape")
+	stats.savedAllies+=1
+	var allies = get_tree().get_nodes_in_group("allies")
+	var ennemies = get_tree().get_nodes_in_group("ennemies")
+	if(ennemies.size()==0 && allies.size()==0):
+		open_doors()
 	
 func ennemy_die(ennemy: Node3D):
+	ennemy.remove_from_group("ennemies")
+	stats.killedEnnemies+=1
 	var ennemies = get_tree().get_nodes_in_group("ennemies")
-	if(ennemies.size()==1 && ennemies[0] == ennemy ):
+	var allies = get_tree().get_nodes_in_group("allies")
+	if(ennemies.size()==0 && allies.size()==0):
 		open_doors()
 	pass
 
 func open_doors():
+	if hasFinish():
+		return
 	get_tree().call_group("doors","open")
 
 func body_exit(body):
 	if(body == hero):
 		win()
+	else:
+		ally_escape(body)
 		
 func loot():
+	if hasFinish():
+		return
 	pass
+
+func hasFinish()-> bool:
+	return isFinish == true

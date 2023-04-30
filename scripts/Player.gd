@@ -7,26 +7,41 @@ const JUMP_VELOCITY = 4.5
 @onready var base = $base
 @onready var hand = $base/hand
 @onready var weapon = $base/hand/weapon
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+
+var stats;
+
+# Get the gravity from the
+# project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export var life = 10 : set = update_life
-
+var isDie = false
 signal life_update(life)
-signal player_die()
 
+func _ready():
+	stats = GlobalInfo.stats
+	life= stats.life
+	
 func die():
-	emit_signal("player_die")
+	get_tree().call_group("level","player_die",self)
+	rotate(Vector3.LEFT,deg_to_rad(90))
+	move_and_slide()
+	isDie = true
 	
 func update_life(value):
-	life = value
+	if isDie == true:
+		return
+	stats.life = value
+	life = stats.life
 	print("player life:"+str(value))
 	emit_signal("life_update",value) 
 	if life<= 0 :
-		self.die()
+		die()
 	pass
 	
 func attack():
+	if isDie == true:
+		return
 	if(weapon.get_child_count()==0):
 		print("no weapon equiped")
 		return
@@ -81,20 +96,27 @@ func top_down_movement():
 	
 func _physics_process(delta):
 	if global_transform.origin.y < -50:
-		self.die()
+		die()
+		return
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+	
+	if isDie == true:
+		move_and_slide()
 		return
 	
-	if life > 0:
-		# Add the gravity.
-		if not is_on_floor():
-			velocity.y -= gravity * delta
+	
+	# Handle Jump.
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	
+	if Input.is_action_just_pressed("action1"):
+		self.attack()
 		
-		# Handle Jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
-		
-		if Input.is_action_just_pressed("action1"):
-			self.attack()
-			
-		self.top_down_movement()
+	self.top_down_movement()
 	move_and_slide()
+	
+func loot(type: String,value)-> void:
+	stats[type]+=value
+		

@@ -166,5 +166,4 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_0w63t")
 
-[connection signal="area_entered" from="Node3D/MeshInstance3D3/Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="body_entered" from="Node3D/MeshInstance3D3/Area3D" to="." method="_on_area_3d_body_entered"]

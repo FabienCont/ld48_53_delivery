@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://dy41a8tidtxnu"]
+[gd_scene load_steps=34 format=3 uid="uid://dy41a8tidtxnu"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_gd0ib"]
 [ext_resource type="Script" path="res://levels/Path3D.gd" id="1_rrvne"]
-[ext_resource type="Script" path="res://exit_door.gd" id="2_pwf0l"]
+[ext_resource type="PackedScene" uid="uid://cw83dv00j8h7p" path="res://interactibles/exit_door.tscn" id="2_q75cf"]
+[ext_resource type="PackedScene" uid="uid://bavs73ctp0h2b" path="res://interactibles/entrance_door.tscn" id="3_wagn0"]
 [ext_resource type="PackedScene" uid="uid://cwfex5q0oty66" path="res://characters/player.tscn" id="4_de1pt"]
 [ext_resource type="PackedScene" uid="uid://blib87i5ig2ls" path="res://interactibles/loot.tscn" id="4_i250j"]
 [ext_resource type="PackedScene" uid="uid://bbm8rkie5wy2j" path="res://characters/ennemy.tscn" id="5_thwi2"]
@@ -57,15 +58,6 @@ size = Vector3(1, 1, 20)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1v0yr"]
 data = PackedVector3Array(-0.5, 0.5, 10, 0.5, 0.5, 10, -0.5, -0.5, 10, 0.5, 0.5, 10, 0.5, -0.5, 10, -0.5, -0.5, 10, 0.5, 0.5, -10, -0.5, 0.5, -10, 0.5, -0.5, -10, -0.5, 0.5, -10, -0.5, -0.5, -10, 0.5, -0.5, -10, 0.5, 0.5, 10, 0.5, 0.5, -10, 0.5, -0.5, 10, 0.5, 0.5, -10, 0.5, -0.5, -10, 0.5, -0.5, 10, -0.5, 0.5, -10, -0.5, 0.5, 10, -0.5, -0.5, -10, -0.5, 0.5, 10, -0.5, -0.5, 10, -0.5, -0.5, -10, 0.5, 0.5, 10, -0.5, 0.5, 10, 0.5, 0.5, -10, -0.5, 0.5, 10, -0.5, 0.5, -10, 0.5, 0.5, -10, -0.5, -0.5, 10, 0.5, -0.5, 10, -0.5, -0.5, -10, 0.5, -0.5, 10, 0.5, -0.5, -10, -0.5, -0.5, -10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_7iunm"]
-size = Vector3(1, 4, 3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_dcvpr"]
-size = Vector3(1, 4, 3)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p4s3v"]
-data = PackedVector3Array(-0.5, 2, 1.5, 0.5, 2, 1.5, -0.5, -2, 1.5, 0.5, 2, 1.5, 0.5, -2, 1.5, -0.5, -2, 1.5, 0.5, 2, -1.5, -0.5, 2, -1.5, 0.5, -2, -1.5, -0.5, 2, -1.5, -0.5, -2, -1.5, 0.5, -2, -1.5, 0.5, 2, 1.5, 0.5, 2, -1.5, 0.5, -2, 1.5, 0.5, 2, -1.5, 0.5, -2, -1.5, 0.5, -2, 1.5, -0.5, 2, -1.5, -0.5, 2, 1.5, -0.5, -2, -1.5, -0.5, 2, 1.5, -0.5, -2, 1.5, -0.5, -2, -1.5, 0.5, 2, 1.5, -0.5, 2, 1.5, 0.5, 2, -1.5, -0.5, 2, 1.5, -0.5, 2, -1.5, 0.5, 2, -1.5, -0.5, -2, 1.5, 0.5, -2, 1.5, -0.5, -2, -1.5, 0.5, -2, 1.5, 0.5, -2, -1.5, -0.5, -2, -1.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u44jv"]
 size = Vector3(40, 1, 20)
@@ -274,31 +266,12 @@ mesh = SubResource("BoxMesh_nehfh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/exit/walls/MeshInstance3D3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_1v0yr")
 
-[node name="door" type="Node3D" parent="Terrain/exit" groups=["doors"]]
-transform = Transform3D(-0.0657862, -0.0428289, 0.996914, 3.02155e-09, 0.999078, 0.0429219, -0.997834, 0.00282367, -0.0657256, 6.78622, -0.447409, 10.7543)
-script = ExtResource("2_pwf0l")
-
-[node name="Area3D" type="Area3D" parent="Terrain/exit/door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, -7.45058e-09, 0, 1, 0.998142, 0.902225, -1.17487)
-collision_layer = 4
-collision_mask = 4
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/exit/door/Area3D"]
-transform = Transform3D(1, 0, 0, 2.32831e-10, 1, 0, -4.47035e-08, 0, 1, -0.871598, 0.00246632, -0.0574107)
-shape = SubResource("BoxShape3D_7iunm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/exit/door"]
-transform = Transform3D(1, -2.66454e-15, 4.26326e-14, 0, 1, -9.70587e-24, 0, 1.06765e-22, 1, 0.998143, 0.902225, -1.17487)
-visible = false
-mesh = SubResource("BoxMesh_dcvpr")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/exit/door/MeshInstance3D"]
-collision_layer = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/exit/door/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_p4s3v")
+[node name="door" parent="Terrain/exit" instance=ExtResource("2_q75cf")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.45149, 0.279184, 9.85761)
 
 [node name="entry" type="Node3D" parent="Terrain"]
+
+[node name="door" parent="Terrain/entry" instance=ExtResource("3_wagn0")]
 
 [node name="ground" type="Node3D" parent="Terrain/entry"]
 
@@ -341,20 +314,6 @@ mesh = SubResource("BoxMesh_nehfh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/entry/walls/MeshInstance3D3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_tupos")
 
-[node name="door" type="Node3D" parent="Terrain/entry"]
-transform = Transform3D(-4.36711e-08, 0.0429219, -0.999078, 1.87618e-09, 0.999078, 0.0429219, 1, -4.44089e-15, -4.37114e-08, 4.192, -0.447409, -11.4695)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/entry/door"]
-transform = Transform3D(1, -2.66454e-15, 4.26326e-14, 0, 1, -9.70587e-24, 0, 1.06765e-22, 1, 0.998143, 0.902225, -1.17487)
-visible = false
-mesh = SubResource("BoxMesh_dcvpr")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/entry/door/MeshInstance3D"]
-collision_layer = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/entry/door/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_p4s3v")
-
 [node name="Path3D" type="Path3D" parent="Terrain"]
 curve = SubResource("Curve3D_hile1")
 script = ExtResource("1_rrvne")
@@ -368,7 +327,15 @@ transform = Transform3D(0.447213, 0, 0.894427, 0, 1, 0, -0.894427, 0, 0.447213, 
 progress = 3.0
 loop = false
 
-[node name="Node3D" parent="Terrain" instance=ExtResource("4_i250j")]
+[node name="loots" type="Node3D" parent="Terrain"]
+
+[node name="Node3D" parent="Terrain/loots" instance=ExtResource("4_i250j")]
+
+[node name="Node3D2" parent="Terrain/loots" instance=ExtResource("4_i250j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65916, 0, 8.74695)
+
+[node name="Node3D3" parent="Terrain/loots" instance=ExtResource("4_i250j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65916, 0, -2.95533)
 
 [node name="Player" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
@@ -394,5 +361,4 @@ metadata/_edit_lock_ = true
 [node name="AllyCharacterBody3D" parent="Allies/Ally" instance=ExtResource("6_sdflk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
 
-[connection signal="body_entered" from="Terrain/exit/door/Area3D" to="Terrain/exit/door" method="_on_area_3d_body_entered"]
 [connection signal="curve_changed" from="Terrain/Path3D" to="Terrain/Path3D" method="_on_curve_changed"]

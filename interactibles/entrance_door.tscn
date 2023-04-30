@@ -1,4 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bavs73ctp0h2b"]
+[gd_scene load_steps=7 format=3 uid="uid://bavs73ctp0h2b"]
+
+[sub_resource type="Gradient" id="Gradient_tpwia"]
+offsets = PackedFloat32Array(0, 0.422764, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.237539, 0.237539, 0.237539, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mo4j2"]
+frequency = 0.023
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4accu"]
+color_ramp = SubResource("Gradient_tpwia")
+noise = SubResource("FastNoiseLite_mo4j2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ifbn"]
+albedo_texture = SubResource("NoiseTexture2D_4accu")
 
 [sub_resource type="BoxMesh" id="BoxMesh_dcvpr"]
 size = Vector3(1, 4, 3)
@@ -11,7 +25,8 @@ transform = Transform3D(-4.36711e-08, 0.0429219, -0.999078, 1.87618e-09, 0.99907
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, -2.66454e-15, 4.26326e-14, 0, 1, -9.70587e-24, 0, 1.06765e-22, 1, 0.998143, 0.902225, -1.17487)
-visible = false
+material_override = SubResource("StandardMaterial3D_1ifbn")
+transparency = 0.35
 mesh = SubResource("BoxMesh_dcvpr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]

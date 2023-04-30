@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7c4k6mdx2gdd"]
+[gd_scene load_steps=3 format=3 uid="uid://bw30yj4vv0n06"]
 
 [ext_resource type="Script" path="res://scripts/goNextLevel.gd" id="1_dkf0f"]
+[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/statsGrid.tscn" id="1_qsy4u"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -43,13 +44,20 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+[node name="GridContainer2" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer"]
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
 text = "go to next level"
 script = ExtResource("1_dkf0f")
 
-[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" method="_on_pressed"]
+[node name="HSeparator3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("1_qsy4u")]
+layout_mode = 2
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" method="_on_pressed"]

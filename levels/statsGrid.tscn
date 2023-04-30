@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://c747yyo377b0b"]
+
+[ext_resource type="Script" path="res://scripts/showStats.gd" id="1_3nxps"]
+
+[node name="GridContainer" type="GridContainer"]
+size_flags_horizontal = 4
+script = ExtResource("1_3nxps")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer4"]
+layout_mode = 2
+text = "Level"
+
+[node name="levelValue" type="Label" parent="HBoxContainer4"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Money : "
+
+[node name="moneyValue" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer3"]
+layout_mode = 2
+text = "Saved :"
+
+[node name="savedValue" type="Label" parent="HBoxContainer3"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer6"]
+layout_mode = 2
+text = "Total saved :"
+
+[node name="totalSavedValue" type="Label" parent="HBoxContainer6"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+text = "ennemies killed : "
+
+[node name="ennemiesKilledValue" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer5"]
+layout_mode = 2
+text = "Total ennemies killed : "
+
+[node name="totalEnemiesKilledValue" type="Label" parent="HBoxContainer5"]
+layout_mode = 2
+text = "0"

@@ -17,9 +17,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var ready_to_attack = false 
 var reloading = false;
 var target: Node3D
+var isDie:bool= false
 
 signal life_update(life)
-signal ennemy_die()
 
 func _ready():
 	hand.add_child(katana.duplicate())
@@ -27,7 +27,12 @@ func _ready():
 	
 func die():
 	get_tree().call_group("level","ennemy_die",self)
+	isDie=true
+	rotate(Vector3.LEFT,deg_to_rad(90))
+	move_and_slide()
+	await get_tree().create_timer(3).timeout
 	queue_free()
+	
 
 func get_random_time():
 	return rng.randf_range(0.8,2)
@@ -40,6 +45,8 @@ func reload():
 	ready_to_attack=true
 	
 func update_life(value):
+	if isDie: 
+		return
 	life = value
 	print("ennemy life:"+str(value))
 	emit_signal("life_update",value) 
@@ -52,6 +59,10 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
+	if isDie == true:
+		move_and_slide()
+		return
+		
 	var newVelocity = Vector3(0,0,0)
 	
 	var currentLocation = global_transform.origin
@@ -66,7 +77,7 @@ func _physics_process(delta):
 			ready_to_attack=false
 			hand.get_child(0).call("attack")
 	elif not reloading :
-		self.reload()
+		reload()
 
 	move_and_slide()
 	nav_agent.set_velocity(newVelocity)

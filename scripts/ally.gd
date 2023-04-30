@@ -11,10 +11,8 @@ const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export var life = 10 : set = update_life
-
+var isDie= false
 signal life_update(life)
-signal ally_die()
-signal ally_escape()
 
 func _ready() -> void:
 	pathFollow3D = PathFollow3D.new()
@@ -27,14 +25,20 @@ func _ready() -> void:
 	pass
 	
 func die():
-	emit_signal("ally_die")
+	get_tree().call_group("level","ally_die",self)
+	isDie=true
+	rotate(Vector3.LEFT,deg_to_rad(90))
+	move_and_slide()
+	await get_tree().create_timer(3).timeout
 	queue_free()
 
 func escape():
-	emit_signal("ally_escape")
+	await get_tree().create_timer(1).timeout
 	queue_free()
 	
 func update_life(value):
+	if isDie: 
+		return
 	life = value
 	print("ally life:"+str(value))
 	emit_signal("life_update",value) 
@@ -47,8 +51,10 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
+	if isDie == true :
+		move_and_slide()
+		return
+		
 	pathFollow3D.progress +=  SPEED * delta
-	if(pathFollow3D.progress_ratio>=1.0):
-		escape()
 	
 	move_and_slide()

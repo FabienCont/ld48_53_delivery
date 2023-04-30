@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var staticBody: StaticBody3D = $MeshInstance3D/StaticBody3D
+@onready var mesh: MeshInstance3D = $MeshInstance3D
 # Called when the node enters the scene tree for the first time.
 
 var isOpen: bool=false
@@ -15,7 +16,9 @@ func _process(_delta):
 	
 
 func open():
-	staticBody.queue_free()
+	if staticBody != null :
+		staticBody.queue_free()
+		mesh.queue_free()
 	isOpen=true
 
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://36hneilo82f0"]
 
-[ext_resource type="Script" path="res://scripts/Button.gd" id="1_g2gxc"]
+[ext_resource type="Script" path="res://scripts/goToLevel1.gd" id="1_ngbjl"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -50,6 +50,6 @@ size_flags_horizontal = 4
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Start Game"
-script = ExtResource("1_g2gxc")
+script = ExtResource("1_ngbjl")
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" method="_on_pressed"]

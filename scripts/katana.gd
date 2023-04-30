@@ -24,7 +24,7 @@ func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
 func _on_area_3d_body_entered(body: Node3D):
 	if(body.get("life") && animationStateMachine.get_current_node() == "attack"):
 		if(!is_parent_recursive(self,body)):
-			body.life-=3
+			body.life-=4
 		
 func attack():
 	animationStateMachine.travel("attack")
