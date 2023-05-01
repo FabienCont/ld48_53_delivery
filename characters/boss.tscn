@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwexo2jql38g1"]
+
+[ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_vua85"]
+[ext_resource type="PackedScene" uid="uid://b0c8c8h8yb8bp" path="res://characters/mesh/boss.tscn" id="2_bwlf2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
+margin = 1.0
+
+[node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
+script = ExtResource("1_vua85")
+life = 22
+aimHero = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_5x11s")
+metadata/_edit_lock_ = true
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="hand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.123381, 0, -0.613536)
+
+[node name="Node3D" parent="." instance=ExtResource("2_bwlf2")]
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

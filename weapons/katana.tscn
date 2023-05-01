@@ -12,7 +12,7 @@ material = SubResource("StandardMaterial3D_dxkf2")
 size = Vector3(0.005, 0.05, 0.75)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jvna8"]
-points = PackedVector3Array(0.00318108, 0.0261364, 0.37682, -0.0043932, -0.0268939, -0.37682, 0.00318108, -0.0268939, -0.37682, -0.0043932, -0.0268939, 0.37682, -0.0043932, 0.0261364, -0.37682, 0.00318108, 0.0261364, -0.37682, 0.00318108, -0.0268939, 0.37682, -0.0043932, 0.0261364, 0.37682)
+points = PackedVector3Array(0.00318108, 0.0261364, 0.37682, -0.004, -0.027, -1, 0.003, -0.027, -1, -0.004, 0, 0.377, -0.004, 0.026, -1, 0.003, 0.026, -1, 0.00318108, -0.0268939, 0.37682, -0.0043932, 0.0261364, 0.37682)
 
 [sub_resource type="Animation" id="Animation_igbia"]
 resource_name = "attack"
@@ -144,7 +144,8 @@ skeleton = NodePath("../../../../..")
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Node3D/MeshInstance3D3"]
 transform = Transform3D(-0.555836, -0.829731, -0.0509283, 0.826581, -0.545133, -0.13998, 0.0883833, -0.119902, 0.988845, -0.0510304, -0.13906, 0.0712033)
 layers = 2
-polygon = PackedVector2Array(0.194918, 0.075079, 0.189587, 0.0735406, 0.170344, 0.0962223)
+polygon = PackedVector2Array(0.1, 0, 0.3, 0.09, 0.17, 0.13)
+depth = 1.46
 smooth_faces = true
 material = SubResource("StandardMaterial3D_dxkf2")
 
@@ -152,7 +153,7 @@ material = SubResource("StandardMaterial3D_dxkf2")
 transform = Transform3D(0.87948, -0.44401, -0.171378, 0.464768, 0.878778, 0.108347, 0.102496, -0.174941, 0.979229, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/MeshInstance3D3/Area3D"]
-transform = Transform3D(0.96927, -0.244159, 0.0300483, 0.245163, 0.96881, -0.0361288, -0.0202899, 0.0423854, 0.998896, -0.211728, 0.0449254, -0.285591)
+transform = Transform3D(0.971189, -0.216275, -0.100084, 0.181548, 0.943513, -0.277177, 0.154377, 0.251021, 0.955593, -0.114933, 0.227945, -0.263026)
 shape = SubResource("ConvexPolygonShape3D_jvna8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d26nf0bb7q6fc"
+path="res://.godot/imported/cart.obj-d07b6e852e8c7ac3916df1529a587b40.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cart.obj-d07b6e852e8c7ac3916df1529a587b40.mesh"]
+
+source_file="res://props/cart.obj"
+dest_files=["res://.godot/imported/cart.obj-d07b6e852e8c7ac3916df1529a587b40.mesh", "res://.godot/imported/cart.obj-d07b6e852e8c7ac3916df1529a587b40.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

@@ -19,11 +19,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if is_dirty:
-		_update_multimesh()
+		_update_multimesh_plank()
 
 		is_dirty = false
 
-func _update_multimesh():
+func _update_multimesh_plank():
 	var path_length: float = curve.get_baked_length()
 	var count = floor(path_length / distance_between_planks)
 

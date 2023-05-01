@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var remoteTransform3D: RemoteTransform3D
 @onready var pathFollow3D: PathFollow3D
-@onready var path3D: Path3D = get_node("/root/Level/Terrain/Path3D")
+@onready var path3D: Path3D = get_node("/root/Level/Terrain/alliesPath")
 
 const SPEED = 3.0
 const JUMP_VELOCITY = 4.5

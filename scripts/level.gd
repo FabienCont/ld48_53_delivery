@@ -11,7 +11,7 @@ var isFinish:bool = false
 var stats 
 var spawning:bool = false 
 @export var timeToSpawn: float = 2
-@export var nbAllyToSpawn:int = 1
+@export var nbAllyToSpawn: int = 1
 var spawnAllyCounter:int =0
 
 func _ready():
@@ -23,9 +23,9 @@ func _ready():
 func _physics_process(_delta):
 	var first_ally= get_tree().get_first_node_in_group("allies")
 	if first_ally != null:
-		get_tree().call_group("ennemies","update_target_location",first_ally)
+		get_tree().call_group("ennemies","update_target_location",first_ally,hero)
 	elif hero:
-		get_tree().call_group("ennemies","update_target_location",hero)
+		get_tree().call_group("ennemies","update_target_location",hero,hero)
 	pass
 	
 	if(not spawning && spawnAllyCounter<nbAllyToSpawn):
@@ -35,8 +35,8 @@ func spawnAlly():
 	print("SPAWN ALLY")
 	spawning=true
 	spawnAllyCounter+=1
-	await get_tree().create_timer(timeToSpawn).timeout
 	allies_node.add_child(ally_instance.duplicate())
+	await get_tree().create_timer(timeToSpawn).timeout
 	spawning=false
 	
 func loose():

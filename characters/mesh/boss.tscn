@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0c8c8h8yb8bp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld5n1"]
+albedo_color = Color(0.443137, 0, 0.00392157, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cqckj"]
+material = SubResource("StandardMaterial3D_ld5n1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yulkb"]
+albedo_color = Color(0.505882, 0.494118, 0.00392157, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bge6y"]
+size = Vector3(0.2, 0.2, 0.5)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_cqckj")
+skeleton = NodePath("../../../..")
+metadata/_edit_lock_ = true
+
+[node name="eyeLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25922, 0.511695, -0.309383)
+material_override = SubResource("StandardMaterial3D_yulkb")
+mesh = SubResource("BoxMesh_bge6y")
+skeleton = NodePath("../..")
+
+[node name="eyeRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.261496, 0.496279, -0.301111)
+material_override = SubResource("StandardMaterial3D_yulkb")
+mesh = SubResource("BoxMesh_bge6y")
+skeleton = NodePath("../..")

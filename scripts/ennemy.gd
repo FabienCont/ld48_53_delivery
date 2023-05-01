@@ -18,7 +18,7 @@ var ready_to_attack = false
 var reloading = false;
 var target: Node3D
 var isDie:bool= false
-
+@export var aimHero:bool =false
 signal life_update(life)
 
 func _ready():
@@ -35,7 +35,7 @@ func die():
 	
 
 func get_random_time():
-	return rng.randf_range(0.8,2)
+	return rng.randf_range(1,2)
 
 func reload():
 	reloading= true
@@ -87,10 +87,13 @@ func _physics_process(delta):
 		rotation.z = 0
 	
 
-func update_target_location(target_node: Node3D):
-	target=target_node
+func update_target_location(target_node: Node3D,hero_node: Node3D):
+	if aimHero ==true :
+		target = hero_node
+	else :
+		target=target_node
 	nav_agent.set_target_position(target.global_transform.origin)
-
+		
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	velocity = safe_velocity
 
