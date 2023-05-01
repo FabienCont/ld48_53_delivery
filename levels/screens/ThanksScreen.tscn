@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bw30yj4vv0n06"]
 
 [ext_resource type="Script" path="res://scripts/goToMenu.gd" id="1_7ebjm"]
-[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/statsGrid.tscn" id="2_pfnes"]
+[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/screens/statsGrid.tscn" id="2_pfnes"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t8ih"]
 

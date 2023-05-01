@@ -13,7 +13,7 @@ func _process(_delta):
 
 func _on_pressed():
 	if GlobalInfo.stats.level==3 :
-		get_tree().change_scene_to_file("res://levels/ThanksScreen.tscn")
+		get_tree().change_scene_to_file("res://levels/screens/ThanksScreen.tscn")
 	elif GlobalInfo.stats.level==2 :
 		get_tree().change_scene_to_file("res://levels/Level3.tscn")
 	elif GlobalInfo.stats.level==1 :

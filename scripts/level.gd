@@ -44,7 +44,7 @@ func loose():
 		return
 	isFinish=true
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://levels/LooseScreen.tscn")
+	get_tree().change_scene_to_file("res://levels/screens/LooseScreen.tscn")
 	
 func win():
 	if hasFinish():
@@ -52,7 +52,7 @@ func win():
 	isFinish=true
 	GlobalInfo.endLevel()
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://levels/WinScreen.tscn")
+	get_tree().change_scene_to_file("res://levels/screens/WinScreen.tscn")
 	
 func player_die(_player: Node3D):
 	loose()
@@ -69,14 +69,12 @@ func ally_escape(ally: Node3D):
 	ally.call("escape")
 	stats.savedAllies+=1
 	var allies = get_tree().get_nodes_in_group("allies")
-	var ennemies = get_tree().get_nodes_in_group("ennemies")
 	if(allies.size()==0):
 		open_doors()
 	
 func ennemy_die(ennemy: Node3D):
 	ennemy.remove_from_group("ennemies")
 	stats.killedEnnemies+=1
-	var ennemies = get_tree().get_nodes_in_group("ennemies")
 	var allies = get_tree().get_nodes_in_group("allies")
 	if(allies.size()==0):
 		open_doors()

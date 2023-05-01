@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bq8ljbxgajeeh"]
+[gd_scene load_steps=6 format=3 uid="uid://bq8ljbxgajeeh"]
 
+[ext_resource type="PackedScene" uid="uid://4rgx1g8dp87i" path="res://levels/screens/texture_rect.tscn" id="1_6abvc"]
 [ext_resource type="Script" path="res://scripts/goNextLevel.gd" id="1_dkf0f"]
-[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/statsGrid.tscn" id="1_qsy4u"]
+[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/screens/statsGrid.tscn" id="1_qsy4u"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pusrk"]
 
@@ -23,15 +24,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.117647, 0.160784, 0.313726, 1)
+color = Color(0.243137, 0.203922, 0.152941, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -463.65
+offset_right = 463.65
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" parent="ColorRect/MarginContainer" instance=ExtResource("1_6abvc")]
+layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
 layout_mode = 2
