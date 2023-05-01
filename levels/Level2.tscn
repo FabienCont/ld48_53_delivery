@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bo0go01e88bkw"]
+[gd_scene load_steps=29 format=3 uid="uid://bo0go01e88bkw"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_e88bp"]
 [ext_resource type="PackedScene" uid="uid://dp2tfdyedtdod" path="res://levels/parts/ground.tscn" id="2_lbbf6"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://blib87i5ig2ls" path="res://interactibles/loot.tscn" id="8_qkrs1"]
 [ext_resource type="PackedScene" uid="uid://cwfex5q0oty66" path="res://characters/player.tscn" id="9_snjqr"]
 [ext_resource type="PackedScene" uid="uid://bbm8rkie5wy2j" path="res://characters/ennemy.tscn" id="10_xtxqn"]
+[ext_resource type="AudioStream" uid="uid://kk0575ani8gm" path="res://sounds/gamjam.mp3" id="11_10xeq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_huhgm"]
 
@@ -286,5 +287,9 @@ transform = Transform3D(0.722979, 0, -0.69087, 0, 1, 0, 0.69087, 0, 0.722979, -8
 
 [node name="Allies" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_10xeq")
+autoplay = true
 
 [connection signal="curve_changed" from="Terrain/alliesPath" to="Terrain/alliesPath" method="_on_curve_changed" flags=18]

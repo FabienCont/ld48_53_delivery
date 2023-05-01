@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cvhcuslhcedce"]
+[gd_scene load_steps=33 format=3 uid="uid://cvhcuslhcedce"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_1nrti"]
 [ext_resource type="Script" path="res://levels/IsoCameraStickFollow.gd" id="2_vd7wm"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/Path3D.gd" id="9_osqw7"]
 [ext_resource type="PackedScene" uid="uid://bbm8rkie5wy2j" path="res://characters/ennemy.tscn" id="10_al2hs"]
 [ext_resource type="PackedScene" uid="uid://dwexo2jql38g1" path="res://characters/boss.tscn" id="12_vlu11"]
+[ext_resource type="AudioStream" uid="uid://kk0575ani8gm" path="res://sounds/gamjam.mp3" id="13_kg3jp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_huhgm"]
 
@@ -509,5 +510,9 @@ metadata/_edit_lock_ = true
 
 [node name="EnnemyCharacterBody3D" parent="." instance=ExtResource("12_vlu11")]
 transform = Transform3D(0.0708881, 0, -0.997484, 0, 1, 0, 0.997484, 0, 0.0708881, -4.85454, 1.22064, 36.914)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_kg3jp")
+autoplay = true
 
 [connection signal="curve_changed" from="Terrain/alliesPath" to="Terrain/alliesPath" method="_on_curve_changed" flags=18]
