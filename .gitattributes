@@ -1,6 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto eol=lf
 
+# Zip
+*.zip filter=lfs diff=lfs merge=lfs -binary
+
 # Binary
 *.bin filter=lfs diff=lfs merge=lfs -binary
 
