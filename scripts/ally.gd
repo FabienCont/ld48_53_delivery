@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @onready var remoteTransform3D: RemoteTransform3D
 @onready var pathFollow3D: PathFollow3D
+@onready var pathFollow3DTargetToLook: PathFollow3D
 @onready var path3D: Path3D = get_node("/root/Level/Terrain/alliesPath")
 
 const SPEED = 3.0
@@ -13,15 +14,23 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var life = 16 : set = update_life
 var isDie= false
 signal life_update(life)
-
+var yOffset = 0.90
 func _ready() -> void:
 	pathFollow3D = PathFollow3D.new()
 	pathFollow3D.loop = false
+	
+	pathFollow3DTargetToLook = PathFollow3D.new()
+	pathFollow3DTargetToLook.loop = false
+	
 	remoteTransform3D = RemoteTransform3D.new()
 	remoteTransform3D.position.y = 1.0
 	remoteTransform3D.remote_path = self.get_path()
+	
+	path3D.add_child(pathFollow3DTargetToLook)
 	path3D.add_child(pathFollow3D)
-	pathFollow3D.add_child(remoteTransform3D)
+	#pathFollow3D.add_child(remoteTransform3D)
+	
+	global_transform = pathFollow3D.global_transform
 	pass
 	
 func die():
@@ -54,7 +63,15 @@ func _physics_process(delta):
 	if isDie == true :
 		move_and_slide()
 		return
-		
+	
 	pathFollow3D.progress +=  SPEED * delta
 	
-	move_and_slide()
+	pathFollow3DTargetToLook.progress =  pathFollow3D.progress +1
+	
+	global_transform = pathFollow3D.global_transform
+	global_position.y+=yOffset
+	
+	var posToLookAt = pathFollow3DTargetToLook.position
+	posToLookAt.y +=yOffset 
+	look_at(posToLookAt)
+	#move_and_slide()

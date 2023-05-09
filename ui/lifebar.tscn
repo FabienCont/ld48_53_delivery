@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://chpsfjftfdckn"]
+
+[ext_resource type="Script" path="res://ui/lifebar.gd" id="1_6uhoy"]
+[ext_resource type="Script" path="res://ui/SubViewport.gd" id="2_03qky"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvkf7"]
+albedo_color = Color(0.298039, 0.592157, 0.34902, 1)
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_x3xy5"]
+material = SubResource("StandardMaterial3D_mvkf7")
+size = Vector2(1, 0.1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hq3qs"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_147dl"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qqp7c"]
+gradient = SubResource("Gradient_147dl")
+
+[sub_resource type="Gradient" id="Gradient_ot5da"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f2dvr"]
+gradient = SubResource("Gradient_ot5da")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ui570"]
+font_size = 12
+
+[node name="lifebar_component" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45463, 0)
+script = ExtResource("1_6uhoy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("QuadMesh_x3xy5")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = SubResource("ViewportTexture_hq3qs")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+size = Vector2i(100, 30)
+script = ExtResource("2_03qky")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Sprite3D/SubViewport"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+texture_under = SubResource("GradientTexture1D_qqp7c")
+texture_over = SubResource("GradientTexture1D_f2dvr")
+
+[node name="Label" type="Label" parent="Sprite3D/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0 / 100"
+label_settings = SubResource("LabelSettings_ui570")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dy41a8tidtxnu"]
+[gd_scene load_steps=30 format=3 uid="uid://dy41a8tidtxnu"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_gd0ib"]
 [ext_resource type="PackedScene" uid="uid://dp2tfdyedtdod" path="res://levels/parts/ground.tscn" id="2_fo422"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bbm8rkie5wy2j" path="res://characters/ennemy.tscn" id="5_thwi2"]
 [ext_resource type="Script" path="res://scripts/Path3D.gd" id="7_i32bn"]
 [ext_resource type="AudioStream" uid="uid://kk0575ani8gm" path="res://sounds/gamjam.mp3" id="11_ur0r5"]
+[ext_resource type="PackedScene" uid="uid://ca8s0bpfw0ruf" path="res://props/exit.tscn" id="12_adc6y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_huhgm"]
 
@@ -253,6 +254,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.81668)
 
 [node name="Node3D3" parent="Terrain/loots" instance=ExtResource("4_i250j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65916, 0, 0.861351)
+
+[node name="exit2" parent="Terrain" instance=ExtResource("12_adc6y")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.26841, 0.158075, 4.01232)
 
 [node name="Player" type="Node3D" parent="."]
 metadata/_edit_lock_ = true

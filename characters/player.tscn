@@ -18,7 +18,7 @@ metadata/_edit_lock_ = true
 [node name="base" type="Node3D" parent="."]
 
 [node name="hand" type="Node3D" parent="base"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75678)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.210087, 0, -0.75678)
 
 [node name="weapon" type="Node3D" parent="base/hand"]
 

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca8s0bpfw0ruf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_s23vv"]
+size = Vector2(0.2, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_fqk5i"]
+size = Vector2(0.2, 0.6)
+
+[node name="exit" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0128797, 0.362089, 0)
+mesh = SubResource("QuadMesh_s23vv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.714961, 0.699164, 0, -0.699164, 0.714961, 0, 0, 0, 1, -0.125365, 0.683467, 0)
+mesh = SubResource("QuadMesh_fqk5i")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.702203, -0.711977, 0, 0.711977, 0.702203, 0, 0, 0, 1, 0.166256, 0.690645, 0)
+mesh = SubResource("QuadMesh_fqk5i")

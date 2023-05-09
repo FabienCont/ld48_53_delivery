@@ -1,6 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkv74b18figfa"]
+[gd_scene load_steps=18 format=3 uid="uid://bkv74b18figfa"]
 
 [ext_resource type="Script" path="res://scripts/katana.gd" id="1_87fpx"]
+[ext_resource type="PackedScene" uid="uid://c6d3xfvcu8km3" path="res://weapons/sword.glb" id="2_ekvaw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvl4y"]
+size = Vector3(0.1, 1.2, 0.3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxkf2"]
 albedo_color = Color(0.662745, 0.670588, 0.623529, 1)
@@ -54,6 +58,46 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0.349066), Vector3(1.5708, 1.0472, 0.698132), Vector3(1.5708, 1.0472, 0.698132), Vector3(0, 0, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hand:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.39626, -0.174533, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_0e3d3"]
+resource_name = "attack_sword"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hand:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.39626, -0.174533, 0), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_fqvwb"]
 resource_name = "idle"
@@ -94,15 +138,40 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0.349066)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("hand:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("hand:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xul54"]
 _data = {
 "attack": SubResource("Animation_igbia"),
+"attack_sword": SubResource("Animation_0e3d3"),
 "idle": SubResource("Animation_fqvwb")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3fwpx"]
-animation = &"attack"
+animation = &"attack_sword"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4ogv8"]
 animation = &"idle"
@@ -111,17 +180,17 @@ animation = &"idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fljg8"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_46abl"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pqrw5"]
 switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pwjax"]
 states/Start/position = Vector2(199, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_3fwpx")
-states/attack/position = Vector2(484, 76)
+states/attack/position = Vector2(573, 76)
 states/idle/node = SubResource("AnimationNodeAnimation_4ogv8")
-states/idle/position = Vector2(355, 81)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qwkj3"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_fljg8"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_46abl")]
+states/idle/position = Vector2(355, 76)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_qwkj3"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_fljg8"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_pqrw5")]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_0w63t"]
 
@@ -129,14 +198,26 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.151759, 0)
 script = ExtResource("1_87fpx")
 
+[node name="hand" type="Node3D" parent="."]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.0419148, 0)
+
+[node name="sword" parent="hand" instance=ExtResource("2_ekvaw")]
+
+[node name="Area3D" type="Area3D" parent="hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.803239, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hand/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18153, 0)
+shape = SubResource("BoxShape3D_mvl4y")
+
 [node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0)
+transform = Transform3D(0.989315, -0.139775, -0.0414426, 0, 0.284265, -0.958745, 0.145789, 0.948502, 0.281227, 0.2, 0, 0)
+visible = false
 
 [node name="MeshInstance3D3" type="Node3D" parent="Node3D"]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D/MeshInstance3D3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.211028, 0.0456919, -0.285987)
-visible = false
+transform = Transform3D(0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 0, 0, 1, -0.211028, 0.0456919, -0.285987)
 layers = 2
 mesh = SubResource("BoxMesh_rhjx0")
 skeleton = NodePath("../../../../..")

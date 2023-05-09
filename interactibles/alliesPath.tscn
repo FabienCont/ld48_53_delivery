@@ -31,7 +31,7 @@ script = ExtResource("1_643vi")
 multimesh = SubResource("MultiMesh_kjh3s")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="."]
-transform = Transform3D(0.447213, 0, 0.894427, 0, 1, 0, -0.894427, 0, 0.447213, 1.54468, -1.49827, -14.9858)
+transform = Transform3D(0.447213, 0, 0.894427, 0, 1, 0, -0.894427, 0, 0.447213, 1.54468, -1.50271, -14.9835)
 progress = 3.0
 loop = false
 

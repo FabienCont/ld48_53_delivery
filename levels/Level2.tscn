@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bo0go01e88bkw"]
+[gd_scene load_steps=30 format=3 uid="uid://bo0go01e88bkw"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_e88bp"]
 [ext_resource type="PackedScene" uid="uid://dp2tfdyedtdod" path="res://levels/parts/ground.tscn" id="2_lbbf6"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bavs73ctp0h2b" path="res://interactibles/entrance_door.tscn" id="6_1nh5q"]
 [ext_resource type="Script" path="res://scripts/Path3D.gd" id="7_tsgco"]
 [ext_resource type="PackedScene" uid="uid://blib87i5ig2ls" path="res://interactibles/loot.tscn" id="8_qkrs1"]
+[ext_resource type="PackedScene" uid="uid://ca8s0bpfw0ruf" path="res://props/exit.tscn" id="9_drhnu"]
 [ext_resource type="PackedScene" uid="uid://cwfex5q0oty66" path="res://characters/player.tscn" id="9_snjqr"]
 [ext_resource type="PackedScene" uid="uid://bbm8rkie5wy2j" path="res://characters/ennemy.tscn" id="10_xtxqn"]
 [ext_resource type="AudioStream" uid="uid://kk0575ani8gm" path="res://sounds/gamjam.mp3" id="11_10xeq"]
@@ -257,6 +258,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65916, 0, 8.74695)
 
 [node name="Node3D3" parent="Terrain/loots" instance=ExtResource("8_qkrs1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.18081, 0, 1.09481)
+
+[node name="exit2" parent="Terrain" instance=ExtResource("9_drhnu")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.26841, 0.158075, 4.01232)
 
 [node name="Player" type="Node3D" parent="."]
 metadata/_edit_lock_ = true

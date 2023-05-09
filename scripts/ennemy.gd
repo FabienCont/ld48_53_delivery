@@ -88,7 +88,7 @@ func _physics_process(delta):
 	
 
 func update_target_location(target_node: Node3D,hero_node: Node3D):
-	if aimHero ==true :
+	if aimHero == true :
 		target = hero_node
 	else :
 		target=target_node
