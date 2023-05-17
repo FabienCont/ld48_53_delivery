@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq8ljbxgajeeh"]
+[gd_scene load_steps=7 format=3 uid="uid://bq8ljbxgajeeh"]
 
 [ext_resource type="PackedScene" uid="uid://4rgx1g8dp87i" path="res://levels/screens/texture_rect.tscn" id="1_6abvc"]
-[ext_resource type="Script" path="res://scripts/goNextLevel.gd" id="1_dkf0f"]
 [ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/screens/statsGrid.tscn" id="1_qsy4u"]
+[ext_resource type="Script" path="res://scripts/ui/goNextLevel.gd" id="2_ubv41"]
+[ext_resource type="AudioStream" uid="uid://cc4bhpwdrlblm" path="res://sounds/ui/bookOpen.ogg" id="4_1rv26"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pusrk"]
 
@@ -65,7 +66,7 @@ size_flags_horizontal = 4
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
 text = "go to next level"
-script = ExtResource("1_dkf0f")
+script = ExtResource("2_ubv41")
 
 [node name="HseparatorCustom3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
@@ -74,5 +75,9 @@ theme = SubResource("Theme_xqt2h")
 
 [node name="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("1_qsy4u")]
 layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1rv26")
+bus = &"UI"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" method="_on_pressed"]

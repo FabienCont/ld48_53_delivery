@@ -59,3 +59,6 @@
 *.tga filter=lfs diff=lfs merge=lfs -binary
 *.tif filter=lfs diff=lfs merge=lfs -binary
 *.tiff filter=lfs diff=lfs merge=lfs -binary
+
+# Ressources
+*.res filter=lfs diff=lfs merge=lfs -binary

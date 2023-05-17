@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cvhcuslhcedce"]
+[gd_scene load_steps=34 format=3 uid="uid://cvhcuslhcedce"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_1nrti"]
 [ext_resource type="Script" path="res://levels/IsoCameraStickFollow.gd" id="2_vd7wm"]
@@ -6,10 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://cteidd0ijk1u" path="res://props/box.tscn" id="3_in06o"]
 [ext_resource type="PackedScene" uid="uid://blib87i5ig2ls" path="res://interactibles/loot.tscn" id="4_lleha"]
 [ext_resource type="Material" uid="uid://gcy7d26no3wp" path="res://materials/wall.tres" id="5_ii440"]
+[ext_resource type="PackedScene" uid="uid://bvbjpmjtrl4mp" path="res://interactibles/barrel.tscn" id="6_lpqkb"]
 [ext_resource type="PackedScene" uid="uid://cw83dv00j8h7p" path="res://interactibles/exit_door.tscn" id="6_usdid"]
 [ext_resource type="PackedScene" uid="uid://bavs73ctp0h2b" path="res://interactibles/entrance_door.tscn" id="7_mki3d"]
 [ext_resource type="PackedScene" uid="uid://cwfex5q0oty66" path="res://characters/player.tscn" id="9_700ky"]
-[ext_resource type="Script" path="res://scripts/Path3D.gd" id="9_osqw7"]
+[ext_resource type="Script" path="res://scripts/interactibles/Path3D.gd" id="9_osqw7"]
 [ext_resource type="PackedScene" uid="uid://bbm8rkie5wy2j" path="res://characters/ennemy.tscn" id="10_al2hs"]
 [ext_resource type="PackedScene" uid="uid://dwexo2jql38g1" path="res://characters/boss.tscn" id="12_vlu11"]
 [ext_resource type="AudioStream" uid="uid://kk0575ani8gm" path="res://sounds/gamjam.mp3" id="13_kg3jp"]
@@ -303,6 +304,44 @@ transform = Transform3D(-1.50977, 0, -0.909317, 0, 2.67347, 0, 1.24992, 0, -1.09
 [node name="Node3D3" parent="Terrain/NavigationRegion3D" instance=ExtResource("4_lleha")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6741, -1.90735e-06, 6.41354)
 
+[node name="interactibles" type="Node3D" parent="Terrain/NavigationRegion3D"]
+
+[node name="RigidBody3D" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.16131, -0.0918067, 6.90958)
+
+[node name="RigidBody3D2" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.16299, -0.0918067, 11.4437)
+
+[node name="RigidBody3D3" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.082, -0.0918067, 22.9131)
+
+[node name="RigidBody3D4" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56798, -0.0918067, 12.3015)
+
+[node name="RigidBody3D5" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98712, 1.73902, 12.0267)
+
+[node name="RigidBody3D6" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38068, -0.0918067, 17.1849)
+
+[node name="RigidBody3D7" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4628, -0.0918067, -4.05779)
+
+[node name="RigidBody3D8" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4364, -0.0918067, 16.3486)
+
+[node name="RigidBody3D9" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.611, -0.0918067, 23.7178)
+
+[node name="RigidBody3D10" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.6593, -0.0918067, 42.6608)
+
+[node name="RigidBody3D11" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.1677, -0.0918067, 41.6431)
+
+[node name="RigidBody3D12" parent="Terrain/NavigationRegion3D/interactibles" instance=ExtResource("6_lpqkb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1662, -0.0918067, 35.5601)
+
 [node name="exit" type="Node3D" parent="Terrain"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
@@ -514,5 +553,6 @@ transform = Transform3D(0.0708881, 0, -0.997484, 0, 1, 0, 0.997484, 0, 0.0708881
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_kg3jp")
 autoplay = true
+bus = &"background_music"
 
 [connection signal="curve_changed" from="Terrain/alliesPath" to="Terrain/alliesPath" method="_on_curve_changed" flags=18]

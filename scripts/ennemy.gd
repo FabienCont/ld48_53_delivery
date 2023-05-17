@@ -70,7 +70,7 @@ func _physics_process(delta):
 	var velocity_temp = (nextLocation-currentLocation) * SPEED
 	newVelocity.x += velocity_temp.x
 	newVelocity.z += velocity_temp.z
-	position=position.move_toward(nextLocation,delta * SPEED)
+	position=position.move_toward(nextLocation, delta*SPEED)
 	
 		
 	if ready_to_attack:

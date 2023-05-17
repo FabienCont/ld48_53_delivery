@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwxnxsg6lktxr"]
+[gd_scene load_steps=8 format=3 uid="uid://cwxnxsg6lktxr"]
 
 [ext_resource type="PackedScene" uid="uid://4rgx1g8dp87i" path="res://levels/screens/texture_rect.tscn" id="1_4643d"]
-[ext_resource type="Script" path="res://scripts/goToMenu.gd" id="1_wrmt2"]
-[ext_resource type="Script" path="res://scripts/RetryButton.gd" id="2_7udfj"]
+[ext_resource type="Script" path="res://scripts/ui/RetryButton.gd" id="2_3egn2"]
 [ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/screens/statsGrid.tscn" id="2_7y3x2"]
+[ext_resource type="Script" path="res://scripts/ui/goToMenu.gd" id="3_dwr7t"]
+[ext_resource type="AudioStream" uid="uid://cc4bhpwdrlblm" path="res://sounds/ui/bookOpen.ogg" id="5_ofvor"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mh5t"]
 
@@ -66,7 +67,7 @@ size_flags_horizontal = 4
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer3"]
 layout_mode = 2
 text = "Retry Level"
-script = ExtResource("2_7udfj")
+script = ExtResource("2_3egn2")
 
 [node name="HseparatorCustom3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
@@ -80,7 +81,7 @@ size_flags_horizontal = 4
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Return to menu"
-script = ExtResource("1_wrmt2")
+script = ExtResource("3_dwr7t")
 
 [node name="HseparatorCustom4" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
@@ -89,6 +90,10 @@ theme = SubResource("Theme_sik0a")
 
 [node name="GridContainer2" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("2_7y3x2")]
 layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ofvor")
+bus = &"UI"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer3/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer3/Button" method="_on_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" method="_on_pressed"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://36hneilo82f0"]
+[gd_scene load_steps=6 format=3 uid="uid://36hneilo82f0"]
 
-[ext_resource type="Script" path="res://scripts/goToLevel1.gd" id="1_ngbjl"]
 [ext_resource type="PackedScene" uid="uid://4rgx1g8dp87i" path="res://levels/screens/texture_rect.tscn" id="1_qugvm"]
+[ext_resource type="Script" path="res://scripts/ui/goToLevel1.gd" id="2_7bmg0"]
+[ext_resource type="AudioStream" uid="uid://cc4bhpwdrlblm" path="res://sounds/ui/bookOpen.ogg" id="3_jbnf2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pjshm"]
 
@@ -64,6 +65,10 @@ size_flags_horizontal = 4
 [node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Start Game"
-script = ExtResource("1_ngbjl")
+script = ExtResource("2_7bmg0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jbnf2")
+bus = &"UI"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" method="_on_pressed"]
