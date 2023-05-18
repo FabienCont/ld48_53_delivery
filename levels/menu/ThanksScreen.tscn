@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw30yj4vv0n06"]
+
+[ext_resource type="Script" path="res://scripts/ui/goToMenu.gd" id="1_7ebjm"]
+[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/menu/statsGrid.tscn" id="2_pfnes"]
+[ext_resource type="AudioStream" uid="uid://cc4bhpwdrlblm" path="res://sounds/ui/bookOpen.ogg" id="3_1eu34"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t8ih"]
+
+[sub_resource type="Theme" id="Theme_fydem"]
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_0t8ih")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.117647, 0.160784, 0.313726, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="HseparatorCustom2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_fydem")
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "YOU WON !"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Thanks for playing"
+horizontal_alignment = 1
+
+[node name="HseparatorCustom" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_fydem")
+
+[node name="GridContainer2" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+text = "Return to menu"
+script = ExtResource("1_7ebjm")
+
+[node name="HseparatorCustom4" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_fydem")
+
+[node name="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("2_pfnes")]
+layout_mode = 2
+
+[node name="HseparatorCustom3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_fydem")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1eu34")
+bus = &"UI"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" method="_on_pressed"]

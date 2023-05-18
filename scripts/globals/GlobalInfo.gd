@@ -45,7 +45,7 @@ func endLevel():
 
 func goToNextLevel():
 	if stats.level==3 :
-		get_tree().change_scene_to_file("res://levels/screens/ThanksScreen.tscn")
+		get_tree().change_scene_to_file("res://levels/menu/ThanksScreen.tscn")
 	elif stats.level==2 :
 		get_tree().change_scene_to_file("res://levels/Level3.tscn")
 	elif stats.level==1 :

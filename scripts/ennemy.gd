@@ -9,23 +9,35 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var rng = RandomNumberGenerator.new()
 @onready var weapon:Node3D 
-@onready var hand = $hand
-@onready var katanaScene = preload("res://weapons/katana.tscn")
+@onready var katanaScene = preload("res://levels/weapons/katana2.tscn")
 @onready var katana = katanaScene.instantiate()
-@export var life = 10 : set = update_life
+@export var life = 10
+
+@onready var animatedSkinComponent: AnimatedSkinComponent = $AnimatedSkinComponent
+@onready var healthComponent: HealthComponent = $HealthComponent
+@onready var hitboxComponent: HitboxComponent = $HitboxComponent
+@onready var weaponSlotComponent: WeaponSlotComponent = $WeaponSlotComponent
 
 var ready_to_attack = false 
 var reloading = false;
 var target: Node3D
 var isDie:bool= false
+
 @export var aimHero:bool =false
-signal life_update(life)
 
 func _ready():
-	hand.add_child(katana.duplicate())
+	healthComponent.health = life
+	if weaponSlotComponent !=null:
+		weaponSlotComponent.equip(katana.duplicate())
+		
+	if animatedSkinComponent != null && weaponSlotComponent != null:
+		weaponSlotComponent.set_external_skeleton(animatedSkinComponent.get_skeleton())
+		weaponSlotComponent.bone_idx=animatedSkinComponent.get_right_hand_bone_index()
 	pass
 	
 func die():
+	if isDie == true:
+		return
 	get_tree().call_group("level","ennemy_die",self)
 	isDie=true
 	rotate(Vector3.LEFT,deg_to_rad(90))
@@ -44,16 +56,6 @@ func reload():
 	reloading = false
 	ready_to_attack=true
 	
-func update_life(value):
-	if isDie: 
-		return
-	life = value
-	print("ennemy life:"+str(value))
-	emit_signal("life_update",value) 
-	if life<= 0 :
-		self.die()
-	pass
-	
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
@@ -70,12 +72,16 @@ func _physics_process(delta):
 	var velocity_temp = (nextLocation-currentLocation) * SPEED
 	newVelocity.x += velocity_temp.x
 	newVelocity.z += velocity_temp.z
-	position=position.move_toward(nextLocation, delta*SPEED)
 	
+	var animation_blend = Vector2(newVelocity.x,-newVelocity.y).rotated(-rotation.y)
+	animatedSkinComponent.walk(animation_blend,delta)
+
+	position=position.move_toward(nextLocation, delta*SPEED)
 		
 	if ready_to_attack:
 			ready_to_attack=false
-			hand.get_child(0).call("attack")
+			weaponSlotComponent.start_attack()
+			animatedSkinComponent.attack()
 	elif not reloading :
 		reload()
 

@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwfex5q0oty66"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_erxv6"]
+[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://levels/components/AnimatedSkinComponent.tscn" id="2_8pl2c"]
+[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://levels/components/HealthComponent.tscn" id="2_r2nnm"]
+[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://levels/components/HitboxComponent.tscn" id="3_yxpjp"]
+[ext_resource type="PackedScene" uid="uid://dki5bbyx48u21" path="res://levels/weapons/katana2.tscn" id="6_ehf80"]
+[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://levels/components/WeaponSlotComponent.tscn" id="7_5d3ua"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c7cg2"]
+
+[node name="PlayerCharacterBody3D" type="CharacterBody3D" groups=["heroes"]]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_erxv6")
+
+[node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_8pl2c")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_r2nnm")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_yxpjp")]
+shape = SubResource("CapsuleShape3D_c7cg2")
+health_component = NodePath("../HealthComponent")
+
+[node name="WeaponSlotComponent" parent="." node_paths=PackedStringArray("weaponEquiped") instance=ExtResource("7_5d3ua")]
+transform = Transform3D(-0.183426, 0.779681, -0.598709, 0.875052, -0.148013, -0.460842, -0.447927, -0.608432, -0.655112, 0.529853, 0.0140834, 0.240563)
+weaponEquiped = NodePath("katana2")
+
+[node name="katana2" parent="WeaponSlotComponent" instance=ExtResource("6_ehf80")]
+transform = Transform3D(-0.00442314, 0.953836, 0.300305, -0.98428, -0.0571824, 0.167128, 0.176584, -0.294843, 0.939092, -0.123656, 0.215673, 0.121179)

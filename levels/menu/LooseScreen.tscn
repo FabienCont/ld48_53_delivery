@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwxnxsg6lktxr"]
+
+[ext_resource type="PackedScene" uid="uid://4rgx1g8dp87i" path="res://levels/menu/texture_rect.tscn" id="1_4643d"]
+[ext_resource type="Script" path="res://scripts/ui/RetryButton.gd" id="2_3egn2"]
+[ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/menu/statsGrid.tscn" id="2_7y3x2"]
+[ext_resource type="Script" path="res://scripts/ui/goToMenu.gd" id="3_dwr7t"]
+[ext_resource type="AudioStream" uid="uid://cc4bhpwdrlblm" path="res://sounds/ui/bookOpen.ogg" id="5_ofvor"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mh5t"]
+
+[sub_resource type="Theme" id="Theme_sik0a"]
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_7mh5t")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.239216, 0.207843, 0.152941, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -463.65
+offset_right = 463.65
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" parent="ColorRect/MarginContainer" instance=ExtResource("1_4643d")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="HseparatorCustom" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_sik0a")
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "You loose"
+horizontal_alignment = 1
+
+[node name="HseparatorCustom2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_sik0a")
+
+[node name="GridContainer3" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer3"]
+layout_mode = 2
+text = "Retry Level"
+script = ExtResource("2_3egn2")
+
+[node name="HseparatorCustom3" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_sik0a")
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Return to menu"
+script = ExtResource("3_dwr7t")
+
+[node name="HseparatorCustom4" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme = SubResource("Theme_sik0a")
+
+[node name="GridContainer2" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("2_7y3x2")]
+layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ofvor")
+bus = &"UI"
+
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer3/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer3/Button" method="_on_pressed"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" method="_on_pressed"]

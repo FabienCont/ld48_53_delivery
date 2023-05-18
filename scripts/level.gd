@@ -4,7 +4,7 @@ var isFinish:bool = false
 
 
 @onready var hero: CharacterBody3D =$Player/PlayerCharacterBody3D
-@onready var allyScene = preload("res://characters/ally.tscn")
+@onready var allyScene = preload("res://levels/characters/ally.tscn")
 @onready var ally_instance = allyScene.instantiate()
 @onready var allies_node: Node3D=$Allies
 # Called when the node enters the scene tree for the first time.
@@ -44,7 +44,7 @@ func loose():
 		return
 	isFinish=true
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://levels/screens/LooseScreen.tscn")
+	get_tree().change_scene_to_file("res://levels/menu/LooseScreen.tscn")
 	
 func win():
 	if hasFinish():
@@ -52,7 +52,7 @@ func win():
 	isFinish=true
 	GlobalInfo.endLevel()
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://levels/screens/WinScreen.tscn")
+	get_tree().change_scene_to_file("res://levels/menu/WinScreen.tscn")
 	
 func player_die(_player: Node3D):
 	loose()

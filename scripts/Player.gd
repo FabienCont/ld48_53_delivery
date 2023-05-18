@@ -3,53 +3,54 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-@onready var weapon = $BoneAttachment3D/weapon
-@onready var animationTree: AnimationTree = $AnimationTree
+#@onready var animationTree: AnimationTree = $AnimationTree
+
+@onready var animatedSkinComponent: AnimatedSkinComponent = $AnimatedSkinComponent
+@onready var healthComponent: HealthComponent = $HealthComponent
+@onready var hitboxComponent: HitboxComponent = $HitboxComponent
+@onready var weaponSlotComponent: WeaponSlotComponent = $WeaponSlotComponent
+
 var stats;
 
 # Get the gravity from the
 # project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@export var life = 10 : set = update_life
 var isDie = false
 var isAttacking = false
 signal life_update(life)
 
 func _ready():
 	stats = GlobalInfo.stats
-	life= stats.life
+	healthComponent.health = stats.life
+	if animatedSkinComponent != null && weaponSlotComponent != null:
+		weaponSlotComponent.set_external_skeleton(animatedSkinComponent.get_skeleton())
+		weaponSlotComponent.bone_idx=animatedSkinComponent.get_right_hand_bone_index()
 	
 func die():
-	get_tree().call_group("level","player_die",self)
-	isDie = true
-	animationTree.set("parameters/die/transition_request","true")
-	
-func update_life(value):
 	if isDie == true:
 		return
-	stats.life = value
-	life = stats.life
-	print("player life:"+str(value))
-	emit_signal("life_update",value) 
-	if life<= 0 :
-		die()
-	pass
+	isDie = true
+	get_tree().call_group("level","player_die",self)
+	animatedSkinComponent.die()
 	
 func attack():
 	if isDie == true:
 		return
-	if(weapon.get_child_count()==0):
+	if(not weaponSlotComponent.has_weapon_equiped()):
 		print("no weapon equiped")
-		return		
+		return
 	if  isAttacking == false:
+		weaponSlotComponent.start_attack()
 		isAttacking=true
-		animationTree.set("parameters/attack/request",1)
+		animatedSkinComponent.attack()
 		velocity.x = 0
 		velocity.z = 0
-		await get_tree().create_timer(1).timeout
-		isAttacking=false
 
+func end_attack(): 
+	isAttacking=false
+	weaponSlotComponent.end_attack()
+	
 func look_at_mouse(delta):
 	var camera := get_viewport().get_camera_3d()
 	if camera == null:
@@ -68,9 +69,6 @@ func look_at_mouse(delta):
 		var diff = Vector3(global_transform.origin-intersection.position)
 		var angle = Vector2(diff.z,diff.x).normalized().angle()
 		rotation.y = lerp_angle(rotation.y,angle,delta*10)
-		#intersection.position
-		#look_at(intersection.position)
-		
 		rotation.x = 0
 		rotation.z = 0
 	
@@ -111,9 +109,9 @@ func top_down_movement(delta):
 		rotation.z = 0
 	else:
 		look_at_mouse(delta)
-	var animation_blend =  lerp(animationTree.get("parameters/walk/blend_position"),Vector2(input_dir.x,-input_dir.y).rotated(camera.global_rotation.y).rotated(-rotation.y),delta*15)
-	animationTree.set("parameters/walk/blend_position",animation_blend)
-	
+		var animation_blend = Vector2(input_dir.x,-input_dir.y).rotated(camera.global_rotation.y).rotated(-rotation.y)
+		animatedSkinComponent.walk(animation_blend,delta)
+
 func _physics_process(delta):
 	if global_transform.origin.y < -50:
 		die()
@@ -122,28 +120,31 @@ func _physics_process(delta):
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	elif animationTree.get("parameters/state/current_state") == "jump":
-		animationTree.set("parameters/state/transition_request","walk")
+	else: 
+		animatedSkinComponent.land()
 	
 	if isDie == true:
 		move_and_slide()
 		return
 	
-	
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		animationTree.set("parameters/state/transition_request","jump")
+		animatedSkinComponent.jump()
 	
 	
 	if Input.is_action_just_pressed("action1") && isAttacking == false:
 		self.attack()
 		
-	
 	if  isAttacking == false && is_on_floor():
 		self.top_down_movement(delta)
 	
 	move_and_slide()
+	for col_idx in get_slide_collision_count():
+		var col := get_slide_collision(col_idx)
+		if col.get_collider() is RigidBody3D:
+			col.get_collider().apply_central_impulse(-col.get_normal() * 0.3)
+			col.get_collider().apply_impulse(-col.get_normal() * 0.01, col.get_position())
 	
 func loot(type: String,value)-> void:
 	stats[type]+=value

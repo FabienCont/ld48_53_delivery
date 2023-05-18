@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@onready var lootScene = preload("res://interactibles/loot.tscn")
+@onready var lootScene = preload("res://levels/interactibles/loot.tscn")
 @onready var loot: = lootScene.instantiate();
 @export var life = 8 : set = update_life
 @onready var isDie= false

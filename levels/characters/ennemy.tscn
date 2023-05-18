@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbm8rkie5wy2j"]
+
+[ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_kf2cx"]
+[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://levels/components/AnimatedSkinComponent.tscn" id="2_85vlx"]
+[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://levels/components/WeaponSlotComponent.tscn" id="3_suwv4"]
+[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://levels/components/HitboxComponent.tscn" id="4_nchdk"]
+[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://levels/components/HealthComponent.tscn" id="5_w7uk5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
+
+[node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
+script = ExtResource("1_kf2cx")
+
+[node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]
+
+[node name="WeaponSlotComponent" parent="." instance=ExtResource("3_suwv4")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_nchdk")]
+shape = SubResource("CapsuleShape3D_5x11s")
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_w7uk5")]
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
