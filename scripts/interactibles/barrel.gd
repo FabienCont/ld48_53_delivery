@@ -34,7 +34,3 @@ func update_life(value):
 	if life<= 0 :
 		self.die()
 	pass
-	
-func _process(delta):
-	pass
-	

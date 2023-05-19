@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwfex5q0oty66"]
+[gd_scene load_steps=12 format=3 uid="uid://cwfex5q0oty66"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erxv6"]
 [ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://levels/components/AnimatedSkinComponent.tscn" id="2_8pl2c"]
@@ -6,8 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://levels/components/HitboxComponent.tscn" id="3_yxpjp"]
 [ext_resource type="PackedScene" uid="uid://dki5bbyx48u21" path="res://levels/weapons/katana2.tscn" id="6_ehf80"]
 [ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://levels/components/WeaponSlotComponent.tscn" id="7_5d3ua"]
+[ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://levels/components/LifebarComponent.tscn" id="7_ukeuy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c7cg2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ff5o2"]
+transparency = 1
+albedo_color = Color(0, 0.392157, 0.588235, 0.572549)
+
+[sub_resource type="TorusMesh" id="TorusMesh_kn1gr"]
+material = SubResource("StandardMaterial3D_ff5o2")
+inner_radius = 0.8
+outer_radius = 0.9
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t8c0y"]
+viewport_path = NodePath("SubViewport")
 
 [node name="PlayerCharacterBody3D" type="CharacterBody3D" groups=["heroes"]]
 collision_layer = 5
@@ -15,8 +28,6 @@ collision_mask = 5
 script = ExtResource("1_erxv6")
 
 [node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_8pl2c")]
-
-[node name="HealthComponent" parent="." instance=ExtResource("2_r2nnm")]
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_yxpjp")]
 shape = SubResource("CapsuleShape3D_c7cg2")
@@ -28,3 +39,16 @@ weaponEquiped = NodePath("katana2")
 
 [node name="katana2" parent="WeaponSlotComponent" instance=ExtResource("6_ehf80")]
 transform = Transform3D(-0.00442314, 0.953836, 0.300305, -0.98428, -0.0571824, 0.167128, 0.176584, -0.294843, 0.939092, -0.123656, 0.215673, 0.121179)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.982607, 0)
+mesh = SubResource("TorusMesh_kn1gr")
+
+[node name="LifebarComponent" parent="." instance=ExtResource("7_ukeuy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27905, 0)
+texture = SubResource("ViewportTexture_t8c0y")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("lifebar_component") instance=ExtResource("2_r2nnm")]
+MAX_HEALTH = 30.0
+health = 30.0
+lifebar_component = NodePath("../LifebarComponent")

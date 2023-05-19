@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
-
-const SPEED = 3.5
+const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -40,7 +39,7 @@ func die():
 		return
 	get_tree().call_group("level","ennemy_die",self)
 	isDie=true
-	rotate(Vector3.LEFT,deg_to_rad(90))
+	animatedSkinComponent.die()
 	move_and_slide()
 	await get_tree().create_timer(3).timeout
 	queue_free()

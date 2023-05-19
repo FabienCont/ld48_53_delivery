@@ -6,7 +6,7 @@ class_name Weapon
 
 func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
 	var parent = node.get_parent()
-	if parent == get_tree().get_root() :
+	if parent == get_tree().get_root():
 		return false
 	elif parent == body:
 		return true
@@ -22,17 +22,13 @@ func end_attack():
 		
 func damage(hitboxComponent :HitboxComponent):
 	var attack = Attack.new()
-	attack.attack_damage = 10
+	attack.attack_damage = 4
 	attack.attack_position = global_position
 	hitboxComponent.damage(attack)
-	pass
 
-
-func _on_area_3d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	print(body)
-	if body is HitboxComponent:
+func _on_area_3d_body_shape_entered(_body_rid: RID, body: Node3D, body_shape_index:int, _local_shape_index:int):
+	var body_shape_owner = body.shape_find_owner(body_shape_index)
+	var body_shape_node = body.shape_owner_get_owner(body_shape_owner)
+	if body_shape_node is HitboxComponent:
 		if(!is_parent_recursive(self,body)):
-			var direction = Vector3(body.global_transform.origin - global_transform.origin).normalized()
-			
-			damage(body)
-	pass # Replace with function body.
+			damage(body_shape_node)

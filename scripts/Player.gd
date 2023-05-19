@@ -3,12 +3,12 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-#@onready var animationTree: AnimationTree = $AnimationTree
 
 @onready var animatedSkinComponent: AnimatedSkinComponent = $AnimatedSkinComponent
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var hitboxComponent: HitboxComponent = $HitboxComponent
 @onready var weaponSlotComponent: WeaponSlotComponent = $WeaponSlotComponent
+@onready var lifebarComponent: LifebarComponent = $LifebarComponent
 
 var stats;
 
@@ -18,7 +18,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var isDie = false
 var isAttacking = false
-signal life_update(life)
 
 func _ready():
 	stats = GlobalInfo.stats
