@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://chpsfjftfdckn"]
 
-[ext_resource type="Script" path="res://scripts/components/LifebarComponent.gd" id="1_mchr6"]
+[ext_resource type="Script" path="res://components/scripts/LifebarComponent.gd" id="1_mchr6"]
 
 [sub_resource type="Theme" id="Theme_hp00d"]
 

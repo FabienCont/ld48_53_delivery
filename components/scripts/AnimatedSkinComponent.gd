@@ -17,7 +17,7 @@ func walk(animation_blend :Vector2, delta :float):
 	var animation_blend_lerp =  lerp(animationTree.get("parameters/walk/blend_position"),animation_blend,delta*15)
 	animationTree.set("parameters/walk/blend_position",animation_blend_lerp)
 	
-func attack():
+func start_attack():
 	animationTree.set("parameters/attack/request",1)
 	
 func end_attack():

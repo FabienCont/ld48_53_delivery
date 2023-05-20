@@ -1,11 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbm8rkie5wy2j"]
+[gd_scene load_steps=14 format=3 uid="uid://bbm8rkie5wy2j"]
 
 [ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_kf2cx"]
-[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://levels/components/AnimatedSkinComponent.tscn" id="2_85vlx"]
-[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://levels/components/WeaponSlotComponent.tscn" id="3_suwv4"]
-[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://levels/components/HitboxComponent.tscn" id="4_nchdk"]
-[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://levels/components/HealthComponent.tscn" id="5_w7uk5"]
-[ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://levels/components/LifebarComponent.tscn" id="6_1ro1a"]
+[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_85vlx"]
+[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="3_suwv4"]
+[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="4_nchdk"]
+[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="5_w7uk5"]
+[ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://components/LifebarComponent.tscn" id="6_1ro1a"]
+[ext_resource type="PackedScene" uid="uid://dsgade72q8iyn" path="res://components/PathFindComponent.tscn" id="7_f0v5f"]
+[ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="8_wabxq"]
+[ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="9_qrb8r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
 
@@ -28,9 +31,7 @@ script = ExtResource("1_kf2cx")
 
 [node name="WeaponSlotComponent" parent="." instance=ExtResource("3_suwv4")]
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_nchdk")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_nchdk")]
 shape = SubResource("CapsuleShape3D_5x11s")
 health_component = NodePath("../HealthComponent")
 
@@ -45,5 +46,15 @@ mesh = SubResource("TorusMesh_mww1x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14265, 0)
 texture = SubResource("ViewportTexture_g5cdl")
 
-[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
-[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+[node name="PathFindComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("7_f0v5f")]
+target_desired_distance = 2.0
+lookAtComponent = NodePath("../LookAtComponent")
+velocityComponent = NodePath("../VelocityComponent")
+
+[node name="LookAtComponent" parent="." node_paths=PackedStringArray("observer") instance=ExtResource("8_wabxq")]
+observer = NodePath("..")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("9_qrb8r")]
+
+[connection signal="target_reached" from="PathFindComponent" to="." method="_on_path_find_component_target_reached"]
+[connection signal="velocity_computed" from="PathFindComponent" to="." method="_on_path_find_component_velocity_computed"]

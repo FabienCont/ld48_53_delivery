@@ -1,21 +1,13 @@
 extends CharacterBody3D
 
-
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-
 @onready var animatedSkinComponent: AnimatedSkinComponent = $AnimatedSkinComponent
 @onready var healthComponent: HealthComponent = $HealthComponent
-@onready var hitboxComponent: HitboxComponent = $HitboxComponent
 @onready var weaponSlotComponent: WeaponSlotComponent = $WeaponSlotComponent
-@onready var lifebarComponent: LifebarComponent = $LifebarComponent
+@onready var controllerComponent: TopDownControllerComponent = $TopDownControllerComponent
+@onready var velocityComponent: VelocityComponent = $VelocityComponent
+@onready var lookAtComponent: LookAtComponent = $LookAtComponent
 
 var stats;
-
-# Get the gravity from the
-# project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 var isDie = false
 var isAttacking = false
 
@@ -30,115 +22,56 @@ func die():
 	if isDie == true:
 		return
 	isDie = true
+	weaponSlotComponent.end_attack()
 	get_tree().call_group("level","player_die",self)
 	animatedSkinComponent.die()
 	
-func attack():
-	if isDie == true:
+func start_attack():
+	if isDie == true || isAttacking == true || not weaponSlotComponent.has_weapon_equiped():
 		return
-	if(not weaponSlotComponent.has_weapon_equiped()):
-		print("no weapon equiped")
-		return
-	if  isAttacking == false:
-		weaponSlotComponent.start_attack()
-		isAttacking=true
-		animatedSkinComponent.attack()
-		velocity.x = 0
-		velocity.z = 0
-
+	weaponSlotComponent.start_attack()
+	animatedSkinComponent.start_attack()
+	isAttacking=true
+		
 func end_attack(): 
 	isAttacking=false
 	weaponSlotComponent.end_attack()
-	
-func look_at_mouse(delta):
-	var camera := get_viewport().get_camera_3d()
-	if camera == null:
-		return
-	var mouse_pos = get_viewport().get_mouse_position()
-	var ray_origin = camera.project_ray_origin(mouse_pos)
-	var ray_normal = camera.project_ray_normal(mouse_pos)
-	var ray_target = ray_origin + ray_normal *100
-	
-	var space_state= get_world_3d().direct_space_state
-	
-	var test = PhysicsRayQueryParameters3D.create(ray_origin,ray_target)
-	var intersection = space_state.intersect_ray(test)
-	
-	if not intersection.is_empty():
-		var diff = Vector3(global_transform.origin-intersection.position)
-		var angle = Vector2(diff.z,diff.x).normalized().angle()
-		rotation.y = lerp_angle(rotation.y,angle,delta*10)
-		rotation.x = 0
-		rotation.z = 0
-	
-	
-func fps_movement (delta) :
-	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
-	look_at_mouse(delta)
-	
-func top_down_movement(delta):
-	var camera := get_viewport().get_camera_3d()
-	if camera == null:
-		return
-	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-	
-	var input_look_dir = Input.get_vector("look_left", "look_right", "look_up", "look_down")
-	var direction_look = (camera.global_transform.basis * Vector3(input_look_dir.x, 0, input_look_dir.y)).normalized()
-	
-	
-	if(direction_look.x!= 0 && direction_look.y!= 0):
-		look_at(position + direction_look)
-		rotation.x = 0
-		rotation.z = 0
-	else:
-		look_at_mouse(delta)
-		var animation_blend = Vector2(input_dir.x,-input_dir.y).rotated(camera.global_rotation.y).rotated(-rotation.y)
-		animatedSkinComponent.walk(animation_blend,delta)
-
-func _physics_process(delta):
+		
+func _process(delta):
 	if global_transform.origin.y < -50:
 		die()
-		return
-	# Add the gravity.
-	
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-	else: 
-		animatedSkinComponent.land()
 	
 	if isDie == true:
-		move_and_slide()
+		velocityComponent.decelerate(delta)
+		velocityComponent.move(self,delta)
 		return
+			
+	if not is_on_floor():
+		velocityComponent.apply_gravity(delta)
+	else: 
+		animatedSkinComponent.land()
+		if controllerComponent.jump():
+			animatedSkinComponent.jump()
+		elif isAttacking == true:
+			velocityComponent.decelerate(delta)
+		elif controllerComponent.has_attack() && isAttacking == false:
+			start_attack()
+		elif isAttacking == false:
+			var camera := get_viewport().get_camera_3d()
+			var basis
+			if camera != null:
+				basis = camera.global_transform.basis.orthonormalized()
+			controllerComponent.updateControl(delta, camera.global_rotation.y)
+			if controllerComponent.has_move() : 
+				var direction = controllerComponent.get_move_direction()
+				var animation_blend = Vector2(direction.z,-direction.x)#.rotated(camera.global_rotation.y).rotated(-rotation.y)
+				animatedSkinComponent.walk(animation_blend,delta)
+			else:
+				animatedSkinComponent.walk(Vector2(),delta)
+			
+	velocityComponent.move(self,delta)
+	lookAtComponent.look()
 	
-	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		animatedSkinComponent.jump()
-	
-	
-	if Input.is_action_just_pressed("action1") && isAttacking == false:
-		self.attack()
-		
-	if  isAttacking == false && is_on_floor():
-		self.top_down_movement(delta)
-	
-	move_and_slide()
 	for col_idx in get_slide_collision_count():
 		var col := get_slide_collision(col_idx)
 		if col.get_collider() is RigidBody3D:

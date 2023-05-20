@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://boxlgobc2bmf1"]
 
 [ext_resource type="Script" path="res://scripts/ally.gd" id="1_fkmo4"]
-[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://levels/components/HitboxComponent.tscn" id="2_wolpn"]
+[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="2_wolpn"]
 [ext_resource type="PackedScene" uid="uid://beiqnyl0bmd58" path="res://levels/props/money.tscn" id="3_emxrf"]
-[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://levels/components/HealthComponent.tscn" id="3_lbnhk"]
+[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="3_lbnhk"]
 [ext_resource type="ArrayMesh" uid="uid://d26nf0bb7q6fc" path="res://levels/props/cart.obj" id="3_lfvrd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ntli"]
@@ -40,7 +40,7 @@ collision_layer = 257
 collision_mask = 257
 script = ExtResource("1_fkmo4")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_wolpn")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_wolpn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.283189, 0)
 shape = SubResource("BoxShape3D_8ntli")
 health_component = NodePath("../HealthComponent")

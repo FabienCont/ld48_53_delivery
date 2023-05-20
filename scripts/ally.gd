@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var pathFollow3DTargetToLook: PathFollow3D
 @onready var path3D: Path3D = get_node("/root/Level/Terrain/alliesPath")
 @onready var healthComponent: HealthComponent = $HealthComponent
-@onready var hitboxComponent: HitboxComponent = $HitboxComponent
+@onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
 
 const SPEED = 3.0
 const JUMP_VELOCITY = 4.5

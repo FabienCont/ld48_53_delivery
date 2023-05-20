@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://do63u6aq4bbox"]
 
-[ext_resource type="Script" path="res://scripts/components/WeaponSlotComponent.gd" id="1_2m6at"]
+[ext_resource type="Script" path="res://components/scripts/WeaponSlotComponent.gd" id="1_2m6at"]
 
 [node name="WeaponSlotComponent" type="BoneAttachment3D"]
 use_external_skeleton = true

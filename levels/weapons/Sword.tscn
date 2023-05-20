@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://dki5bbyx48u21"]
 
-[ext_resource type="Script" path="res://levels/weapons/katana2.gd" id="1_2a302"]
-[ext_resource type="PackedScene" uid="uid://43webmok60tq" path="res://levels/weapons/Sword.blend" id="3_0m1t0"]
-[ext_resource type="AudioStream" uid="uid://dcak2f6e7fmow" path="res://sounds/weapon/drawKnife2.ogg" id="3_pk10n"]
+[ext_resource type="Script" path="res://levels/weapons/katana2.gd" id="1_vgjdk"]
+[ext_resource type="PackedScene" uid="uid://43webmok60tq" path="res://levels/weapons/Sword.blend" id="2_ub4my"]
+[ext_resource type="AudioStream" uid="uid://dcak2f6e7fmow" path="res://sounds/weapon/drawKnife2.ogg" id="3_8encb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mvl4y"]
-size = Vector3(0.1, 1.2, 0.3)
+size = Vector3(0.1, 1.4, 0.1)
 
-[node name="katana2" type="Node3D"]
+[node name="Sword" type="Node3D"]
 transform = Transform3D(-0.00442311, 0.953833, 0.300303, -0.984276, -0.0571822, 0.167127, 0.176583, -0.294842, 0.939088, -0.123656, 0.215673, 0.121179)
-script = ExtResource("1_2a302")
+script = ExtResource("1_vgjdk")
 
-[node name="Sword" parent="." instance=ExtResource("3_0m1t0")]
+[node name="Sword" parent="." instance=ExtResource("2_ub4my")]
 transform = Transform3D(0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0.133382, 0)
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -20,11 +20,11 @@ collision_layer = 5
 collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18153, 0)
+transform = Transform3D(0.999981, -0.00576379, -0.00208266, 0.00583154, 0.9994, 0.0341388, 0.00188467, -0.0341507, 0.999415, -0.00453758, 0.209984, -0.0169888)
 shape = SubResource("BoxShape3D_mvl4y")
 
 [node name="attackAudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_pk10n")
+stream = ExtResource("3_8encb")
 unit_size = 15.0
 bus = &"Effects"
 doppler_tracking = 2
