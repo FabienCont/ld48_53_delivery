@@ -10,7 +10,7 @@ extends CharacterBody3D
 var stats;
 var isDie = false
 var isAttacking = false
-
+var isStun = false
 func _ready():
 	stats = GlobalInfo.stats
 	healthComponent.health = stats.life
@@ -25,6 +25,13 @@ func die():
 	weaponSlotComponent.end_attack()
 	get_tree().call_group("level","player_die",self)
 	animatedSkinComponent.die()
+
+func hurt():
+	animatedSkinComponent.start_hurt()
+	isStun=true
+	
+func end_hurt():
+	isStun=false
 	
 func start_attack():
 	if isDie == true || isAttacking == true || not weaponSlotComponent.has_weapon_equiped():
@@ -37,7 +44,7 @@ func end_attack():
 	isAttacking=false
 	weaponSlotComponent.end_attack()
 		
-func _process(delta):
+func _physics_process(delta):
 	if global_transform.origin.y < -50:
 		die()
 	
@@ -52,20 +59,17 @@ func _process(delta):
 		animatedSkinComponent.land()
 		if controllerComponent.jump():
 			animatedSkinComponent.jump()
-		elif isAttacking == true:
+		elif isAttacking == true || isStun == true:
 			velocityComponent.decelerate(delta)
-		elif controllerComponent.has_attack() && isAttacking == false:
+		elif controllerComponent.has_attack() && (isAttacking == false && isStun == false) :
 			start_attack()
-		elif isAttacking == false:
+		elif isAttacking == false && isStun == false:
 			var camera := get_viewport().get_camera_3d()
-			var basis
-			if camera != null:
-				basis = camera.global_transform.basis.orthonormalized()
 			controllerComponent.updateControl(delta, camera.global_rotation.y)
 			if controllerComponent.has_move() : 
-				var direction = controllerComponent.get_move_direction()
-				var animation_blend = Vector2(direction.z,-direction.x)#.rotated(camera.global_rotation.y).rotated(-rotation.y)
-				animatedSkinComponent.walk(animation_blend,delta)
+				var direction = controllerComponent.get_move_direction() * transform.basis
+				var animation_blend = Vector2(direction.x,-direction.z)				
+				animatedSkinComponent.walk(Vector2(animation_blend.x,animation_blend.y),delta)
 			else:
 				animatedSkinComponent.walk(Vector2(),delta)
 			

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_kf2cx"]
 [ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_85vlx"]
+[ext_resource type="PackedScene" uid="uid://iuxwye7gypnb" path="res://components/GroundMarkComponent.tscn" id="2_cxk8e"]
 [ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="3_suwv4"]
 [ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="4_nchdk"]
 [ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="5_w7uk5"]
@@ -10,22 +11,22 @@
 [ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="8_wabxq"]
 [ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="9_qrb8r"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fthi8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6q1hh"]
 transparency = 1
 albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 
-[sub_resource type="TorusMesh" id="TorusMesh_mww1x"]
-material = SubResource("StandardMaterial3D_fthi8")
-inner_radius = 0.8
-outer_radius = 0.9
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_g5cdl"]
 viewport_path = NodePath("SubViewport")
 
 [node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
 script = ExtResource("1_kf2cx")
+life = 5
+
+[node name="GroundMarkComponent" parent="." instance=ExtResource("2_cxk8e")]
+surface_material_override/0 = SubResource("StandardMaterial3D_6q1hh")
+color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]
 
@@ -37,10 +38,6 @@ health_component = NodePath("../HealthComponent")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("lifebar_component") instance=ExtResource("5_w7uk5")]
 lifebar_component = NodePath("../LifebarComponent")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.982607, 0)
-mesh = SubResource("TorusMesh_mww1x")
 
 [node name="LifebarComponent" parent="." instance=ExtResource("6_1ro1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14265, 0)
@@ -56,5 +53,6 @@ observer = NodePath("..")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("9_qrb8r")]
 
+[connection signal="path_changed" from="PathFindComponent" to="." method="_on_path_find_component_path_changed"]
 [connection signal="target_reached" from="PathFindComponent" to="." method="_on_path_find_component_target_reached"]
 [connection signal="velocity_computed" from="PathFindComponent" to="." method="_on_path_find_component_velocity_computed"]

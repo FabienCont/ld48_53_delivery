@@ -12,7 +12,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func move(characterBody3D : CharacterBody3D , _delta : float ):
 	current_velocity = current_velocity.clamp(Vector3(-MAX_SPEED,-MAX_SPEED,-MAX_SPEED),Vector3(MAX_SPEED,MAX_SPEED,MAX_SPEED))
-	#print(current_velocity)
 	characterBody3D.velocity = current_velocity
 	characterBody3D.move_and_slide()
 
@@ -21,12 +20,14 @@ func jump():
 	
 func apply_gravity(delta:float):
 	current_velocity.y -= gravity * delta
-
+	
 func accelerate_in_direction(direction: Vector3, delta:float):
 	accelerate_to_velocity(direction * SPEED_FACTOR ,delta)
 
 func decelerate(delta:float):
+	var ySpeed = current_velocity.y 
 	accelerate_to_velocity(Vector3.ZERO * FRICTION,delta)
+	current_velocity.y  = ySpeed
 	
 func accelerate_to_velocity(velocity: Vector3,delta:float):
 	current_velocity = current_velocity.move_toward(velocity,delta * ACCELERATION_FACTOR)

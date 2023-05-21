@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://iuxwye7gypnb"]
+
+[ext_resource type="Script" path="res://components/scripts/GroundMarkComponent.gd" id="1_l3w77"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rm3ki"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_kn1gr"]
+material = SubResource("StandardMaterial3D_rm3ki")
+inner_radius = 0.8
+outer_radius = 0.9
+
+[node name="GroundMarkComponent" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.982607, 0)
+mesh = SubResource("TorusMesh_kn1gr")
+script = ExtResource("1_l3w77")

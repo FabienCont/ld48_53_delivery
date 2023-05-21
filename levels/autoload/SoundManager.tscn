@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6fd2l7ogxcoi"]
+
+[ext_resource type="PackedScene" uid="uid://d3ge3v8h84te7" path="res://levels/sounds/SoundQueue.tscn" id="1_8cvsp"]
+[ext_resource type="Script" path="res://scripts/globals/SoundManager.gd" id="1_l1eau"]
+[ext_resource type="AudioStream" uid="uid://ds8s4m2e74dd0" path="res://sounds/interactibles/handleCoins2.ogg" id="2_jdjdx"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_l1eau")
+
+[node name="LootCoinSoundQueue" parent="." instance=ExtResource("1_8cvsp")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LootCoinSoundQueue"]
+stream = ExtResource("2_jdjdx")
+bus = &"Effects"

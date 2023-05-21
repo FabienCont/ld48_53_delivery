@@ -18,5 +18,6 @@ func _process(_delta):
 func _on_area_3d_body_entered(body: Node3D):
 	if body.has_method("loot"):
 		body.call("loot",type,value)
+		SoundManager.playLootCoinSound()
 		queue_free()
 	

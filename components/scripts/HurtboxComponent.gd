@@ -6,3 +6,6 @@ class_name HurtboxComponent
 func damage(attack: Attack):
 	if health_component:
 		health_component.damage(attack)
+	var parent = get_parent()
+	if parent.has_method("hurt") : 
+		parent.hurt()

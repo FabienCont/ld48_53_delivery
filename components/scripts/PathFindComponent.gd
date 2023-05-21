@@ -16,6 +16,7 @@ func follow_path(node: Node3D,delta: float):
 		return;
 	
 	var direction = (get_next_path_position() - node.global_position).normalized()
+	
 	velocityComponent.accelerate_in_direction(direction,delta)
 	set_velocity(velocityComponent.current_velocity)
 	
@@ -26,5 +27,5 @@ func on_velocity_computed(velocity :Vector3):
 
 func look_at_target(delta:float):
 	if target :
-		lookAtComponent.update_rotation(target.global_position,delta)
+		lookAtComponent.update_rotation_with_target_position(target.global_position,delta)
 		lookAtComponent.look()

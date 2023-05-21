@@ -82,5 +82,5 @@ func look_at_mouse(delta:float):
 	var intersection = space_state.intersect_ray(test)
 	
 	if not intersection.is_empty():
-		lookAtComponent.update_rotation(intersection.position,delta)
+		lookAtComponent.update_rotation_with_target_position(intersection.position,delta)
 

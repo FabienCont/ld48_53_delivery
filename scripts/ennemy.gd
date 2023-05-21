@@ -22,6 +22,7 @@ var ready_to_attack = true
 var reloading = false;
 var target: Node3D
 var isDie:bool= false
+var isStun:bool= false
 
 @export var aimHero:bool =false
 
@@ -42,8 +43,16 @@ func start_attack():
 	animatedSkinComponent.start_attack()
 	
 func end_attack():
+	weaponSlotComponent.end_attack()
 	is_attacking=false
 	reload()
+
+func hurt():
+	animatedSkinComponent.start_hurt()
+	isStun=true
+	
+func end_hurt():
+	isStun=false
 
 func die():
 	if isDie == true:
@@ -67,10 +76,13 @@ func reload():
 	reloading = false
 	ready_to_attack=true
 	
-func _process(delta):
+func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocityComponent.apply_gravity(delta)
+		velocityComponent.move(self,delta)
+		animatedSkinComponent.walk(Vector2(),delta)
+		return
 	
 	if isDie == true:
 		velocityComponent.decelerate(delta)
@@ -80,7 +92,7 @@ func _process(delta):
 	if ready_to_attack ==true && in_range == true:
 		start_attack()
 	
-	if is_attacking == false: 
+	if is_attacking == false && isStun == false: 
 		pathFindComponent.follow_path(self,delta)
 		pathFindComponent.look_at_target(delta)
 		var animation_blend = Vector2(velocityComponent.current_velocity.x,-velocityComponent.current_velocity.y).rotated(-rotation.y).normalized()
@@ -106,3 +118,8 @@ func _on_path_find_component_velocity_computed(safe_velocity):
 func _on_path_find_component_target_reached():
 	in_range = true
 	pass
+
+
+func _on_path_find_component_path_changed():
+	in_range = false
+	pass # Replace with function body.
