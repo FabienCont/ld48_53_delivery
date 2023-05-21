@@ -8,4 +8,4 @@ func damage(attack: Attack):
 		health_component.damage(attack)
 	var parent = get_parent()
 	if parent.has_method("hurt") : 
-		parent.hurt()
+		parent.hurt(attack)

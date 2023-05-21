@@ -47,9 +47,10 @@ func end_attack():
 	is_attacking=false
 	reload()
 
-func hurt():
+func hurt(attack :Attack):
 	animatedSkinComponent.start_hurt()
 	isStun=true
+	SoundManager.playImpactPlateSound()
 	
 func end_hurt():
 	isStun=false

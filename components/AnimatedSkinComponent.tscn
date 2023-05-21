@@ -281,7 +281,7 @@ nodes/state/node = SubResource("AnimationNodeTransition_vvci0")
 nodes/state/position = Vector2(320, -180)
 nodes/walk/node = SubResource("AnimationNodeBlendSpace2D_orkdk")
 nodes/walk/position = Vector2(-960, -460)
-node_connections = [&"output", 0, &"die", &"TimeScale", 0, &"Animation_attack", &"TimeScale 2", 0, &"jump", &"TimeScale 3", 0, &"walk", &"attack", 0, &"TimeScale 3", &"attack", 1, &"TimeScale", &"die", 0, &"state", &"die", 1, &"Die", &"state", 0, &"hurt", &"state", 1, &"TimeScale 2", &"TimeScale 4", 0, &"Animation", &"hurt", 0, &"attack", &"hurt", 1, &"TimeScale 4"]
+node_connections = [&"output", 0, &"die", &"TimeScale", 0, &"Animation_attack", &"TimeScale 2", 0, &"jump", &"TimeScale 3", 0, &"walk", &"TimeScale 4", 0, &"Animation", &"attack", 0, &"TimeScale 3", &"attack", 1, &"TimeScale", &"die", 0, &"state", &"die", 1, &"Die", &"hurt", 0, &"attack", &"hurt", 1, &"TimeScale 4", &"state", 0, &"hurt", &"state", 1, &"TimeScale 2"]
 
 [node name="AnimatedSkinComponent" type="Node3D" node_paths=PackedStringArray("animationTree", "skeleton")]
 script = ExtResource("1_0v6yx")

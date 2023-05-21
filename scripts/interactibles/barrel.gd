@@ -22,6 +22,9 @@ func die():
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
+func hurt(attack :Attack):
+	SoundManager.playImpactPlankSound()
+	
 func generate_loot():
 	loot.position = position + (transform.basis * Vector3(0, 0, 0.5))
 	get_tree().get_root().add_child(loot.duplicate())

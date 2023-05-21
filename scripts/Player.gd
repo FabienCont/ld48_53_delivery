@@ -26,8 +26,9 @@ func die():
 	get_tree().call_group("level","player_die",self)
 	animatedSkinComponent.die()
 
-func hurt():
+func hurt(attack :Attack):
 	animatedSkinComponent.start_hurt()
+	SoundManager.playImpactPlateSound()
 	isStun=true
 	
 func end_hurt():

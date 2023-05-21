@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6fd2l7ogxcoi"]
+[gd_scene load_steps=16 format=3 uid="uid://b6fd2l7ogxcoi"]
 
 [ext_resource type="PackedScene" uid="uid://d3ge3v8h84te7" path="res://levels/sounds/SoundQueue.tscn" id="1_8cvsp"]
 [ext_resource type="Script" path="res://scripts/globals/SoundManager.gd" id="1_l1eau"]
 [ext_resource type="AudioStream" uid="uid://ds8s4m2e74dd0" path="res://sounds/interactibles/handleCoins2.ogg" id="2_jdjdx"]
+[ext_resource type="Script" path="res://scripts/sounds/SoundPool.gd" id="4_o2jki"]
+[ext_resource type="AudioStream" uid="uid://cdt1fhv4ha71i" path="res://sounds/impacts/impactPlank_medium_000.ogg" id="5_og4n3"]
+[ext_resource type="Script" path="res://scripts/sounds/SoundQueue.gd" id="5_tamdx"]
+[ext_resource type="AudioStream" uid="uid://820pd2n33iim" path="res://sounds/impacts/impactPlank_medium_001.ogg" id="6_qafyo"]
+[ext_resource type="AudioStream" uid="uid://i85ktk4rxorv" path="res://sounds/impacts/impactPlank_medium_002.ogg" id="7_oia1f"]
+[ext_resource type="AudioStream" uid="uid://d2hlbg33wgy36" path="res://sounds/impacts/impactPlank_medium_003.ogg" id="8_brrgh"]
+[ext_resource type="AudioStream" uid="uid://6sl4fw1u6s32" path="res://sounds/impacts/impactPlank_medium_004.ogg" id="9_7nxy4"]
+[ext_resource type="AudioStream" uid="uid://b0xn3rrmpkdvw" path="res://sounds/impacts/impactPlate_heavy_000.ogg" id="10_ixpvq"]
+[ext_resource type="AudioStream" uid="uid://c6wluvgfyeejc" path="res://sounds/impacts/impactPlate_heavy_001.ogg" id="11_p6hgx"]
+[ext_resource type="AudioStream" uid="uid://3hg58h86gt8k" path="res://sounds/impacts/impactPlate_heavy_002.ogg" id="12_w4hls"]
+[ext_resource type="AudioStream" uid="uid://cati30vw047n0" path="res://sounds/impacts/impactPlate_heavy_003.ogg" id="13_yd7e5"]
+[ext_resource type="AudioStream" uid="uid://csctsylkycm3m" path="res://sounds/impacts/impactPlate_heavy_004.ogg" id="14_ik6mf"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_l1eau")
@@ -11,4 +23,80 @@ script = ExtResource("1_l1eau")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LootCoinSoundQueue"]
 stream = ExtResource("2_jdjdx")
+bus = &"Effects"
+
+[node name="ImpactPlankSoundPool" type="Node" parent="."]
+script = ExtResource("4_o2jki")
+
+[node name="SoundQueue5" type="Node" parent="ImpactPlankSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="ImpactPlankSoundPool/SoundQueue5"]
+stream = ExtResource("9_7nxy4")
+bus = &"Effects"
+
+[node name="SoundQueue4" type="Node" parent="ImpactPlankSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="ImpactPlankSoundPool/SoundQueue4"]
+stream = ExtResource("8_brrgh")
+bus = &"Effects"
+
+[node name="SoundQueue3" type="Node" parent="ImpactPlankSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="ImpactPlankSoundPool/SoundQueue3"]
+stream = ExtResource("7_oia1f")
+bus = &"Effects"
+
+[node name="SoundQueue2" type="Node" parent="ImpactPlankSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="ImpactPlankSoundPool/SoundQueue2"]
+stream = ExtResource("6_qafyo")
+bus = &"Effects"
+
+[node name="SoundQueue" type="Node" parent="ImpactPlankSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactPlankSoundPool/SoundQueue"]
+stream = ExtResource("5_og4n3")
+bus = &"Effects"
+
+[node name="ImpactPlateSoundPool" type="Node" parent="."]
+script = ExtResource("4_o2jki")
+
+[node name="SoundQueue" type="Node" parent="ImpactPlateSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactPlateSoundPool/SoundQueue"]
+stream = ExtResource("10_ixpvq")
+bus = &"Effects"
+
+[node name="SoundQueue2" type="Node" parent="ImpactPlateSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="ImpactPlateSoundPool/SoundQueue2"]
+stream = ExtResource("11_p6hgx")
+bus = &"Effects"
+
+[node name="SoundQueue3" type="Node" parent="ImpactPlateSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="ImpactPlateSoundPool/SoundQueue3"]
+stream = ExtResource("12_w4hls")
+bus = &"Effects"
+
+[node name="SoundQueue4" type="Node" parent="ImpactPlateSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="ImpactPlateSoundPool/SoundQueue4"]
+stream = ExtResource("13_yd7e5")
+bus = &"Effects"
+
+[node name="SoundQueue5" type="Node" parent="ImpactPlateSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="ImpactPlateSoundPool/SoundQueue5"]
+stream = ExtResource("14_ik6mf")
 bus = &"Effects"

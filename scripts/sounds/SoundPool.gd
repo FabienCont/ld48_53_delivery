@@ -11,7 +11,7 @@ func _ready():
 		if child is SoundQueue:
 			_sounds.push_back(child)
 			
-func playRandomSound():
+func play_random_sound():
 	var index = _random.randi_range(0, _sounds.size() -1 )
 	if index == _last_index:
 		index = _random.randi_range(0, _sounds.size() -1 )
