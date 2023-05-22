@@ -12,7 +12,6 @@ func _ready():
 		lifebar_component.set_life(health)
 
 func damage(attack: Attack):
-	print(attack)
 	health -= attack.attack_damage
 	if lifebar_component:
 		lifebar_component.set_life(health)
@@ -21,3 +20,5 @@ func damage(attack: Attack):
 		var parent = get_parent();
 		if parent.has_method("die"):
 			parent.die();
+
+	

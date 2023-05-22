@@ -17,7 +17,7 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_t8c0y"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbns8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asmun"]
 transparency = 1
 albedo_color = Color(0, 0.392157, 0.588235, 0.572549)
 
@@ -58,5 +58,5 @@ lifebar_component = NodePath("../LifebarComponent")
 observer = NodePath("..")
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("11_yv1g6")]
-surface_material_override/0 = SubResource("StandardMaterial3D_xbns8")
+surface_material_override/0 = SubResource("StandardMaterial3D_asmun")
 color_mark = Color(0, 0.392157, 0.588235, 0.572549)

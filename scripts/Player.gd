@@ -46,7 +46,7 @@ func end_attack():
 	weaponSlotComponent.end_attack()
 		
 func _physics_process(delta):
-	if global_transform.origin.y < -50:
+	if global_transform.origin.y < -10:
 		die()
 	
 	if isDie == true:

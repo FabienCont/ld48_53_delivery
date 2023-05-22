@@ -23,6 +23,8 @@ func die():
 	queue_free()
 
 func hurt(attack :Attack):
+	var impulse_direction =  Vector3(global_transform.origin - attack.attack_position).normalized()
+	apply_central_impulse(impulse_direction * attack.knockback_force)
 	SoundManager.playImpactPlankSound()
 	
 func generate_loot():

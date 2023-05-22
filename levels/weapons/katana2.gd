@@ -5,6 +5,7 @@ class_name Weapon
 @onready var collider: CollisionShape3D = $Area3D/CollisionShape3D
 @onready var touched_ennemies= {}
 @onready var is_attacking : bool = false
+@onready var trail :GPUParticles3D = $AttackTrail
 
 func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
 	var parent = node.get_parent()
@@ -20,14 +21,17 @@ func start_attack():
 	is_attacking = true
 	touched_ennemies={}
 	audioStreamPlayer.play()
+	trail.emitting =true
 	
 func end_attack():
 	collider.disabled=true
 	is_attacking = false
+	trail.emitting = false
 		
 func damage(hurtboxComponent :HurtboxComponent):
 	var attack = Attack.new()
 	attack.attack_damage = 4
+	attack.knockback_force = 2
 	attack.attack_position = global_position
 	hurtboxComponent.damage(attack)
 

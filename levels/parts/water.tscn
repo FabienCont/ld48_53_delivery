@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://gctqxwf2h3ih"]
+
+[ext_resource type="Material" uid="uid://c7mw5tryqfggw" path="res://addons/proton_scatter/demos/assets/materials/m_water.tres" id="1_7vm27"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xx2p7"]
+size = Vector2(300, 300)
+
+[node name="Water" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+material_override = ExtResource("1_7vm27")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_xx2p7")
+metadata/_edit_group_ = true

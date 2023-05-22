@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6fd2l7ogxcoi"]
+[gd_scene load_steps=17 format=3 uid="uid://b6fd2l7ogxcoi"]
 
 [ext_resource type="PackedScene" uid="uid://d3ge3v8h84te7" path="res://levels/sounds/SoundQueue.tscn" id="1_8cvsp"]
 [ext_resource type="Script" path="res://scripts/globals/SoundManager.gd" id="1_l1eau"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://3hg58h86gt8k" path="res://sounds/impacts/impactPlate_heavy_002.ogg" id="12_w4hls"]
 [ext_resource type="AudioStream" uid="uid://cati30vw047n0" path="res://sounds/impacts/impactPlate_heavy_003.ogg" id="13_yd7e5"]
 [ext_resource type="AudioStream" uid="uid://csctsylkycm3m" path="res://sounds/impacts/impactPlate_heavy_004.ogg" id="14_ik6mf"]
+[ext_resource type="AudioStream" uid="uid://kk0575ani8gm" path="res://sounds/gamjam.mp3" id="16_aiat1"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_l1eau")
@@ -100,3 +101,10 @@ script = ExtResource("5_tamdx")
 [node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="ImpactPlateSoundPool/SoundQueue5"]
 stream = ExtResource("14_ik6mf")
 bus = &"Effects"
+
+[node name="BackgroundSoundQueue" type="Node" parent="."]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BackgroundSoundQueue"]
+stream = ExtResource("16_aiat1")
+bus = &"background_music"

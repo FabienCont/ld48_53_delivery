@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://dy41a8tidtxnu"]
+[gd_scene load_steps=49 format=3 uid="uid://dy41a8tidtxnu"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_gd0ib"]
 [ext_resource type="PackedScene" uid="uid://dp2tfdyedtdod" path="res://levels/parts/ground.tscn" id="2_fo422"]
 [ext_resource type="PackedScene" uid="uid://cw83dv00j8h7p" path="res://levels/interactibles/exit_door.tscn" id="2_q75cf"]
+[ext_resource type="PackedScene" uid="uid://c8xevdt3p0w3q" path="res://levels/parts/sun_and_environment.tscn" id="2_xka1y"]
 [ext_resource type="PackedScene" uid="uid://cteidd0ijk1u" path="res://levels/props/box.tscn" id="3_44383"]
 [ext_resource type="PackedScene" uid="uid://bavs73ctp0h2b" path="res://levels/interactibles/entrance_door.tscn" id="3_wagn0"]
 [ext_resource type="PackedScene" uid="uid://cwfex5q0oty66" path="res://levels/characters/player.tscn" id="4_de1pt"]
@@ -11,18 +12,20 @@
 [ext_resource type="PackedScene" uid="uid://bvbjpmjtrl4mp" path="res://levels/interactibles/barrel.tscn" id="4_p36op"]
 [ext_resource type="PackedScene" uid="uid://bbm8rkie5wy2j" path="res://levels/characters/ennemy.tscn" id="5_thwi2"]
 [ext_resource type="Script" path="res://scripts/interactibles/Path3D.gd" id="8_pggcq"]
-[ext_resource type="AudioStream" uid="uid://kk0575ani8gm" path="res://sounds/gamjam.mp3" id="11_ur0r5"]
 [ext_resource type="PackedScene" uid="uid://ca8s0bpfw0ruf" path="res://levels/props/exit.tscn" id="12_adc6y"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_huhgm"]
-
-[sub_resource type="Sky" id="Sky_qnbbd"]
-sky_material = SubResource("ProceduralSkyMaterial_huhgm")
-
-[sub_resource type="Environment" id="Environment_w8i4q"]
-background_mode = 2
-sky = SubResource("Sky_qnbbd")
-tonemap_mode = 2
+[ext_resource type="PackedScene" uid="uid://gctqxwf2h3ih" path="res://levels/parts/water.tscn" id="12_e04p8"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="13_48r2l"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="14_8340e"]
+[ext_resource type="PackedScene" uid="uid://c6bl2e0mbyd02" path="res://levels/menu/LoadingScreen.tscn" id="15_3ugcc"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="15_ix2bh"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="16_qi017"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="17_51l7y"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="18_5lo7h"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="19_asmfq"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/remove_outside_shapes.gd" id="19_n4vcb"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="20_4x1f8"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="21_vom1r"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="23_6laqh"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_m3s6h"]
 vertices = PackedVector3Array(-4.25, -1.12409, -2, -3.25, -1.12409, -1, -3.25, -1.12409, -2.25, -4.5, -1.12409, -3, -7.75, -1.12409, 6.5, -7, -1.12409, 6.5, -5.75, -1.12409, 1.5, -5.75, -1.12409, -2, -4.25, -1.12409, -2, -4.5, -1.12409, -3, -9.5, -1.12409, 9.5, -8.25, -1.12409, 9.5, -8.5, -1.12409, 7.25, -4.5, -1.12409, -3, -4.5, -1.12409, -4.75, -5.25, -1.12409, -5.5, -6.75, -1.12409, -1.25, -5.75, -1.12409, -2, -6.75, -1.12409, -1.25, -5.25, -1.12409, -5.5, -5.25, -1.12409, -6.75, -9.5, -1.12409, -9.5, -9.5, -1.12409, 0, -5.25, -1.12409, -6.75, -3, -1.12409, -7.75, -3, -1.12409, -9.5, -9.5, -1.12409, -9.5, -6.75, -1.12409, 0.75, -6.75, -1.12409, -1.25, -9.5, -1.12409, 0, -9.5, -1.12409, 9.5, -8.5, -1.12409, 7.25, -7.75, -1.12409, 6.5, -5.75, -1.12409, 1.5, -6.75, -1.12409, 0.75, -8.5, -1.12409, 7.25, 2.25, -1.12409, -1, 2, -1.12409, 0.25, 3.25, -1.12409, 0.5, -0.5, -1.12409, -5, -0.5, -1.12409, -3.5, 0.25, -1.12409, -3.25, -3, -1.12409, -9.5, -3, -1.12409, -7.75, -2.25, -1.12409, -7.75, 3.25, -1.12409, 0.5, 3.5, -1.12409, 1.5, 4.75, -1.12409, 1.75, -1.5, -1.12409, -7, -1, -1.12409, -5.25, -0.5, -1.12409, -5, 3.25, -1.12409, -9.5, -3, -1.12409, -9.5, -2.25, -1.12409, -7.75, -1.5, -1.12409, -7, 3.25, -1.12409, -9.5, 0.25, -1.12409, -3.25, 0.25, -1.12409, -1.75, 2.25, -1.12409, -1, 2.25, -1.12409, -1, 3.25, -1.12409, 0.5, 4.75, -1.12409, 1.75, -0.5, -1.12409, -5, 0.25, -1.12409, -3.25, 2.25, -1.12409, -1, 4.75, -1.12409, 1.75, 5.25, -1.12409, 3.75, 9.5, -1.12409, 3.75, 9.5, -1.12409, -3, 2.25, -1.12409, -1, 4.75, -1.12409, 1.75, 9.5, -1.12409, -3, 9.5, -1.12409, -9.5, 3.25, -1.12409, -9.5, -0.5, -1.12409, -5, -1.75, 0.625905, -4, -1.75, 0.375905, -4.5, -2.75, 0.625905, -4.75, -3.25, 0.625905, -3.75, -2.25, 0.625905, -3.25, -2.5, 0.625905, -5.75, -3, 0.625905, -6.75, -4, 0.375905, -6.25, -3.25, 0.625905, -3.75, -2.75, 0.625905, -4.75, -1, 0.125905, 0.5, 0, 0.875905, 0.5, 0, 0.875905, -0.5, -1, 0.375905, -0.75, -2.25, 0.625905, -2, -2.25, 0.375905, -1.25, -1, 0.375905, -1, -0.75, 0.625905, -2.25, -1, 0.375905, -0.75, 0, 0.875905, -0.5, -1, 0.375905, -1, -2.25, 0.375905, -1.25, -5.75, 0.625905, -0.5, -5.25, 0.625905, 0.5, -4.5, 0.625905, 0.25, -4.75, 0.625905, -1, -2.25, -1.12409, -0.25, -3.25, -1.12409, -0.5, -3.5, -1.12409, 1, -2.25, -1.12409, 1, 2.5, -1.12409, 9.5, 2.25, -1.12409, 5.5, 1.5, -1.12409, 5.25, -2.25, -1.12409, 1, -3.5, -1.12409, 1, -4.25, -1.12409, 1.5, -0.25, -1.12409, 2.75, -0.25, -1.12409, 1.75, -5.75, -1.12409, 1.5, -7, -1.12409, 6.5, -5.25, -1.12409, 7, -4.25, -1.12409, 1.5, 1.5, -1.12409, 5.25, 1, -1.12409, 3.25, -0.25, -1.12409, 2.75, -0.25, -1.12409, 2.75, -4.25, -1.12409, 1.5, -5.25, -1.12409, 7, -5.25, -1.12409, 9.5, 2.5, -1.12409, 9.5, 1.5, -1.12409, 5.25, 2.5, -0.124095, 1.5, 1.75, 0.125905, 1.25, 1.5, 0.375905, 1.75, 2.25, 0.125905, 3, 2.25, -0.124095, 4, 3.5, 0.625905, 4.25, 3, 0.625905, 3, 2.25, 0.125905, 3, 1.5, 0.375905, 1.75, 2.25, -0.124095, 4, 2.25, 0.125905, 3, 9.5, -1.12409, 3.75, 5.25, -1.12409, 3.75, 4.75, -1.12409, 5, 4.75, -1.12409, 5, 2.25, -1.12409, 5.5, 2.5, -1.12409, 9.5, 9.5, -1.12409, 9.5, 9.5, -1.12409, 3.75, 4.75, -1.12409, 5, 2.5, -1.12409, 9.5, -7.25, 0.625905, 8.75, -6.25, 0.625905, 8.75, -6.5, 0.625905, 7.5, -7.5, 0.625905, 7.75)
@@ -76,220 +79,321 @@ instance_count = 50
 mesh = SubResource("BoxMesh_ya0hm")
 buffer = PackedFloat32Array(-0.366874, 0, -0.93027, -0.382977, 0, 1, 0.00104097, -1.50046, 0.930271, 0, -0.366874, -15.7352, -0.359011, 0, -0.933333, 0.501387, 0, 1, 0.00113998, -1.50153, 0.933333, 0, -0.359011, -15.3937, -0.378108, 0, -0.925761, 1.54468, 0, 1, 0.000897903, -1.50271, 0.925761, 0, -0.378108, -14.9835, -0.42061, 0, -0.907242, 2.63848, 0, 1, 0.000350542, -1.50352, 0.907242, 0, -0.42061, -14.5129, -0.495033, 0, -0.868874, 3.67438, 0, 1, -0.000640426, -1.50347, 0.868874, 0, -0.495033, -13.9901, -0.623792, 0, -0.781588, 4.54396, 0, 1, -0.00246859, -1.50207, 0.78159, 0, -0.62379, -13.4234, -0.828582, -0.000519092, -0.559856, 5.18114, -0.000275669, 1, -0.00581259, -1.4985, 0.559867, -0.000275854, -0.828569, -12.768, -0.955985, -0.00218183, -0.293386, 5.60902, -0.00167229, 0.999997, -0.0085762, -1.49144, 0.29341, -0.00140932, -0.955956, -11.8876, -0.992934, -0.0036287, -0.118582, 5.81439, -0.00327003, 0.999989, -0.00989, -1.48216, 0.118619, -0.00280788, -0.992895, -10.9088, -0.998692, -0.00481793, -0.0508784, 5.89689, -0.00458606, 0.999979, -0.0103095, -1.47165, 0.0509278, -0.00443116, -0.998652, -9.87552, -0.996616, -0.0057152, -0.0819766, 5.95619, -0.00518479, 0.999964, -0.0101262, -1.46091, 0.0820321, -0.00623232, -0.996583, -8.832, -0.977043, -0.00629257, -0.212949, 6.09195, -0.00441247, 0.999947, -0.00963055, -1.45093, 0.212998, -0.00814971, -0.977016, -7.82232, -0.952175, -0.00629257, -0.305452, 6.33587, -0.00350182, 0.999947, -0.0146581, -1.43951, 0.305532, -0.00814971, -0.952095, -6.91229, -0.946368, -0.00629257, -0.322987, 6.61928, -0.0033223, 0.999947, -0.0156128, -1.42582, 0.323074, -0.00814971, -0.946275, -6.07415, -0.96596, -0.00629257, -0.258598, 6.89004, -0.00397057, 0.999947, -0.0121093, -1.41286, 0.258661, -0.00814971, -0.965909, -5.21298, -0.990451, -0.00629257, -0.137744, 7.09601, -0.00510995, 0.999947, -0.00555647, -1.40361, 0.137772, -0.00814971, -0.990452, -4.23387, -0.999974, -0.00629257, -0.00347988, 7.18507, -0.00626447, 0.999947, 0.00169121, -1.40105, 0.00346922, -0.00814971, -0.999992, -3.0419, -0.99998, -0.00605041, 0.00161194, 7.17461, -0.00606196, 0.999958, 0.00588785, -1.40469, -0.00164764, -0.0069236, -0.999981, -2.06328, -0.999961, -0.00576584, -0.00681834, 7.17839, -0.00573053, 0.99997, 0.00797154, -1.41138, 0.00677276, -0.00520633, -0.999945, -1.0985, -0.999984, -0.00554295, 0.00101536, 7.18316, -0.00554669, 0.999979, 0.00928721, -1.42075, -0.00106691, -0.00347996, -0.999956, -0.0113001, -0.999741, -0.00538202, 0.0220661, 7.17213, -0.00541935, 0.999984, 0.0101799, -1.43205, -0.0221221, -0.0017467, -0.999705, 1.15132, -0.998351, -0.00528327, 0.0571037, 7.12852, -0.00527513, 0.999986, 0.0107956, -1.44454, -0.0571631, -8.77382e-06, -0.99831, 2.34236, -0.993918, -0.00524682, 0.109947, 7.03556, -0.0050245, 0.999985, 0.0111929, -1.45747, -0.110008, 0.00173157, -0.993874, 3.51482, -0.982074, -0.00527271, 0.188382, 6.87645, -0.00452399, 0.99998, 0.0113572, -1.4701, -0.188443, 0.0034721, -0.98203, 4.62171, -0.951944, -0.00536092, 0.306199, 6.63442, -0.00350764, 0.999972, 0.0111576, -1.48168, -0.306253, 0.00521057, -0.951902, 5.61602, -0.875116, -0.00551133, 0.483873, 6.29268, -0.00146248, 0.999961, 0.010223, -1.49146, -0.48391, 0.00694475, -0.875079, 6.45076, -0.684507, -0.00572375, 0.728996, 5.83445, 0.00240439, 0.999946, 0.00767862, -1.49871, -0.729002, 0.0086724, -0.684475, 7.07893, -0.357324, -0.00566325, 0.933978, 5.20814, 0.00593137, 0.999948, 0.00440757, -1.50328, -0.933962, 0.00851713, -0.357303, 7.47966, -0.104172, -0.0054013, 0.994559, 4.39008, 0.00718998, 0.999955, 0.00197934, -1.50599, -0.994533, 0.00779494, -0.104161, 7.67489, 0.0537843, -0.00502888, 0.998552, 3.42416, 0.00738325, 0.999962, 0.000434043, -1.50715, -0.998525, 0.007123, 0.053789, 7.699, 0.14943, -0.00455529, 0.988772, 2.3521, 0.00712566, 0.999968, -0.000512993, -1.50711, -0.988747, 0.00651809, 0.14943, 7.58956, 0.206304, -0.00399235, 0.978488, 1.2156, 0.00669, 0.999974, -0.00107779, -1.50619, -0.978465, 0.0059953, 0.206301, 7.38417, 0.23659, -0.00335411, 0.971609, 0.0563859, 0.00620317, 0.999979, -0.00137811, -1.50473, -0.97159, 0.00556767, 0.236586, 7.1204, 0.245068, -0.00265648, 0.969506, -1.08383, 0.00573694, 0.999983, -0.00145493, -1.50304, -0.969489, 0.00524588, 0.245063, 6.83585, 0.230541, -0.00191689, 0.973063, -2.16334, 0.00534417, 0.999985, -0.00130071, -1.50148, -0.973048, 0.00503796, 0.230537, 6.5681, 0.183614, -0.00115377, 0.982998, -3.14041, 0.00507679, 0.999987, -0.000814748, -1.50036, -0.982985, 0.00494909, 0.183612, 6.35473, 0.104853, -0.000495543, 0.994488, -4.05975, 0.00499398, 0.999988, 0, -1.5, -0.994475, 0.00496942, 0.104854, 6.22318, 0.110073, -0.000508856, 0.993923, -5.28271, 0.00499389, 0.999988, 0, -1.5, -0.993911, 0.00496807, 0.110074, 6.09145, 0.114906, -0.000522165, 0.993376, -6.30097, 0.00499379, 0.999988, 0, -1.5, -0.993364, 0.00496669, 0.114908, 5.9764, 0.117736, -0.000535471, 0.993045, -7.19943, 0.00499378, 0.999988, 0, -1.5, -0.993032, 0.00496527, 0.117738, 5.8711, 0.117249, -0.000548773, 0.993102, -8.06303, 0.00499393, 0.999988, 0, -1.5, -0.99309, 0.00496382, 0.11725, 5.76865, 0.113685, -0.000562071, 0.993517, -8.97669, 0.00499406, 0.999988, 0, -1.5, -0.993504, 0.00496233, 0.113687, 5.66212, 0.158871, -0.000564546, 0.987299, -10.0014, 0.00498872, 0.999988, 0, -1.5, -0.987287, 0.00496205, 0.158873, 5.52375, 0.173367, -0.000564546, 0.984857, -11.0915, 0.00498479, 0.999988, 0, -1.5, -0.984845, 0.00496205, 0.173369, 5.33752, 0.152399, -0.000564546, 0.988319, -12.179, 0.00499013, 0.999988, 0, -1.5, -0.988306, 0.00496205, 0.152401, 5.15325, 0.0858214, -0.000564546, 0.99631, -13.1964, 0.00499219, 0.999988, 0, -1.5, -0.996298, 0.00496205, 0.0858225, 5.02219, -0.0648765, -0.000564547, 0.997893, -14.076, 0.00491497, 0.999988, 0, -1.5, -0.997881, 0.00496205, -0.0648773, 4.99558, -0.558668, 0.000254317, 0.829388, -15.0173, 0.00427874, 0.999988, 0, -1.5, -0.829381, 0.00498758, -0.558673, 5.2621, -0.854751, 0.00189017, 0.519028, -15.7981, 0.00401488, 0.999988, 0, -1.5, -0.519023, 0.00462255, -0.854757, 6.10264, -0.823669, 0.00331311, 0.567058, -16.2517, 0.00484794, 0.999988, 0, -1.5, -0.567051, 0.00373684, -0.823678, 6.9037)
 
-[node name="Level" type="Node3D" groups=["level"]]
+[sub_resource type="Resource" id="Resource_wf8w5"]
+script = ExtResource("15_ix2bh")
+amount = 600
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_pnrlf"]
+script = ExtResource("16_qi017")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(20, 360, 20)
+scale = Vector3(0.1, 0.1, 0.1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_w4gjl"]
+script = ExtResource("17_51l7y")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_bx21f"]
+script = ExtResource("18_5lo7h")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_rt8b2"]
+script = ExtResource("19_n4vcb")
+negative_shapes_only = false
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_bg6rh"]
+script = ExtResource("14_8340e")
+stack = Array[Resource]([SubResource("Resource_wf8w5"), SubResource("Resource_pnrlf"), SubResource("Resource_w4gjl"), SubResource("Resource_bx21f"), SubResource("Resource_rt8b2")])
+
+[sub_resource type="Resource" id="Resource_dmwds"]
+script = ExtResource("21_vom1r")
+closed = false
+thickness = 2.8
+curve = SubResource("Curve3D_hile1")
+
+[sub_resource type="Resource" id="Resource_y2e6t"]
+script = ExtResource("23_6laqh")
+size = Vector3(18, 1, 19)
+
+[node name="Level" type="Node3D" node_paths=PackedStringArray("hero", "allies_node", "allies_path_3D") groups=["level"]]
+process_mode = 3
 script = ExtResource("1_gd0ib")
+hero = NodePath("World/Characters/Player/PlayerCharacterBody3D")
+allies_node = NodePath("World/Characters/Allies")
+allies_path_3D = NodePath("World/Terrain/alliesPath")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
-metadata/_edit_lock_ = true
+[node name="World" type="Node3D" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_w8i4q")
+[node name="SunAndEnvironment" parent="World" instance=ExtResource("2_xka1y")]
 
-[node name="TopCameraStick2" type="Node3D" parent="."]
+[node name="Cameras" type="Node3D" parent="World"]
+
+[node name="TopCameraStick2" type="Node3D" parent="World/Cameras"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 8, 50, 8)
 metadata/_edit_lock_ = true
 
-[node name="CameraIsometrique" type="Camera3D" parent="TopCameraStick2"]
+[node name="CameraIsometrique" type="Camera3D" parent="World/Cameras/TopCameraStick2"]
 transform = Transform3D(1, 0, 0, 0, 0.224951, 0.97437, 0, -0.97437, 0.224951, 0, 0, 0)
 current = true
 fov = 32.0
 
-[node name="FrontCameraStick" type="Node3D" parent="."]
+[node name="FrontCameraStick" type="Node3D" parent="World/Cameras"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.391639, 10, 13.2991)
 
-[node name="CameraFront" type="Camera3D" parent="FrontCameraStick"]
+[node name="CameraFront" type="Camera3D" parent="World/Cameras/FrontCameraStick"]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 3.46123, -1.89235, -3.42593)
 current = true
 fov = 50.0
 
-[node name="IsoCameraStick" type="Node3D" parent="."]
+[node name="IsoCameraStick" type="Node3D" parent="World/Cameras"]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 15, 13, 15)
 metadata/_edit_lock_ = true
 
-[node name="CameraIsometrique" type="Camera3D" parent="IsoCameraStick"]
+[node name="CameraIsometrique" type="Camera3D" parent="World/Cameras/IsoCameraStick"]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 0)
 current = true
 fov = 50.0
 metadata/_edit_lock_ = true
 
-[node name="fpsCamera" type="Node3D" parent="."]
+[node name="fpsCamera" type="Node3D" parent="World/Cameras"]
 
-[node name="CameraFps" type="Camera3D" parent="fpsCamera"]
+[node name="CameraFps" type="Camera3D" parent="World/Cameras/fpsCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.788, 0.62334)
 near = 0.01
 
-[node name="Terrain" type="Node3D" parent="."]
+[node name="Terrain" type="Node3D" parent="World"]
 metadata/_edit_lock_ = true
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Terrain"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="World/Terrain"]
 navigation_mesh = SubResource("NavigationMesh_m3s6h")
 
-[node name="ground" type="Node3D" parent="Terrain/NavigationRegion3D"]
+[node name="ground" type="Node3D" parent="World/Terrain/NavigationRegion3D"]
 
-[node name="MeshInstance3D" parent="Terrain/NavigationRegion3D/ground" instance=ExtResource("2_fo422")]
+[node name="MeshInstance3D" parent="World/Terrain/NavigationRegion3D/ground" instance=ExtResource("2_fo422")]
 
-[node name="obstacles" type="Node3D" parent="Terrain/NavigationRegion3D"]
+[node name="obstacles" type="Node3D" parent="World/Terrain/NavigationRegion3D"]
 
-[node name="MeshInstance3D2" parent="Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
+[node name="MeshInstance3D2" parent="World/Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
 transform = Transform3D(0.201532, 0.45, 0.752917, -0.116355, 0.779423, -0.434697, -0.869394, -1.3411e-08, 0.23271, 1.57282, -1.22522, 1.82219)
 
-[node name="MeshInstance3D3" parent="Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
+[node name="MeshInstance3D3" parent="World/Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
 transform = Transform3D(-0.301985, -0.461592, 0.834109, 0.138505, 0.844431, 0.517449, -0.943197, 0.27179, -0.191073, 3.25017, -1.12371, 3.44874)
 
-[node name="MeshInstance3D4" parent="Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
+[node name="MeshInstance3D4" parent="World/Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
 transform = Transform3D(0.222898, -0.506816, 0.832739, 0.131046, 0.862054, 0.489581, -0.965994, 0, 0.258566, 0, -0.900674, 0)
 
-[node name="MeshInstance3D5" parent="Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
+[node name="MeshInstance3D5" parent="World/Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
 transform = Transform3D(0.991485, 0.12941, -0.014495, -0.0150096, 0.224144, 0.97444, 0.129351, -0.965926, 0.224178, -1.53304, -0.900674, -1.91164)
 
-[node name="MeshInstance3D6" parent="Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
+[node name="MeshInstance3D6" parent="World/Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
 transform = Transform3D(0.499773, 0, 0.866156, -0.224178, 0.965926, 0.129351, -0.836643, -0.258819, 0.482744, -2.50025, -0.900674, -3.84297)
 
-[node name="MeshInstance3D7" parent="Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
+[node name="MeshInstance3D7" parent="World/Terrain/NavigationRegion3D/obstacles" instance=ExtResource("3_44383")]
 transform = Transform3D(-0.483182, -0.258819, 0.83639, -0.129468, 0.965926, 0.22411, -0.865894, 0, -0.500227, -3.08045, -0.900674, -5.83703)
 
-[node name="ressources" type="Node3D" parent="Terrain/NavigationRegion3D"]
+[node name="ressources" type="Node3D" parent="World/Terrain/NavigationRegion3D"]
 
-[node name="RigidBody3D" parent="Terrain/NavigationRegion3D/ressources" instance=ExtResource("4_p36op")]
+[node name="RigidBody3D" parent="World/Terrain/NavigationRegion3D/ressources" instance=ExtResource("4_p36op")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03513, -0.627706, -0.244407)
 
-[node name="RigidBody3D2" parent="Terrain/NavigationRegion3D/ressources" instance=ExtResource("4_p36op")]
+[node name="RigidBody3D2" parent="World/Terrain/NavigationRegion3D/ressources" instance=ExtResource("4_p36op")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.77289, -0.627706, 8.21992)
 
-[node name="exit" type="Node3D" parent="Terrain"]
+[node name="exit" type="Node3D" parent="World/Terrain"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="ground" type="Node3D" parent="Terrain/exit"]
+[node name="ground" type="Node3D" parent="World/Terrain/exit"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.79232, 0, 11.2936)
 
-[node name="Node3D" parent="Terrain/exit/ground" instance=ExtResource("2_fo422")]
+[node name="Node3D" parent="World/Terrain/exit/ground" instance=ExtResource("2_fo422")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.24938, 0, -6.95403)
 
-[node name="Node3D2" parent="Terrain/exit/ground" instance=ExtResource("2_fo422")]
+[node name="Node3D2" parent="World/Terrain/exit/ground" instance=ExtResource("2_fo422")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.24938, 0, -26.8982)
 
-[node name="walls" type="Node3D" parent="Terrain/exit"]
+[node name="walls" type="Node3D" parent="World/Terrain/exit"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/exit/walls"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Terrain/exit/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.78669, 0, -2.77309)
 material_override = ExtResource("4_h8q7t")
 mesh = SubResource("BoxMesh_367cn")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/exit/walls/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Terrain/exit/walls/MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/exit/walls/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Terrain/exit/walls/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_uwujd")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Terrain/exit/walls"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World/Terrain/exit/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.78669, 0, 8.43998)
 material_override = ExtResource("4_h8q7t")
 mesh = SubResource("BoxMesh_vi4mp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/exit/walls/MeshInstance3D2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Terrain/exit/walls/MeshInstance3D2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/exit/walls/MeshInstance3D2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Terrain/exit/walls/MeshInstance3D2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_n22ps")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Terrain/exit/walls"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="World/Terrain/exit/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.78669, 2.76701, -0.0543942)
 material_override = ExtResource("4_h8q7t")
 mesh = SubResource("BoxMesh_nehfh")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/exit/walls/MeshInstance3D3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Terrain/exit/walls/MeshInstance3D3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/exit/walls/MeshInstance3D3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Terrain/exit/walls/MeshInstance3D3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_1v0yr")
 
-[node name="door" parent="Terrain/exit" instance=ExtResource("2_q75cf")]
+[node name="door" parent="World/Terrain/exit" instance=ExtResource("2_q75cf")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.45149, 0.279184, 9.85761)
 
-[node name="entry" type="Node3D" parent="Terrain"]
+[node name="entry" type="Node3D" parent="World/Terrain"]
 
-[node name="door" parent="Terrain/entry" instance=ExtResource("3_wagn0")]
+[node name="door" parent="World/Terrain/entry" instance=ExtResource("3_wagn0")]
 
-[node name="ground" type="Node3D" parent="Terrain/entry"]
+[node name="ground" type="Node3D" parent="World/Terrain/entry"]
 
-[node name="Node3D" parent="Terrain/entry/ground" instance=ExtResource("2_fo422")]
+[node name="Node3D" parent="World/Terrain/entry/ground" instance=ExtResource("2_fo422")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.0959)
 
-[node name="walls" type="Node3D" parent="Terrain/entry"]
+[node name="walls" type="Node3D" parent="World/Terrain/entry"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.0437452, 0, -20.2859)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/entry/walls"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Terrain/entry/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.78669, 0, -2.77309)
 material_override = ExtResource("4_h8q7t")
 mesh = SubResource("BoxMesh_367cn")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/entry/walls/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Terrain/entry/walls/MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/entry/walls/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Terrain/entry/walls/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_3ggwj")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Terrain/entry/walls"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World/Terrain/entry/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.78669, 0, 8.43998)
 material_override = ExtResource("4_h8q7t")
 mesh = SubResource("BoxMesh_vi4mp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/entry/walls/MeshInstance3D2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Terrain/entry/walls/MeshInstance3D2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/entry/walls/MeshInstance3D2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Terrain/entry/walls/MeshInstance3D2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_bkfh7")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Terrain/entry/walls"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="World/Terrain/entry/walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.78669, 2.82205, -0.0543942)
 material_override = ExtResource("4_h8q7t")
 mesh = SubResource("BoxMesh_nehfh")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/entry/walls/MeshInstance3D3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Terrain/entry/walls/MeshInstance3D3"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/entry/walls/MeshInstance3D3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Terrain/entry/walls/MeshInstance3D3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_tupos")
 
-[node name="alliesPath" type="Path3D" parent="Terrain"]
+[node name="alliesPath" type="Path3D" parent="World/Terrain"]
 unique_name_in_owner = true
 curve = SubResource("Curve3D_hile1")
 script = ExtResource("8_pggcq")
 
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Terrain/alliesPath"]
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="World/Terrain/alliesPath"]
 multimesh = SubResource("MultiMesh_kjh3s")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Terrain/alliesPath"]
+[node name="PathFollow3D" type="PathFollow3D" parent="World/Terrain/alliesPath"]
 transform = Transform3D(0.447213, 0, 0.894427, 0, 1, 0, -0.894427, 0, 0.447213, 1.54468, -1.50271, -14.9835)
 progress = 3.0
 loop = false
 
-[node name="loots" type="Node3D" parent="Terrain"]
+[node name="loots" type="Node3D" parent="World/Terrain"]
 
-[node name="Node3D" parent="Terrain/loots" instance=ExtResource("4_i250j")]
+[node name="Node3D" parent="World/Terrain/loots" instance=ExtResource("4_i250j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2.18332)
 
-[node name="exit2" parent="Terrain" instance=ExtResource("12_adc6y")]
+[node name="exit2" parent="World/Terrain" instance=ExtResource("12_adc6y")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.26841, 0.158075, 4.01232)
 
-[node name="Player" type="Node3D" parent="."]
+[node name="Water" parent="World/Terrain" instance=ExtResource("12_e04p8")]
+
+[node name="ProtonScatter" type="Node3D" parent="World/Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.52341, 0)
+script = ExtResource("13_48r2l")
+modifier_stack = SubResource("Resource_bg6rh")
+
+[node name="ScatterItem" type="Node3D" parent="World/Terrain/ProtonScatter"]
+script = ExtResource("19_asmfq")
+proportion = 80
+source_scale_multiplier = 1.5
+path = "res://addons/proton_scatter/demos/assets/grass.tscn"
+
+[node name="ScatterItem2" type="Node3D" parent="World/Terrain/ProtonScatter"]
+script = ExtResource("19_asmfq")
+proportion = 20
+source_scale_multiplier = 2.0
+path = "res://addons/proton_scatter/demos/assets/small_rock.tscn"
+
+[node name="ScatterShape" type="Node3D" parent="World/Terrain/ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 1.52637, 0)
+script = ExtResource("20_4x1f8")
+negative = true
+shape = SubResource("Resource_dmwds")
+
+[node name="ScatterShape2" type="Node3D" parent="World/Terrain/ProtonScatter"]
+script = ExtResource("20_4x1f8")
+shape = SubResource("Resource_y2e6t")
+
+[node name="Characters" type="Node3D" parent="World"]
+process_mode = 1
+
+[node name="Player" type="Node3D" parent="World/Characters"]
 metadata/_edit_lock_ = true
 
-[node name="PlayerCharacterBody3D" parent="Player" instance=ExtResource("4_de1pt")]
+[node name="PlayerCharacterBody3D" parent="World/Characters/Player" instance=ExtResource("4_de1pt")]
 transform = Transform3D(-0.832167, 0, -0.554525, 0, 1, 0, 0.554525, 0, -0.832167, 4, 0, -8)
 
-[node name="Ennemies" type="Node3D" parent="."]
+[node name="Ennemies" type="Node3D" parent="World/Characters"]
 metadata/_edit_lock_ = true
 
-[node name="Ennemy" type="Node3D" parent="Ennemies"]
+[node name="Ennemy" type="Node3D" parent="World/Characters/Ennemies"]
 metadata/_edit_lock_ = true
 
-[node name="EnnemyCharacterBody3D" parent="Ennemies/Ennemy" instance=ExtResource("5_thwi2")]
+[node name="EnnemyCharacterBody3D" parent="World/Characters/Ennemies/Ennemy" instance=ExtResource("5_thwi2")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.13182, -1.90735e-06, 4.38004)
 
-[node name="Allies" type="Node3D" parent="."]
+[node name="Allies" type="Node3D" parent="World/Characters"]
 metadata/_edit_lock_ = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_ur0r5")
-autoplay = true
-bus = &"background_music"
+[node name="LoadingScreen" parent="." node_paths=PackedStringArray("scatter_node") instance=ExtResource("15_3ugcc")]
+scatter_node = NodePath("../World/Terrain/ProtonScatter")
 
-[connection signal="curve_changed" from="Terrain/alliesPath" to="Terrain/alliesPath" method="_on_curve_changed" flags=18]
+[connection signal="curve_changed" from="World/Terrain/alliesPath" to="World/Terrain/alliesPath" method="_on_curve_changed" flags=18]

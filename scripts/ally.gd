@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var pathFollow3D: PathFollow3D
 @onready var pathFollow3DTargetToLook: PathFollow3D
-@onready var path3D: Path3D = get_node("/root/Level/Terrain/alliesPath")
+@onready var path3D: Path3D
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
 

@@ -2,9 +2,11 @@ extends Node3D
 
 var isFinish:bool = false
 
-@onready var hero: CharacterBody3D =$Player/PlayerCharacterBody3D
+@export var hero: CharacterBody3D
+@export var allies_node: Node3D
+@export var allies_path_3D: Path3D
+
 @onready var allyScene = preload("res://levels/characters/ally.tscn")
-@onready var allies_node: Node3D=$Allies
 # Called when the node enters the scene tree for the first time.
 var stats 
 var spawning:bool = false 
@@ -14,6 +16,7 @@ var spawnAllyCounter:int =0
 
 func _ready():
 	GlobalInfo.startLevel()
+	SoundManager.playBackgroundSound()
 	stats= GlobalInfo.stats
 	pass # Replace with function body.
 
@@ -33,7 +36,9 @@ func spawnAlly():
 	print("SPAWN ALLY")
 	spawning=true
 	spawnAllyCounter+=1
-	allies_node.add_child(allyScene.instantiate())
+	var ally = allyScene.instantiate()
+	ally.path3D = allies_path_3D
+	allies_node.add_child(ally)
 	await get_tree().create_timer(timeToSpawn).timeout
 	spawning=false
 	

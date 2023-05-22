@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://iuxwye7gypnb"]
+[gd_scene load_steps=5 format=3 uid="uid://iuxwye7gypnb"]
 
 [ext_resource type="Script" path="res://components/scripts/GroundMarkComponent.gd" id="1_l3w77"]
 
@@ -9,7 +9,12 @@ material = SubResource("StandardMaterial3D_rm3ki")
 inner_radius = 0.8
 outer_radius = 0.9
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2p4c"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 1)
+
 [node name="GroundMarkComponent" type="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.982607, 0)
 mesh = SubResource("TorusMesh_kn1gr")
+surface_material_override/0 = SubResource("StandardMaterial3D_r2p4c")
 script = ExtResource("1_l3w77")

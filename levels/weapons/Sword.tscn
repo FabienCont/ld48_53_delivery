@@ -1,8 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://dki5bbyx48u21"]
+[gd_scene load_steps=8 format=3 uid="uid://dki5bbyx48u21"]
 
 [ext_resource type="Script" path="res://levels/weapons/katana2.gd" id="1_vgjdk"]
 [ext_resource type="PackedScene" uid="uid://43webmok60tq" path="res://levels/weapons/Sword.blend" id="2_ub4my"]
 [ext_resource type="AudioStream" uid="uid://dcak2f6e7fmow" path="res://sounds/weapon/drawKnife2.ogg" id="3_8encb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m2cqb"]
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0iav1"]
+no_depth_test = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.980392, 0, 0.0156863, 1)
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_gokqh"]
+material = SubResource("StandardMaterial3D_0iav1")
+shape = 0
+size = 2.0
+sections = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mvl4y"]
 size = Vector3(0.1, 1.4, 0.1)
@@ -14,8 +32,14 @@ script = ExtResource("1_vgjdk")
 [node name="Sword" parent="." instance=ExtResource("2_ub4my")]
 transform = Transform3D(0.999998, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0.133382, 0)
 
+[node name="AttackTrail" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.999998, 3.72529e-09, 1.49012e-08, -7.45058e-09, 0.999999, 2.98023e-08, -2.98023e-08, 2.98023e-08, 1, 1.49012e-08, 0.803239, 2.23517e-08)
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_m2cqb")
+draw_pass_1 = SubResource("RibbonTrailMesh_gokqh")
+
 [node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.803239, 0)
+transform = Transform3D(0.999999, 0, 0, -3.72529e-09, 1, 2.98023e-08, -1.49012e-08, 0, 0.999999, 1.49012e-08, 0.803239, 0)
 collision_layer = 5
 collision_mask = 5
 

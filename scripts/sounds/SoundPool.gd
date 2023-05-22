@@ -19,7 +19,7 @@ func play_random_sound():
 	_sounds[index].play_sound()
 
 func _get_configuration_warnings():
-	var nbSoundQueue
+	var nbSoundQueue = 0
 	for child in get_children():
 		if child is SoundQueue:
 			nbSoundQueue+=1
