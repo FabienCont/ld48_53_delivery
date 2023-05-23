@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6bl2e0mbyd02"]
+
+[ext_resource type="Script" path="res://scripts/globals/SceneLoader.gd" id="1_bpo8l"]
+
+[sub_resource type="Animation" id="Animation_sklrw"]
+resource_name = "loading_screen"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6bn3m"]
+_data = {
+"loading_screen": SubResource("Animation_sklrw")
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_bpo8l")
+
+[node name="LoadingScreen" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="LoadingScreen"]
+modulate = Color(0, 1, 1, 1)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.164706, 0.498039, 0.819608, 1)
+
+[node name="Label" type="Label" parent="LoadingScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Loading"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LoadingScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_6bn3m")
+}

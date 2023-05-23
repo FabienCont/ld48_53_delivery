@@ -5,6 +5,7 @@ var isFinish:bool = false
 @export var hero: CharacterBody3D
 @export var allies_node: Node3D
 @export var allies_path_3D: Path3D
+@export var proton_scatter_node: Node3D
 
 @onready var allyScene = preload("res://levels/characters/ally.tscn")
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +19,10 @@ func _ready():
 	GlobalInfo.startLevel()
 	SoundManager.playBackgroundSound()
 	stats= GlobalInfo.stats
-	pass # Replace with function body.
+	if proton_scatter_node == null || not proton_scatter_node.has_signal("build_completed"):
+		level_finish_to_load()
+	else:
+		proton_scatter_node.connect("build_completed",level_finish_to_load)
 
 	# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
@@ -101,3 +105,6 @@ func loot():
 
 func hasFinish()-> bool:
 	return isFinish == true
+
+func level_finish_to_load() -> void :
+	Signals.emit_signal('level_loaded')

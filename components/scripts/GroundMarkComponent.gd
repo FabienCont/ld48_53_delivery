@@ -8,15 +8,10 @@ class_name GroundMarkComponent
 
 func _ready():
 	material.albedo_color = color_mark
-	material.transparency = 1
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	set_surface_override_material(0,material)
 	
 func set_color(value):
 	if material is StandardMaterial3D:
 		material.albedo_color = value
 	color_mark=value
-	
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 GlobalInfo="*res://scripts/globals/GlobalInfo.gd"
 SoundManager="*res://levels/autoload/SoundManager.tscn"
+SceneLoader="*res://levels/autoload/SceneLoader.tscn"
+Signals="*res://scripts/globals/Signals.gd"
 
 [editor_plugins]
 

@@ -20,8 +20,8 @@ func follow_path(node: Node3D,delta: float):
 	velocityComponent.accelerate_in_direction(direction,delta)
 	set_velocity(velocityComponent.current_velocity)
 	
-func on_velocity_computed(velocity :Vector3):
-	var direction = velocity.normalized()
+func on_velocity_computed(_velocity :Vector3):
+	#var direction = velocity.normalized()
 	#velocityComponent.accelerateInDirection(direction,1)
 	pass
 

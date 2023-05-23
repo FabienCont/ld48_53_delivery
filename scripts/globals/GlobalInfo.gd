@@ -43,23 +43,27 @@ func endLevel():
 	stats.TotalKilledEnnemies+=stats.killedEnnemies
 	stats.level+=1
 
+
+func goToMenu():
+	get_tree().change_scene_to_file("res://Menu.tscn")
+
 func goToNextLevel():
 	if stats.level==3 :
 		get_tree().change_scene_to_file("res://levels/menu/ThanksScreen.tscn")
 	elif stats.level==2 :
-		get_tree().change_scene_to_file("res://levels/Level3.tscn")
+		SceneLoader.change_scene_to_file("res://levels/Level3.tscn")
 	elif stats.level==1 :
-		get_tree().change_scene_to_file("res://levels/Level2.tscn")
+		SceneLoader.change_scene_to_file("res://levels/Level2.tscn")
 	else:
-		get_tree().change_scene_to_file("res://levels/Level1.tscn")
+		SceneLoader.change_scene_to_file("res://levels/Level1.tscn")
 	pass # Replace with function body.
 
 func restartLevel():
 	stats = savedStats.duplicate(true)
 	if stats.level==2 :
-		get_tree().change_scene_to_file("res://levels/Level3.tscn")
+		SceneLoader.change_scene_to_file("res://levels/Level3.tscn")
 	elif stats.level==1 :
-		get_tree().change_scene_to_file("res://levels/Level2.tscn")
+		SceneLoader.change_scene_to_file("res://levels/Level2.tscn")
 	else:
-		get_tree().change_scene_to_file("res://levels/Level1.tscn")
+		SceneLoader.change_scene_to_file("res://levels/Level1.tscn")
 	pass # Replace with function body.

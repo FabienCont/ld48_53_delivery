@@ -11,6 +11,10 @@ var stats;
 var isDie = false
 var isAttacking = false
 var isStun = false
+var isRecoveringAttack = false
+var attackCombo = 0
+var maxAttackCombo = 1
+
 func _ready():
 	stats = GlobalInfo.stats
 	healthComponent.health = stats.life
@@ -23,10 +27,11 @@ func die():
 		return
 	isDie = true
 	weaponSlotComponent.end_attack()
+	weaponSlotComponent.unequip()
 	get_tree().call_group("level","player_die",self)
 	animatedSkinComponent.die()
 
-func hurt(attack :Attack):
+func hurt(_attack :Attack):
 	animatedSkinComponent.start_hurt()
 	SoundManager.playImpactPlateSound()
 	isStun=true
@@ -35,15 +40,28 @@ func end_hurt():
 	isStun=false
 	
 func start_attack():
+	print(isRecoveringAttack)
+	if isRecoveringAttack == true && attackCombo<maxAttackCombo:
+		attackCombo+=1
+		animatedSkinComponent.start_attack_2()
+		weaponSlotComponent.start_attack()
+		return
+	
 	if isDie == true || isAttacking == true || not weaponSlotComponent.has_weapon_equiped():
 		return
-	weaponSlotComponent.start_attack()
 	animatedSkinComponent.start_attack()
+	weaponSlotComponent.start_attack()
 	isAttacking=true
-		
+
 func end_attack(): 
+	attackCombo=0
 	isAttacking=false
+	isRecoveringAttack=false
 	weaponSlotComponent.end_attack()
+	
+func start_recovery_attack():
+	isRecoveringAttack=true
+	weaponSlotComponent.start_recovery_attack()
 		
 func _physics_process(delta):
 	if global_transform.origin.y < -10:
@@ -60,10 +78,10 @@ func _physics_process(delta):
 		animatedSkinComponent.land()
 		if controllerComponent.jump():
 			animatedSkinComponent.jump()
+		elif controllerComponent.has_attack() && ((isAttacking == false|| isRecoveringAttack==true) && isStun == false) :
+			start_attack()
 		elif isAttacking == true || isStun == true:
 			velocityComponent.decelerate(delta)
-		elif controllerComponent.has_attack() && (isAttacking == false && isStun == false) :
-			start_attack()
 		elif isAttacking == false && isStun == false:
 			var camera := get_viewport().get_camera_3d()
 			controllerComponent.updateControl(delta, camera.global_rotation.y)

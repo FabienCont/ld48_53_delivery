@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbm8rkie5wy2j"]
+[gd_scene load_steps=13 format=3 uid="uid://bbm8rkie5wy2j"]
 
 [ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_kf2cx"]
 [ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_85vlx"]
@@ -11,21 +11,18 @@
 [ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="8_wabxq"]
 [ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="9_qrb8r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vjwv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcmvk"]
 transparency = 1
 albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_g5cdl"]
-viewport_path = NodePath("SubViewport")
 
 [node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
 script = ExtResource("1_kf2cx")
 life = 5
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("2_cxk8e")]
-surface_material_override/0 = SubResource("StandardMaterial3D_1vjwv")
+surface_material_override/0 = SubResource("StandardMaterial3D_vcmvk")
 color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]
@@ -41,7 +38,6 @@ lifebar_component = NodePath("../LifebarComponent")
 
 [node name="LifebarComponent" parent="." instance=ExtResource("6_1ro1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14265, 0)
-texture = SubResource("ViewportTexture_g5cdl")
 
 [node name="PathFindComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("7_f0v5f")]
 target_desired_distance = 2.0

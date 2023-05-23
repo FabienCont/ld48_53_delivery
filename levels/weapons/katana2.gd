@@ -6,6 +6,7 @@ class_name Weapon
 @onready var touched_ennemies= {}
 @onready var is_attacking : bool = false
 @onready var trail :GPUParticles3D = $AttackTrail
+@onready var trailMesh3d :Trail3DComponent = $Trail3DComponent
 
 func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
 	var parent = node.get_parent()
@@ -17,17 +18,21 @@ func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
 		return is_parent_recursive(parent,body)
 
 func start_attack():
+	trailMesh3d.trailEnabled = true
 	collider.disabled=false
 	is_attacking = true
 	touched_ennemies={}
 	audioStreamPlayer.play()
 	trail.emitting =true
+
+func start_recovery_attack():
+	trailMesh3d.trailEnabled = false
+	collider.call_deferred("set_disabled",true)
+	trail.emitting = false
 	
 func end_attack():
-	collider.disabled=true
 	is_attacking = false
-	trail.emitting = false
-		
+	
 func damage(hurtboxComponent :HurtboxComponent):
 	var attack = Attack.new()
 	attack.attack_damage = 4

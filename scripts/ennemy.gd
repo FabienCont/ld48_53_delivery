@@ -47,7 +47,10 @@ func end_attack():
 	is_attacking=false
 	reload()
 
-func hurt(attack :Attack):
+func start_recovery_attack(): 
+	weaponSlotComponent.start_recovery_attack()
+		
+func hurt(_attack :Attack):
 	animatedSkinComponent.start_hurt()
 	isStun=true
 	SoundManager.playImpactPlateSound()
@@ -59,6 +62,7 @@ func die():
 	if isDie == true:
 		return
 	weaponSlotComponent.end_attack()
+	weaponSlotComponent.unequip()
 	isDie=true
 	animatedSkinComponent.die()
 	move_and_slide()

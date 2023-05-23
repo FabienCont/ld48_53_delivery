@@ -5,4 +5,3 @@ extends Button
 func _on_pressed():
 	audioStreamPlayer.play()
 	GlobalInfo.restartLevel()
-	get_tree().change_scene_to_file("res://Menu.tscn")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://chpsfjftfdckn"]
+[gd_scene load_steps=9 format=3 uid="uid://chpsfjftfdckn"]
 
 [ext_resource type="Script" path="res://components/scripts/LifebarComponent.gd" id="1_mchr6"]
+[ext_resource type="Script" path="res://components/LifebarComponent.gd" id="1_qtgd3"]
 
 [sub_resource type="Theme" id="Theme_hp00d"]
 
@@ -27,15 +28,22 @@ height = 13
 [sub_resource type="LabelSettings" id="LabelSettings_ui570"]
 font_size = 12
 
-[node name="LifebarComponent" type="Sprite3D"]
+[node name="LifebarComponent" type="Node3D" node_paths=PackedStringArray("sprite3D")]
+script = ExtResource("1_qtgd3")
+sprite3D = NodePath("LifebarSprite3D")
+
+[node name="LifebarSprite3D" type="Sprite3D" parent="." node_paths=PackedStringArray("sub_viewport", "label", "texture_progess_bar")]
 billboard = 1
 script = ExtResource("1_mchr6")
+sub_viewport = NodePath("SubViewport")
+label = NodePath("SubViewport/Label")
+texture_progess_bar = NodePath("SubViewport/TextureProgressBar")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="LifebarSprite3D"]
 transparent_bg = true
 size = Vector2i(100, 15)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="SubViewport"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="LifebarSprite3D/SubViewport"]
 offset_right = 256.0
 offset_bottom = 1.0
 theme = SubResource("Theme_hp00d")
@@ -44,7 +52,7 @@ texture_under = SubResource("GradientTexture2D_dgi4m")
 texture_progress = SubResource("GradientTexture2D_otq7f")
 texture_progress_offset = Vector2(1, 1)
 
-[node name="Label" type="Label" parent="SubViewport"]
+[node name="Label" type="Label" parent="LifebarSprite3D/SubViewport"]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5

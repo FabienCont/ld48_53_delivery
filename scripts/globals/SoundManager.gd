@@ -24,8 +24,8 @@ func playImpactPlankSound():
 func playImpactPlateSound():
 	get_sound_pool_by_name("ImpactPlateSoundPool").play_random_sound()
 
-func get_sound_queue_by_name(name: String) -> SoundQueue :
-	return _soundQueuesByName[name]
+func get_sound_queue_by_name(sound_name: String) -> SoundQueue :
+	return _soundQueuesByName[sound_name]
 
-func get_sound_pool_by_name(name: String) -> SoundPool :
-	return _soundPoolsByName[name]
+func get_sound_pool_by_name(sound_name: String) -> SoundPool :
+	return _soundPoolsByName[sound_name]
