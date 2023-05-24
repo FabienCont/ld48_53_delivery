@@ -8,8 +8,6 @@ extends RigidBody3D
 @onready var rng = RandomNumberGenerator.new()
 @onready var last_attack: Attack
 
-@export var barrel: Node3D
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

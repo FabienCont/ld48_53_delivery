@@ -5,5 +5,6 @@
 
 [node name="barrel_broken" type="Node3D"]
 script = ExtResource("1_4iw7s")
+mass_pieces = 0.3
 
 [node name="barrel_broken_model" parent="." instance=ExtResource("1_wdib8")]

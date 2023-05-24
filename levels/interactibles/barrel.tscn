@@ -9,9 +9,8 @@
 height = 1.75
 radius = 1.3
 
-[node name="RigidBody3D" type="RigidBody3D" node_paths=PackedStringArray("barrel")]
+[node name="RigidBody3D" type="RigidBody3D"]
 script = ExtResource("1_i70sc")
-barrel = NodePath("")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_fh02c")]
 shape = SubResource("CylinderShape3D_y07h4")
