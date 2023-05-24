@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bw30yj4vv0n06"]
+[gd_scene load_steps=5 format=3 uid="uid://bw30yj4vv0n06"]
 
 [ext_resource type="Script" path="res://scripts/ui/goToMenu.gd" id="1_7ebjm"]
 [ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/menu/statsGrid.tscn" id="2_pfnes"]
-[ext_resource type="AudioStream" uid="uid://cc4bhpwdrlblm" path="res://sounds/ui/bookOpen.ogg" id="3_1eu34"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0t8ih"]
 
@@ -78,9 +77,5 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme = SubResource("Theme_fydem")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_1eu34")
-bus = &"UI"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer2/Button" method="_on_pressed"]

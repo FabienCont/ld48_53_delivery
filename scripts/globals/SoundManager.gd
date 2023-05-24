@@ -8,9 +8,13 @@ extends Node
 func _ready():
 	_soundQueuesByName["LootCoinSoundQueue"] = get_node("LootCoinSoundQueue")
 	_soundQueuesByName["BackgroundSoundQueue"] = get_node("BackgroundSoundQueue")
+	_soundQueuesByName["ClickButtonUISoundQueue"] = get_node("ClickButtonUISoundQueue")
 	_soundPoolsByName["ImpactPlateSoundPool"] = get_node("ImpactPlateSoundPool")
 	_soundPoolsByName["ImpactPlankSoundPool"] = get_node("ImpactPlankSoundPool")
 	pass
+
+func playUiClickButton():
+	get_sound_queue_by_name("ClickButtonUISoundQueue").play_sound()
 
 func playBackgroundSound():
 	get_sound_queue_by_name("BackgroundSoundQueue").play_sound()

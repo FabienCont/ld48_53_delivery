@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwxnxsg6lktxr"]
+[gd_scene load_steps=8 format=3 uid="uid://cwxnxsg6lktxr"]
 
 [ext_resource type="PackedScene" uid="uid://4rgx1g8dp87i" path="res://levels/menu/texture_rect.tscn" id="1_4643d"]
 [ext_resource type="Script" path="res://scripts/ui/RetryButton.gd" id="2_3egn2"]
 [ext_resource type="PackedScene" uid="uid://c747yyo377b0b" path="res://levels/menu/statsGrid.tscn" id="2_7y3x2"]
 [ext_resource type="Texture2D" uid="uid://d12q3h5fao2qc" path="res://assets/Background_loading.png" id="2_8gwm3"]
 [ext_resource type="Script" path="res://scripts/ui/goToMenu.gd" id="3_dwr7t"]
-[ext_resource type="AudioStream" uid="uid://cc4bhpwdrlblm" path="res://sounds/ui/bookOpen.ogg" id="5_ofvor"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mh5t"]
 
@@ -92,10 +91,6 @@ theme = SubResource("Theme_sik0a")
 
 [node name="GridContainer2" parent="ColorRect/MarginContainer/VBoxContainer" instance=ExtResource("2_7y3x2")]
 layout_mode = 2
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_ofvor")
-bus = &"UI"
 
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer3/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer3/Button" method="_on_pressed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" to="ColorRect/MarginContainer/VBoxContainer/GridContainer/Button" method="_on_pressed"]

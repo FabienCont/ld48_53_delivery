@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="8_wabxq"]
 [ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="9_qrb8r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcmvk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mlpo"]
 transparency = 1
 albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 
@@ -22,7 +22,7 @@ script = ExtResource("1_kf2cx")
 life = 5
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("2_cxk8e")]
-surface_material_override/0 = SubResource("StandardMaterial3D_vcmvk")
+surface_material_override/0 = SubResource("StandardMaterial3D_2mlpo")
 color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]

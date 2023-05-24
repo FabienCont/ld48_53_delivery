@@ -19,9 +19,4 @@ func _ready():
 	totalEnnemiesKilledLabel.text = str(stats.TotalKilledEnnemies)
 	totalSavedAlliesLabel.text= str(stats.totalSavedAllies)
 	levelLabel.text = str(stats.level)
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass

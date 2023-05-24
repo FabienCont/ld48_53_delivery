@@ -1,5 +1,9 @@
 extends Node
 
+@onready var level1: PackedScene  = preload("res://levels/Level1.tscn")
+@onready var level2: PackedScene  = preload("res://levels/Level2.tscn")
+@onready var level3: PackedScene = preload("res://levels/Level3.tscn")
+
 var stats: Dictionary = {
 	"max_health":10,
 	"life":10,
@@ -51,19 +55,19 @@ func goToNextLevel():
 	if stats.level==3 :
 		get_tree().change_scene_to_file("res://levels/menu/ThanksScreen.tscn")
 	elif stats.level==2 :
-		SceneLoader.change_scene_to_file("res://levels/Level3.tscn")
+		SceneLoader.change_scene_to_packed(level3)
 	elif stats.level==1 :
-		SceneLoader.change_scene_to_file("res://levels/Level2.tscn")
+		SceneLoader.change_scene_to_packed(level2)
 	else:
-		SceneLoader.change_scene_to_file("res://levels/Level1.tscn")
+		SceneLoader.change_scene_to_packed(level1)
 	pass # Replace with function body.
 
 func restartLevel():
 	stats = savedStats.duplicate(true)
 	if stats.level==2 :
-		SceneLoader.change_scene_to_file("res://levels/Level3.tscn")
+		SceneLoader.change_scene_to_packed(level3)
 	elif stats.level==1 :
-		SceneLoader.change_scene_to_file("res://levels/Level2.tscn")
+		SceneLoader.change_scene_to_packed(level2)
 	else:
-		SceneLoader.change_scene_to_file("res://levels/Level1.tscn")
+		SceneLoader.change_scene_to_packed(level1)
 	pass # Replace with function body.
