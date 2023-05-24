@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://donfs6nsn301p"]
+
+[ext_resource type="Script" path="res://scripts/interactibles/barrel_broken.gd" id="1_4iw7s"]
+[ext_resource type="PackedScene" uid="uid://cgkcvcuqfl5vk" path="res://levels/props/barrel_broken/barrel_borken.gltf" id="1_wdib8"]
+
+[node name="barrel_broken" type="Node3D"]
+script = ExtResource("1_4iw7s")
+
+[node name="barrel_broken_model" parent="." instance=ExtResource("1_wdib8")]
