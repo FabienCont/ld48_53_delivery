@@ -4,11 +4,7 @@ extends CharacterBody3D
 @onready var rng = RandomNumberGenerator.new()
 
 @onready var swordScene = preload("res://levels/weapons/Sword.tscn")
-@onready var bloodParticuleScene = preload("res://particles/BloodParticuleEmitter.tscn")
 @onready var sword = swordScene.instantiate()
-
-@export var life = 10
-
 @onready var animatedSkinComponent: AnimatedSkinComponent = $AnimatedSkinComponent
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var weaponSlotComponent: WeaponSlotComponent = $WeaponSlotComponent
@@ -16,6 +12,9 @@ extends CharacterBody3D
 @onready var velocityComponent: VelocityComponent = $VelocityComponent
 @onready var lookAtComponent: LookAtComponent = $LookAtComponent
 @onready var pathFindComponent: PathFindComponent = $PathFindComponent
+
+@export var life = 10
+@export var hurt_effects: Array[Resource]
 
 var in_range=false
 var is_attacking= false
@@ -57,9 +56,8 @@ func hurt(attack :Attack):
 	animatedSkinComponent.start_hurt()
 	isStun=true
 	SoundManager.playImpactPlateSound()
-	var blood = bloodParticuleScene.instantiate()
-	add_child(blood)
-	blood.global_transform.origin = attack.attack_position
+	for hurt_effect in hurt_effects:
+		hurt_effect.trigger_effect(self,attack)
 	
 func end_hurt():
 	isStun=false

@@ -6,6 +6,8 @@ extends CharacterBody3D
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
 
+@export var hurt_effects: Array[Resource]
+
 const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -23,7 +25,12 @@ func _ready():
 	
 	global_transform = pathFollow3D.global_transform
 	pass
-	
+
+func hurt(attack : Attack):
+	SoundManager.playImpactPlateSound()
+	for hurt_effect in hurt_effects:
+		hurt_effect.trigger_effect(self,attack)
+		
 func die():
 	if isDie == true:
 		return

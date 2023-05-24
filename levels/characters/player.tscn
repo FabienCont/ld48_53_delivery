@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cwfex5q0oty66"]
+[gd_scene load_steps=16 format=3 uid="uid://cwfex5q0oty66"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_erxv6"]
 [ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_8pl2c"]
+[ext_resource type="Script" path="res://ressources/BloodHurtEffectResource.gd" id="2_nueh2"]
 [ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="2_r2nnm"]
+[ext_resource type="Script" path="res://ressources/DisplayDamageHurtEffectResource.gd" id="3_p2ns4"]
 [ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="3_yxpjp"]
 [ext_resource type="PackedScene" uid="uid://dki5bbyx48u21" path="res://levels/weapons/Sword.tscn" id="6_ehf80"]
 [ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="7_5d3ua"]
@@ -14,7 +16,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c7cg2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mwkbc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktpk7"]
 transparency = 1
 albedo_color = Color(0, 0.392157, 0.588235, 0.572549)
 
@@ -22,6 +24,7 @@ albedo_color = Color(0, 0.392157, 0.588235, 0.572549)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_erxv6")
+hurt_effects = Array[Resource]([ExtResource("2_nueh2"), ExtResource("3_p2ns4")])
 
 [node name="TopDownControllerComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("10_sfgug")]
 lookAtComponent = NodePath("../LookAtComponent")
@@ -53,5 +56,5 @@ health = 30.0
 observer = NodePath("..")
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("11_yv1g6")]
-surface_material_override/0 = SubResource("StandardMaterial3D_mwkbc")
+surface_material_override/0 = SubResource("StandardMaterial3D_ktpk7")
 color_mark = Color(0, 0.392157, 0.588235, 0.572549)

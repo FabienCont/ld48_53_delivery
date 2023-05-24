@@ -6,7 +6,8 @@ extends CharacterBody3D
 @onready var controllerComponent: TopDownControllerComponent = $TopDownControllerComponent
 @onready var velocityComponent: VelocityComponent = $VelocityComponent
 @onready var lookAtComponent: LookAtComponent = $LookAtComponent
-@onready var bloodParticuleScene = preload("res://particles/BloodParticuleEmitter.tscn")
+
+@export var hurt_effects: Array[Resource]
 
 var stats;
 var isDie = false
@@ -37,11 +38,12 @@ func hurt(attack :Attack):
 	animatedSkinComponent.start_hurt()
 	SoundManager.playImpactPlateSound()
 	isStun=true
-	var blood = bloodParticuleScene.instantiate()
-	add_child(blood)
-	blood.global_transform.origin = attack.attack_position
+	
+	for hurt_effect in hurt_effects:
+		hurt_effect.trigger_effect(self,attack)
+			
 	shake_camera(0.8)
-
+	
 func hit(_attack :Attack):
 	shake_camera(0.2)
 	

@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbm8rkie5wy2j"]
+[gd_scene load_steps=15 format=3 uid="uid://bbm8rkie5wy2j"]
 
 [ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_kf2cx"]
 [ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_85vlx"]
+[ext_resource type="Script" path="res://ressources/BloodHurtEffectResource.gd" id="2_bujif"]
 [ext_resource type="PackedScene" uid="uid://iuxwye7gypnb" path="res://components/GroundMarkComponent.tscn" id="2_cxk8e"]
+[ext_resource type="Script" path="res://ressources/DisplayDamageHurtEffectResource.gd" id="3_dtklk"]
 [ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="3_suwv4"]
 [ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="4_nchdk"]
 [ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="5_w7uk5"]
@@ -11,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="8_wabxq"]
 [ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="9_qrb8r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trvdc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3wye"]
 transparency = 1
 albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 
@@ -20,9 +22,10 @@ albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 [node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
 script = ExtResource("1_kf2cx")
 life = 5
+hurt_effects = Array[Resource]([ExtResource("2_bujif"), ExtResource("3_dtklk")])
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("2_cxk8e")]
-surface_material_override/0 = SubResource("StandardMaterial3D_trvdc")
+surface_material_override/0 = SubResource("StandardMaterial3D_v3wye")
 color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]
