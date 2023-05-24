@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhk6njb5epl57"]
+
+[ext_resource type="Script" path="res://scripts/cameras/shaekableCameraArea.gd" id="1_ired2"]
+[ext_resource type="Script" path="res://scripts/cameras/traumaCamera.gd" id="2_rqbph"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8km1c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0350h"]
+radius = 4.0
+
+[node name="ShaekableCameraArea" type="Area3D"]
+script = ExtResource("1_ired2")
+noise = SubResource("FastNoiseLite_8km1c")
+
+[node name="CameraIsometrique" type="Camera3D" parent="." node_paths=PackedStringArray("shaekableArea")]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 0)
+current = true
+fov = 50.0
+script = ExtResource("2_rqbph")
+shaekableArea = NodePath("..")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0350h")

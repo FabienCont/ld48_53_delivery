@@ -5,8 +5,8 @@ extends Node
 @onready var level3: PackedScene = preload("res://levels/Level3.tscn")
 
 var stats: Dictionary = {
-	"max_health":10,
-	"life":10,
+	"max_health":30,
+	"life":30,
 	"strenght":0,
 	"money":0,
 	"curse":0,

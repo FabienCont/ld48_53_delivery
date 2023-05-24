@@ -28,9 +28,8 @@ height = 13
 [sub_resource type="LabelSettings" id="LabelSettings_ui570"]
 font_size = 12
 
-[node name="LifebarComponent" type="Node3D" node_paths=PackedStringArray("sprite3D")]
+[node name="LifebarComponent" type="Node3D"]
 script = ExtResource("1_mchr6")
-sprite3D = NodePath("LifebarSprite3D")
 
 [node name="LifebarSprite3D" type="Sprite3D" parent="." node_paths=PackedStringArray("sub_viewport", "label", "texture_progess_bar")]
 billboard = 1

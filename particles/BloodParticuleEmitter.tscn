@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bib767exaroat"]
+
+[ext_resource type="Texture2D" uid="uid://l7dma4etwkq3" path="res://assets/particles/scorch_03.png" id="1_rknku"]
+[ext_resource type="Script" path="res://particles/OneShotParticuleEmitter.gd" id="2_up8m6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_at8bo"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.603922, 0.603922, 0.603922, 1)
+albedo_texture = ExtResource("1_rknku")
+albedo_texture_msdf = true
+heightmap_scale = 16.0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_4au0g"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_441su"]
+gradient = SubResource("Gradient_4au0g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_my62j"]
+emission_shape = 2
+emission_sphere_radius = 0.2
+direction = Vector3(0, 1, 0)
+spread = 10.0
+flatness = 1.0
+gravity = Vector3(0, -5, 0)
+initial_velocity_max = 0.5
+angular_velocity_min = 100.0
+angular_velocity_max = 100.0
+radial_accel_min = 2.0
+radial_accel_max = 2.0
+scale_min = 100.0
+scale_max = 100.0
+color = Color(0.360784, 0.14902, 0.152941, 1)
+color_ramp = SubResource("GradientTexture1D_441su")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_arjqs"]
+size = Vector2(1, 1)
+orientation = 2
+
+[node name="GPUParticles3DComponent" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_at8bo")
+amount = 20
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_my62j")
+draw_pass_1 = SubResource("PlaneMesh_arjqs")
+script = ExtResource("2_up8m6")

@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var controllerComponent: TopDownControllerComponent = $TopDownControllerComponent
 @onready var velocityComponent: VelocityComponent = $VelocityComponent
 @onready var lookAtComponent: LookAtComponent = $LookAtComponent
+@onready var bloodParticuleScene = preload("res://particles/BloodParticuleEmitter.tscn")
 
 var stats;
 var isDie = false
@@ -17,6 +18,7 @@ var maxAttackCombo = 1
 
 func _ready():
 	stats = GlobalInfo.stats
+	healthComponent.MAX_HEALTH = stats.max_health
 	healthComponent.health = stats.life
 	if animatedSkinComponent != null && weaponSlotComponent != null:
 		weaponSlotComponent.set_external_skeleton(animatedSkinComponent.get_skeleton())
@@ -31,10 +33,22 @@ func die():
 	get_tree().call_group("level","player_die",self)
 	animatedSkinComponent.die()
 
-func hurt(_attack :Attack):
+func hurt(attack :Attack):
 	animatedSkinComponent.start_hurt()
 	SoundManager.playImpactPlateSound()
 	isStun=true
+	var blood = bloodParticuleScene.instantiate()
+	add_child(blood)
+	blood.global_transform.origin = attack.attack_position
+	shake_camera(0.8)
+
+func hit(_attack :Attack):
+	shake_camera(0.2)
+	
+func shake_camera(trauma_power:float):
+	var camera := get_viewport().get_camera_3d()
+	if camera is Camera3D && camera.has_method("add_trauma"):
+		camera.add_trauma(trauma_power)
 	
 func end_hurt():
 	isStun=false

@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="8_wabxq"]
 [ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="9_qrb8r"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mlpo"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0x7p6"]
 transparency = 1
 albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 
@@ -22,7 +22,7 @@ script = ExtResource("1_kf2cx")
 life = 5
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("2_cxk8e")]
-surface_material_override/0 = SubResource("StandardMaterial3D_2mlpo")
+surface_material_override/0 = SubResource("StandardMaterial3D_0x7p6")
 color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]
@@ -33,11 +33,11 @@ color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 shape = SubResource("CapsuleShape3D_5x11s")
 health_component = NodePath("../HealthComponent")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("lifebar_component") instance=ExtResource("5_w7uk5")]
-lifebar_component = NodePath("../LifebarComponent")
+[node name="HealthComponent" parent="." instance=ExtResource("5_w7uk5")]
 
-[node name="LifebarComponent" parent="." instance=ExtResource("6_1ro1a")]
+[node name="LifebarComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("6_1ro1a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14265, 0)
+healthComponent = NodePath("../HealthComponent")
 
 [node name="PathFindComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("7_f0v5f")]
 target_desired_distance = 2.0

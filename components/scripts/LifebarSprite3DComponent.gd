@@ -12,7 +12,7 @@ func _ready():
 
 func update_display_life(display_life,max_life_value):
 	if label != null:
-		label.text = str(display_life) +" / "+ str(max_life_value)
+		label.text = str(round(display_life)) +" / "+ str(round(max_life_value))
 	if texture_progess_bar != null && max_life_value > 0:	
 		texture_progess_bar.value = (display_life/max_life_value)*100
 	return display_life

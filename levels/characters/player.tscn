@@ -14,7 +14,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c7cg2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5ln8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gviph"]
 transparency = 1
 albedo_color = Color(0, 0.392157, 0.588235, 0.572549)
 
@@ -39,13 +39,13 @@ weaponEquiped = NodePath("Sword")
 
 [node name="Sword" parent="WeaponSlotComponent" instance=ExtResource("6_ehf80")]
 
-[node name="LifebarComponent" parent="." instance=ExtResource("7_ukeuy")]
+[node name="LifebarComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("7_ukeuy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27905, 0)
+healthComponent = NodePath("../HealthComponent")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("lifebar_component") instance=ExtResource("2_r2nnm")]
+[node name="HealthComponent" parent="." instance=ExtResource("2_r2nnm")]
 MAX_HEALTH = 30.0
 health = 30.0
-lifebar_component = NodePath("../LifebarComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("8_lwfvi")]
 
@@ -53,5 +53,5 @@ lifebar_component = NodePath("../LifebarComponent")
 observer = NodePath("..")
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("11_yv1g6")]
-surface_material_override/0 = SubResource("StandardMaterial3D_e5ln8")
+surface_material_override/0 = SubResource("StandardMaterial3D_gviph")
 color_mark = Color(0, 0.392157, 0.588235, 0.572549)

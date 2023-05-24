@@ -8,6 +8,8 @@ class_name Weapon
 @onready var trail :GPUParticles3D = $AttackTrail
 @onready var trailMesh3d :Trail3DComponent = $Trail3DComponent
 
+signal hit(attack:Attack)
+
 func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
 	var parent = node.get_parent()
 	if parent == get_tree().get_root():
@@ -39,7 +41,8 @@ func damage(hurtboxComponent :HurtboxComponent):
 	attack.knockback_force = 2
 	attack.attack_position = global_position
 	hurtboxComponent.damage(attack)
-
+	hit.emit(attack)
+	
 func _on_area_3d_body_shape_entered(_body_rid: RID, body: Node3D, body_shape_index:int, _local_shape_index:int):
 	if touched_ennemies.get(_body_rid) != null || is_attacking == false:
 		return

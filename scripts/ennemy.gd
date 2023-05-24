@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var rng = RandomNumberGenerator.new()
 
 @onready var swordScene = preload("res://levels/weapons/Sword.tscn")
+@onready var bloodParticuleScene = preload("res://particles/BloodParticuleEmitter.tscn")
 @onready var sword = swordScene.instantiate()
 
 @export var life = 10
@@ -28,6 +29,8 @@ var isStun:bool= false
 
 func _ready():
 	healthComponent.health = life
+	healthComponent.MAX_HEALTH = life
+	
 	if weaponSlotComponent !=null:
 		weaponSlotComponent.equip(sword.duplicate())
 		
@@ -50,10 +53,13 @@ func end_attack():
 func start_recovery_attack(): 
 	weaponSlotComponent.start_recovery_attack()
 		
-func hurt(_attack :Attack):
+func hurt(attack :Attack):
 	animatedSkinComponent.start_hurt()
 	isStun=true
 	SoundManager.playImpactPlateSound()
+	var blood = bloodParticuleScene.instantiate()
+	add_child(blood)
+	blood.global_transform.origin = attack.attack_position
 	
 func end_hurt():
 	isStun=false
