@@ -56,7 +56,6 @@ func end_hurt():
 	isStun=false
 	
 func start_attack():
-	print(isRecoveringAttack)
 	if isRecoveringAttack == true && attackCombo<maxAttackCombo:
 		attackCombo+=1
 		animatedSkinComponent.start_attack_2()

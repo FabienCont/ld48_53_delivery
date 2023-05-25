@@ -5,7 +5,7 @@ extends CharacterBody3D
 @onready var path3D: Path3D
 @onready var healthComponent: HealthComponent = $HealthComponent
 @onready var hurtboxComponent: HurtboxComponent = $HurtboxComponent
-
+@onready var animationTree : AnimationTree = $AnimationTree
 @export var hurt_effects: Array[Resource]
 
 const SPEED = 3.0
@@ -28,6 +28,7 @@ func _ready():
 
 func hurt(attack : Attack):
 	SoundManager.playImpactPlateSound()
+	animationTree.set("parameters/hurt/request",1)
 	for hurt_effect in hurt_effects:
 		hurt_effect.trigger_effect(self,attack)
 		
