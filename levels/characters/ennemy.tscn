@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bbm8rkie5wy2j"]
+[gd_scene load_steps=26 format=3 uid="uid://bbm8rkie5wy2j"]
 
 [ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_kf2cx"]
 [ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_85vlx"]
@@ -12,8 +12,19 @@
 [ext_resource type="PackedScene" uid="uid://dsgade72q8iyn" path="res://components/PathFindComponent.tscn" id="7_f0v5f"]
 [ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="8_wabxq"]
 [ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="9_qrb8r"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="13_vgjxr"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="14_x3xxs"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="15_yxllg"]
+[ext_resource type="PackedScene" uid="uid://dj7p634ox6isf" path="res://ressources/beehave/conditions/IsReadyAttack.tscn" id="16_hnh0e"]
+[ext_resource type="PackedScene" uid="uid://7dkb535em8fn" path="res://ressources/beehave/conditions/IsInRange.tscn" id="16_nn6er"]
+[ext_resource type="PackedScene" uid="uid://co5x4jdi0vv6o" path="res://ressources/beehave/actions/AttackAction.tscn" id="17_wklhh"]
+[ext_resource type="PackedScene" uid="uid://csifnj6tq0igs" path="res://ressources/beehave/conditions/MoveCondition.tscn" id="19_gdedw"]
+[ext_resource type="PackedScene" uid="uid://bhfqn753jsk57" path="res://ressources/beehave/actions/MoveAction.tscn" id="20_h41li"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="21_dvdpq"]
+[ext_resource type="PackedScene" uid="uid://chlx16btt5tll" path="res://ressources/beehave/conditions/SlowCondition.tscn" id="21_mj7rh"]
+[ext_resource type="PackedScene" uid="uid://bcqdvmppwhvfn" path="res://ressources/beehave/actions/SlowAction.tscn" id="23_kog0f"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v3wye"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klxyu"]
 transparency = 1
 albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 
@@ -25,7 +36,7 @@ life = 5
 hurt_effects = Array[Resource]([ExtResource("2_bujif"), ExtResource("3_dtklk")])
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("2_cxk8e")]
-surface_material_override/0 = SubResource("StandardMaterial3D_v3wye")
+surface_material_override/0 = SubResource("StandardMaterial3D_klxyu")
 color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]
@@ -52,6 +63,41 @@ observer = NodePath("..")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("9_qrb8r")]
 
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
+script = ExtResource("13_vgjxr")
+actor_node_path = NodePath("..")
+blackboard = NodePath("../Blackboard")
+
+[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("14_x3xxs")
+
+[node name="SequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("15_yxllg")
+
+[node name="IsReadyAttack" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite" instance=ExtResource("16_hnh0e")]
+
+[node name="IsInRange" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite" instance=ExtResource("16_nn6er")]
+
+[node name="AttackAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite" instance=ExtResource("17_wklhh")]
+
+[node name="SequenceComposite3" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("15_yxllg")
+
+[node name="SlowCondition" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite3" instance=ExtResource("21_mj7rh")]
+
+[node name="SlowAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite3" instance=ExtResource("23_kog0f")]
+
+[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("15_yxllg")
+
+[node name="MoveCondition" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2" instance=ExtResource("19_gdedw")]
+
+[node name="MoveAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2" instance=ExtResource("20_h41li")]
+
+[node name="Blackboard" type="Node" parent="."]
+script = ExtResource("21_dvdpq")
+
+[connection signal="navigation_finished" from="PathFindComponent" to="." method="_on_path_find_component_navigation_finished"]
 [connection signal="path_changed" from="PathFindComponent" to="." method="_on_path_find_component_path_changed"]
 [connection signal="target_reached" from="PathFindComponent" to="." method="_on_path_find_component_target_reached"]
 [connection signal="velocity_computed" from="PathFindComponent" to="." method="_on_path_find_component_velocity_computed"]

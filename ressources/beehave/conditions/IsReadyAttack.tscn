@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj7p634ox6isf"]
+
+[sub_resource type="GDScript" id="GDScript_ukwbw"]
+script/source = "extends ConditionLeaf
+
+func tick(actor: Node, _blackboard: Blackboard) -> int:
+	if actor.ready_to_attack == true :
+		return SUCCESS
+	else:
+		return FAILURE
+"
+
+[node name="IsReadyAttack" type="Node"]
+script = SubResource("GDScript_ukwbw")

@@ -7,7 +7,6 @@ extends Node3D
 func _ready() -> void:
 	label.text = "- "+str(attack_number)
 	top_level=true
-	var tween = get_tree().create_tween()
 	pass # Replace with function body.
 
 

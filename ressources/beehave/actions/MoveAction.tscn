@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhfqn753jsk57"]
+
+[ext_resource type="Script" path="res://ressources/beehave/actions/MoveAction.gd" id="1_y2nwt"]
+
+[node name="MoveAction" type="Node"]
+script = ExtResource("1_y2nwt")

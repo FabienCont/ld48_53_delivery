@@ -1,6 +1,6 @@
 extends Resource
 class_name HurtEffectResource
 
-static func trigger_effect(node :Node3D,attack :Attack)->void:
+static func trigger_effect(_node :Node3D,_attack :Attack)->void:
 	return
 	

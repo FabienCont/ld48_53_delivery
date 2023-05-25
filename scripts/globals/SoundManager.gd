@@ -11,6 +11,7 @@ func _ready():
 	_soundQueuesByName["ClickButtonUISoundQueue"] = get_node("ClickButtonUISoundQueue")
 	_soundPoolsByName["ImpactPlateSoundPool"] = get_node("ImpactPlateSoundPool")
 	_soundPoolsByName["ImpactPlankSoundPool"] = get_node("ImpactPlankSoundPool")
+	_soundPoolsByName["ImpactPlateLightSoundPool"] = get_node("ImpactPlateLightSoundPool")
 	pass
 
 func playUiClickButton():

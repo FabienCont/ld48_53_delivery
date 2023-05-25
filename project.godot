@@ -21,10 +21,12 @@ GlobalInfo="*res://scripts/globals/GlobalInfo.gd"
 SoundManager="*res://levels/autoload/SoundManager.tscn"
 SceneLoader="*res://levels/autoload/SceneLoader.tscn"
 Signals="*res://scripts/globals/Signals.gd"
+BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
+BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg", "res://addons/beehave/plugin.cfg")
 
 [input]
 

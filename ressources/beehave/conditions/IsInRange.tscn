@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7dkb535em8fn"]
+
+[ext_resource type="Script" path="res://ressources/beehave/conditions/IsInRange.gd" id="1_dexk5"]
+
+[node name="MoveCondition" type="Node"]
+script = ExtResource("1_dexk5")

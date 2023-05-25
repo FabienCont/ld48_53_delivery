@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://csifnj6tq0igs"]
+
+[ext_resource type="Script" path="res://ressources/beehave/conditions/MoveCondition.gd" id="1_psuoy"]
+
+[node name="MoveCondition" type="Node"]
+script = ExtResource("1_psuoy")

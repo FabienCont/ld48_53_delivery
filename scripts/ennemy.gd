@@ -12,6 +12,8 @@ extends CharacterBody3D
 @onready var velocityComponent: VelocityComponent = $VelocityComponent
 @onready var lookAtComponent: LookAtComponent = $LookAtComponent
 @onready var pathFindComponent: PathFindComponent = $PathFindComponent
+@onready var tree := $BeehaveTree
+@onready var blackboard := $Blackboard
 
 @export var life = 10
 @export var hurt_effects: Array[Resource]
@@ -86,6 +88,7 @@ func reload():
 	ready_to_attack=true
 	
 func _physics_process(delta):
+	blackboard.set_value("delta",delta)
 	# Add the gravity.
 	if not is_on_floor():
 		velocityComponent.apply_gravity(delta)
@@ -98,24 +101,24 @@ func _physics_process(delta):
 		velocityComponent.move(self,delta)
 		return
 				
-	if ready_to_attack ==true && in_range == true:
-		start_attack()
+	#if ready_to_attack ==true && in_range == true:
+	#	start_attack()
 	
-	if is_attacking == false && isStun == false: 
-		pathFindComponent.follow_path(self,delta)
-		pathFindComponent.look_at_target(delta)
-		var animation_blend = Vector2(velocityComponent.current_velocity.x,-velocityComponent.current_velocity.y).rotated(-rotation.y).normalized()
-		animatedSkinComponent.walk(animation_blend,delta)
-	else:
-		velocityComponent.decelerate(delta)
-		
-	velocityComponent.move(self,delta)
+	#if is_attacking == false && isStun == false: 
+	#	pathFindComponent.follow_path(self,delta)
+	#	pathFindComponent.look_at_target(delta)
+	#	var animation_blend = Vector2(velocityComponent.current_velocity.x,-velocityComponent.current_velocity.y).rotated(-rotation.y).normalized()
+	#	animatedSkinComponent.walk(animation_blend,delta)
+	#else:
+	#	velocityComponent.decelerate(delta)
+	#	
+	#velocityComponent.move(self,delta)
 	
 
 func update_target_location(target_node: Node3D,hero_node: Node3D):
-	if aimHero == true :
+	if aimHero == true:
 		target = hero_node
-	else :
+	else:
 		target=target_node
 	pathFindComponent.set_target_position_node(target)
 
@@ -123,12 +126,17 @@ func _on_path_find_component_velocity_computed(safe_velocity):
 	pathFindComponent.on_velocity_computed(safe_velocity)
 	pass # Replace with function body.
 
-
 func _on_path_find_component_target_reached():
 	in_range = true
 	pass
 
-
 func _on_path_find_component_path_changed():
 	in_range = false
+	print("change_path")
+	pass # Replace with function body.
+
+
+func _on_path_find_component_navigation_finished():
+	in_range = false
+	print("path_finished")
 	pass # Replace with function body.

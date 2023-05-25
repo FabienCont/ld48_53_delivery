@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6fd2l7ogxcoi"]
+[gd_scene load_steps=23 format=3 uid="uid://b6fd2l7ogxcoi"]
 
 [ext_resource type="PackedScene" uid="uid://d3ge3v8h84te7" path="res://levels/sounds/SoundQueue.tscn" id="1_8cvsp"]
 [ext_resource type="Script" path="res://scripts/globals/SoundManager.gd" id="1_l1eau"]
@@ -16,7 +16,12 @@
 [ext_resource type="AudioStream" uid="uid://cati30vw047n0" path="res://sounds/impacts/impactPlate_heavy_003.ogg" id="13_yd7e5"]
 [ext_resource type="AudioStream" uid="uid://csctsylkycm3m" path="res://sounds/impacts/impactPlate_heavy_004.ogg" id="14_ik6mf"]
 [ext_resource type="AudioStream" uid="uid://kk0575ani8gm" path="res://sounds/gamjam.mp3" id="16_aiat1"]
+[ext_resource type="AudioStream" uid="uid://d1de04wkripsx" path="res://sounds/impacts/impactPlate_light_000.ogg" id="16_cuwc6"]
+[ext_resource type="AudioStream" uid="uid://bsdwevf6ev8mr" path="res://sounds/impacts/impactPlate_light_001.ogg" id="17_if2cm"]
 [ext_resource type="AudioStream" uid="uid://cc4bhpwdrlblm" path="res://sounds/ui/bookOpen.ogg" id="17_m2ep2"]
+[ext_resource type="AudioStream" uid="uid://cfp8g5rmp56n8" path="res://sounds/impacts/impactPlate_light_002.ogg" id="18_a0stm"]
+[ext_resource type="AudioStream" uid="uid://bsbl34oxjucbr" path="res://sounds/impacts/impactPlate_light_003.ogg" id="19_m156r"]
+[ext_resource type="AudioStream" uid="uid://dbct10usbuhsr" path="res://sounds/impacts/impactPlate_light_004.ogg" id="20_ipnr5"]
 
 [node name="Node" type="Node"]
 script = ExtResource("1_l1eau")
@@ -101,6 +106,44 @@ script = ExtResource("5_tamdx")
 
 [node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="ImpactPlateSoundPool/SoundQueue5"]
 stream = ExtResource("14_ik6mf")
+bus = &"Effects"
+
+[node name="ImpactPlateLightSoundPool" type="Node" parent="."]
+script = ExtResource("4_o2jki")
+
+[node name="SoundQueue" type="Node" parent="ImpactPlateLightSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactPlateLightSoundPool/SoundQueue"]
+stream = ExtResource("16_cuwc6")
+bus = &"Effects"
+
+[node name="SoundQueue2" type="Node" parent="ImpactPlateLightSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactPlateLightSoundPool/SoundQueue2"]
+stream = ExtResource("17_if2cm")
+bus = &"Effects"
+
+[node name="SoundQueue3" type="Node" parent="ImpactPlateLightSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactPlateLightSoundPool/SoundQueue3"]
+stream = ExtResource("18_a0stm")
+bus = &"Effects"
+
+[node name="SoundQueue4" type="Node" parent="ImpactPlateLightSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactPlateLightSoundPool/SoundQueue4"]
+stream = ExtResource("19_m156r")
+bus = &"Effects"
+
+[node name="SoundQueue5" type="Node" parent="ImpactPlateLightSoundPool"]
+script = ExtResource("5_tamdx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactPlateLightSoundPool/SoundQueue5"]
+stream = ExtResource("20_ipnr5")
 bus = &"Effects"
 
 [node name="BackgroundSoundQueue" type="Node" parent="."]

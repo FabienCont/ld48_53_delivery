@@ -11,7 +11,7 @@ func _ready():
 	if target : 
 		posSave = Vector3( target.global_transform.origin)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	if target == null:
 		return
 	if posSave == null:
