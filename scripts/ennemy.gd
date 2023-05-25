@@ -132,11 +132,10 @@ func _on_path_find_component_target_reached():
 
 func _on_path_find_component_path_changed():
 	in_range = false
-	print("change_path")
 	pass # Replace with function body.
 
 
 func _on_path_find_component_navigation_finished():
-	in_range = false
+	in_range = true
 	print("path_finished")
 	pass # Replace with function body.
