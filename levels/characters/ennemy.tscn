@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_kf2cx"]
 [ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_85vlx"]
-[ext_resource type="Script" path="res://ressources/BloodHurtEffectResource.gd" id="2_bujif"]
 [ext_resource type="PackedScene" uid="uid://iuxwye7gypnb" path="res://components/GroundMarkComponent.tscn" id="2_cxk8e"]
-[ext_resource type="Script" path="res://ressources/DisplayDamageHurtEffectResource.gd" id="3_dtklk"]
+[ext_resource type="Script" path="res://ressources/effects/BloodHurtEffectResource.gd" id="2_xlfqt"]
 [ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="3_suwv4"]
+[ext_resource type="Script" path="res://ressources/effects/DisplayDamageHurtEffectResource.gd" id="3_vu4sg"]
 [ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="4_nchdk"]
 [ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="5_w7uk5"]
 [ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://components/LifebarComponent.tscn" id="6_1ro1a"]
@@ -24,19 +24,21 @@
 [ext_resource type="PackedScene" uid="uid://chlx16btt5tll" path="res://ressources/beehave/conditions/SlowCondition.tscn" id="21_mj7rh"]
 [ext_resource type="PackedScene" uid="uid://bcqdvmppwhvfn" path="res://ressources/beehave/actions/SlowAction.tscn" id="23_kog0f"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klxyu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjv1i"]
 transparency = 1
 albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
 
 [node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
+collision_layer = 12
+collision_mask = 15
 script = ExtResource("1_kf2cx")
 life = 5
-hurt_effects = Array[Resource]([ExtResource("2_bujif"), ExtResource("3_dtklk")])
+hurt_effects = Array[Resource]([ExtResource("2_xlfqt"), ExtResource("3_vu4sg")])
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("2_cxk8e")]
-surface_material_override/0 = SubResource("StandardMaterial3D_klxyu")
+surface_material_override/0 = SubResource("StandardMaterial3D_gjv1i")
 color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]
@@ -71,28 +73,28 @@ blackboard = NodePath("../Blackboard")
 [node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree"]
 script = ExtResource("14_x3xxs")
 
-[node name="SequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+[node name="IdleSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
 script = ExtResource("15_yxllg")
 
-[node name="IsReadyAttack" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite" instance=ExtResource("16_hnh0e")]
+[node name="SlowCondition" parent="BeehaveTree/SelectorReactiveComposite/IdleSequenceComposite" instance=ExtResource("21_mj7rh")]
 
-[node name="IsInRange" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite" instance=ExtResource("16_nn6er")]
+[node name="SlowAction" parent="BeehaveTree/SelectorReactiveComposite/IdleSequenceComposite" instance=ExtResource("23_kog0f")]
 
-[node name="AttackAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite" instance=ExtResource("17_wklhh")]
-
-[node name="SequenceComposite3" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+[node name="AttackSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
 script = ExtResource("15_yxllg")
 
-[node name="SlowCondition" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite3" instance=ExtResource("21_mj7rh")]
+[node name="IsReadyAttack" parent="BeehaveTree/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("16_hnh0e")]
 
-[node name="SlowAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite3" instance=ExtResource("23_kog0f")]
+[node name="IsInRange" parent="BeehaveTree/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("16_nn6er")]
 
-[node name="SequenceComposite2" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+[node name="AttackAction" parent="BeehaveTree/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("17_wklhh")]
+
+[node name="MoveSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
 script = ExtResource("15_yxllg")
 
-[node name="MoveCondition" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2" instance=ExtResource("19_gdedw")]
+[node name="MoveCondition" parent="BeehaveTree/SelectorReactiveComposite/MoveSequenceComposite" instance=ExtResource("19_gdedw")]
 
-[node name="MoveAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite2" instance=ExtResource("20_h41li")]
+[node name="MoveAction" parent="BeehaveTree/SelectorReactiveComposite/MoveSequenceComposite" instance=ExtResource("20_h41li")]
 
 [node name="Blackboard" type="Node" parent="."]
 script = ExtResource("21_dvdpq")

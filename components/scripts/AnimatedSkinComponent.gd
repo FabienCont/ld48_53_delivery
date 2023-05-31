@@ -34,7 +34,6 @@ func start_attack_2():
 	
 func start_attack():
 	comboAttackCounter+=1
-	print("start_attack")
 	animationTree.set("parameters/attack/request",1)
 
 func end_attack(numAttack:int):
@@ -42,9 +41,12 @@ func end_attack(numAttack:int):
 		comboAttackCounter=0
 		if parent.has_method("end_attack") :
 			parent.end_attack()
+
+func attack_start_to_hurt():
+	if parent.has_method("attack_start_to_hurt") :
+		parent.attack_start_to_hurt()
 	
 func start_recovery_attack(_numAttack:int):
-	print("start_recovery_attack")
 	if parent.has_method("start_recovery_attack") :
 		parent.start_recovery_attack()
 		

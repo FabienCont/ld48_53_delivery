@@ -4,9 +4,8 @@ class_name Weapon
 @onready var audioStreamPlayer: AudioStreamPlayer3D = $attackAudioStreamPlayer;
 @onready var collider: CollisionShape3D = $Area3D/CollisionShape3D
 @onready var touched_ennemies= {}
-@onready var is_attacking : bool = false
+@onready var attack_can_hurt : bool = false
 @onready var trail :GPUParticles3D = $AttackTrail
-@onready var trailMesh3d :Trail3DComponent = $Trail3DComponent
 
 signal hit(attack:Attack)
 
@@ -20,20 +19,21 @@ func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
 		return is_parent_recursive(parent,body)
 
 func start_attack():
-	trailMesh3d.trailEnabled = true
-	collider.disabled=false
-	is_attacking = true
 	touched_ennemies={}
+
+func attack_start_to_hurt():
+	attack_can_hurt = true
+	collider.disabled=false
 	audioStreamPlayer.play()
 	trail.emitting =true
-
+	
 func start_recovery_attack():
-	trailMesh3d.trailEnabled = false
-	collider.call_deferred("set_disabled",true)
+	collider.disabled=true
 	trail.emitting = false
+	attack_can_hurt = false
 	
 func end_attack():
-	is_attacking = false
+	pass
 	
 func damage(hurtboxComponent :HurtboxComponent):
 	var attack = Attack.new()
@@ -44,7 +44,7 @@ func damage(hurtboxComponent :HurtboxComponent):
 	hit.emit(attack)
 	
 func _on_area_3d_body_shape_entered(_body_rid: RID, body: Node3D, body_shape_index:int, _local_shape_index:int):
-	if touched_ennemies.get(_body_rid) != null || is_attacking == false:
+	if touched_ennemies.get(_body_rid) != null || attack_can_hurt == false:
 		return
 	var body_shape_owner = body.shape_find_owner(body_shape_index)
 	var body_shape_node = body.shape_owner_get_owner(body_shape_owner)

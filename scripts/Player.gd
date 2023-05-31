@@ -7,6 +7,7 @@ extends CharacterBody3D
 @onready var velocityComponent: VelocityComponent = $VelocityComponent
 @onready var lookAtComponent: LookAtComponent = $LookAtComponent
 
+@export var die_effects: Array[Resource]
 @export var hurt_effects: Array[Resource]
 
 var stats;
@@ -19,8 +20,8 @@ var maxAttackCombo = 1
 
 func _ready():
 	stats = GlobalInfo.stats
-	healthComponent.MAX_HEALTH = stats.max_health
-	healthComponent.health = stats.life
+	healthComponent.MAX_HEALTH = 1.0
+	healthComponent.health = 1.0
 	if animatedSkinComponent != null && weaponSlotComponent != null:
 		weaponSlotComponent.set_external_skeleton(animatedSkinComponent.get_skeleton())
 		weaponSlotComponent.bone_idx=animatedSkinComponent.get_right_hand_bone_index()
@@ -33,6 +34,9 @@ func die():
 	weaponSlotComponent.unequip()
 	get_tree().call_group("level","player_die",self)
 	animatedSkinComponent.die()
+	
+	for die_effect in die_effects:
+		die_effect.trigger_effect(self,null)
 
 func hurt(attack :Attack):
 	animatedSkinComponent.start_hurt()
@@ -73,6 +77,9 @@ func end_attack():
 	isAttacking=false
 	isRecoveringAttack=false
 	weaponSlotComponent.end_attack()
+
+func attack_start_to_hurt():
+	weaponSlotComponent.attack_start_to_hurt()
 	
 func start_recovery_attack():
 	isRecoveringAttack=true

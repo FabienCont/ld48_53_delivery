@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dki5bbyx48u21"]
+[gd_scene load_steps=8 format=3 uid="uid://dki5bbyx48u21"]
 
 [ext_resource type="Script" path="res://levels/weapons/katana2.gd" id="1_vgjdk"]
 [ext_resource type="PackedScene" uid="uid://43webmok60tq" path="res://levels/weapons/Sword.blend" id="2_ub4my"]
-[ext_resource type="PackedScene" uid="uid://ll6da1q4svrh" path="res://components/Trail3DComponent.tscn" id="3_3x5lr"]
 [ext_resource type="AudioStream" uid="uid://dcak2f6e7fmow" path="res://sounds/weapon/drawKnife2.ogg" id="3_8encb"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m2cqb"]
@@ -23,12 +22,6 @@ shape = 0
 size = 2.0
 sections = 2
 
-[sub_resource type="QuadMesh" id="QuadMesh_d5h16"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53wua"]
-albedo_color = Color(1, 0, 0, 1)
-billboard_mode = 1
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_mvl4y"]
 size = Vector3(0.1, 1.4, 0.1)
 
@@ -45,23 +38,15 @@ trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_m2cqb")
 draw_pass_1 = SubResource("RibbonTrailMesh_gokqh")
 
-[node name="Trail3DComponent" parent="." instance=ExtResource("3_3x5lr")]
-transform = Transform3D(1, -1.86265e-08, 0, -5.58794e-08, 1, 0, -1.93715e-07, 5.96046e-08, 1, 0.00841051, 1.168, -0.00473428)
-visible = false
-mesh = SubResource("QuadMesh_d5h16")
-surface_material_override/0 = SubResource("StandardMaterial3D_53wua")
-trailEnabled = false
-startColor = Color(0.643137, 0.0823529, 0.403922, 0.482353)
-endColor = Color(1, 0.501961, 0.670588, 0.596078)
-
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(0.999999, 0, 0, -3.72529e-09, 1, 2.98023e-08, -1.49012e-08, 0, 0.999999, 1.49012e-08, 0.803239, 0)
-collision_layer = 5
-collision_mask = 5
+collision_layer = 28
+collision_mask = 28
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(0.999981, -0.00576379, -0.00208266, 0.00583154, 0.9994, 0.0341388, 0.00188467, -0.0341507, 0.999415, -0.00453758, 0.209984, -0.0169888)
 shape = SubResource("BoxShape3D_mvl4y")
+disabled = true
 
 [node name="attackAudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_8encb")

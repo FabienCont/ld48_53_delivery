@@ -67,11 +67,12 @@ func ally_die(ally: Node3D):
 
 func ally_escape(ally: Node3D):
 	ally.remove_from_group("allies")
-	ally.call("escape")
-	stats.savedAllies+=1
-	var allies = get_tree().get_nodes_in_group("allies")
-	if(allies.size()==0):
-		open_doors()
+	if ally.has_method("escape"):
+		ally.call("escape")
+		stats.savedAllies+=1
+		var allies = get_tree().get_nodes_in_group("allies")
+		if(allies.size()==0):
+			open_doors()
 	
 func ennemy_die(ennemy: Node3D):
 	ennemy.remove_from_group("ennemies")

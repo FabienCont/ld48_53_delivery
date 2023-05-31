@@ -33,6 +33,10 @@ func start_attack():
 func end_attack():
 	if has_weapon_equiped() :
 		weaponEquiped.end_attack()
+		
+func attack_start_to_hurt():
+	if has_weapon_equiped() :
+		weaponEquiped.attack_start_to_hurt()
 
 func start_recovery_attack():
 	if has_weapon_equiped() :

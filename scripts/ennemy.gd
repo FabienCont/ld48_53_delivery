@@ -51,6 +51,9 @@ func end_attack():
 	is_attacking=false
 	reload()
 
+func attack_start_to_hurt():
+	weaponSlotComponent.attack_start_to_hurt()
+	
 func start_recovery_attack(): 
 	weaponSlotComponent.start_recovery_attack()
 		
@@ -100,20 +103,6 @@ func _physics_process(delta):
 		velocityComponent.decelerate(delta)
 		velocityComponent.move(self,delta)
 		return
-				
-	#if ready_to_attack ==true && in_range == true:
-	#	start_attack()
-	
-	#if is_attacking == false && isStun == false: 
-	#	pathFindComponent.follow_path(self,delta)
-	#	pathFindComponent.look_at_target(delta)
-	#	var animation_blend = Vector2(velocityComponent.current_velocity.x,-velocityComponent.current_velocity.y).rotated(-rotation.y).normalized()
-	#	animatedSkinComponent.walk(animation_blend,delta)
-	#else:
-	#	velocityComponent.decelerate(delta)
-	#	
-	#velocityComponent.move(self,delta)
-	
 
 func update_target_location(target_node: Node3D,hero_node: Node3D):
 	if aimHero == true:
