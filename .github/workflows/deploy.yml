@@ -1,0 +1,41 @@
+name: 🚥 Status Checks
+on: push
+
+jobs:
+  tests:
+    name: 👀 Evaluate on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      # Don't cancel other OS runners if one fails.
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+    defaults:
+      run:
+        # Use bash shells on all platforms.
+        shell: bash
+    steps:
+      - uses: actions/checkout@v3
+        name: 🧾 Checkout
+
+      - uses: chickensoft-games/setup-godot@v1
+        name: 🤖 Setup Godot
+        with:
+          # Version must include major, minor, and patch, and be >= 4.0.0
+          # Pre-release label is optional.
+          version: 4.0.3
+          use-dotnet: false
+
+      - name: 🔬 Verify Setup
+        run: |
+          godot --version
+
+      - name: 🧑‍🔬 Generate .NET Bindings
+        run: godot --headless --build-solutions --quit || exit 0
+
+      - name: 🦺 Build Projects
+        run: dotnet build
+        
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
