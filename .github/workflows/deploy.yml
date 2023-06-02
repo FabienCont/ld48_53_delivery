@@ -31,4 +31,4 @@ jobs:
           godot --version
       
       - name: 🧑‍🔬 Generate web export
-        run: godot --export-release Web
+        run: godot --headless --export-release Web
