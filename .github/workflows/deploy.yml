@@ -30,6 +30,5 @@ jobs:
         run: |
           godot --version
       
-      - name: 🧑‍🔬 Generate .NET Bindings
-        run: godot --headless --build-solutions --quit || exit 0
-      
+      - name: 🧑‍🔬 Generate web export
+        run: godot --export-release Web
