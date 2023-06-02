@@ -6,13 +6,11 @@ jobs:
     name: 👀 Evaluate on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      # Don't cancel other OS runners if one fails.
       fail-fast: false
       matrix:
         os: [windows-latest]
     defaults:
       run:
-        # Use bash shells on all platforms.
         shell: bash
     steps:
       - name: 🧾 Checkout
@@ -22,8 +20,6 @@ jobs:
       - name: 🤖 Setup Godot
         uses: chickensoft-games/setup-godot@v1
         with:
-          # Version must include major, minor, and patch, and be >= 4.0.0
-          # Pre-release label is optional.
           version: 4.0.3
           use-dotnet: false
 
@@ -32,16 +28,16 @@ jobs:
           godot --version
       
       - name: 🧑‍🔬 Create export folder
-        run: mkdir -v -p exportDeliveryHtml
+        run: mkdir -v -p build/web
       
       - name: 🧑‍🔬 Generate web export
-        run: godot -v --export "Web" ../exportDeliveryHtml
+        run: godot -v --export-release "Web" ../build/web
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: web
-          path: exportDeliveryHtml
+          path: build/web
 
       - name: Install rsync 📚
         run: |
@@ -51,4 +47,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: exportDeliveryHtml # The folder the action should deploy.
+          folder: build/web # The folder the action should deploy.
