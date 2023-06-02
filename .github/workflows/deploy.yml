@@ -15,11 +15,12 @@ jobs:
         # Use bash shells on all platforms.
         shell: bash
     steps:
-      - uses: actions/checkout@v3
-        name: 🧾 Checkout
-
-      - uses: chickensoft-games/setup-godot@v1
-        name: 🤖 Setup Godot
+      - name: 🧾 Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+      - name: 🤖 Setup Godot
+        uses: chickensoft-games/setup-godot@v1
         with:
           # Version must include major, minor, and patch, and be >= 4.0.0
           # Pre-release label is optional.
@@ -30,5 +31,24 @@ jobs:
         run: |
           godot --version
       
+      - name: 🧑‍🔬 Create export folder
+        run: mkdir -v -p exportDeliveryHtml
+      
       - name: 🧑‍🔬 Generate web export
-        run: godot --headless --export-release Web
+        run: godot -v --export "Web" ../exportDeliveryHtml
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: web
+          path: exportDeliveryHtml
+
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync
+      
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: exportDeliveryHtml # The folder the action should deploy.
