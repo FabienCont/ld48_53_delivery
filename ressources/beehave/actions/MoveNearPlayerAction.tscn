@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dha6lfsk2al17"]
+
+[ext_resource type="Script" path="res://ressources/beehave/actions/MoveNearPlayerAction.gd" id="1_1xbic"]
+
+[node name="MoveNearPlayerAction" type="Node"]
+script = ExtResource("1_1xbic")

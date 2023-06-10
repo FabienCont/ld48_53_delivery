@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhwo5ly2yhfqt"]
+
+[ext_resource type="Script" path="res://ressources/beehave/conditions/PatrolCondition.gd" id="1_pssly"]
+
+[node name="PatrolCondition" type="Node"]
+script = ExtResource("1_pssly")

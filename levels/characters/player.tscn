@@ -1,62 +1,64 @@
 [gd_scene load_steps=17 format=3 uid="uid://cwfex5q0oty66"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_erxv6"]
-[ext_resource type="Script" path="res://ressources/effects/BloodHurtEffectResource.gd" id="2_3u12d"]
-[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_8pl2c"]
-[ext_resource type="Script" path="res://ressources/effects/FrameFreezeEffectResource.gd" id="2_21g3s"]
-[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="2_r2nnm"]
-[ext_resource type="Script" path="res://ressources/effects/DisplayDamageHurtEffectResource.gd" id="3_anef1"]
-[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="3_yxpjp"]
-[ext_resource type="PackedScene" uid="uid://dki5bbyx48u21" path="res://levels/weapons/Sword.tscn" id="6_ehf80"]
-[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="7_5d3ua"]
-[ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://components/LifebarComponent.tscn" id="7_ukeuy"]
-[ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="8_lwfvi"]
-[ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="9_mjckh"]
-[ext_resource type="PackedScene" uid="uid://ckkpcqh3iqxfq" path="res://components/TopDownControllerComponent.tscn" id="10_sfgug"]
-[ext_resource type="PackedScene" uid="uid://iuxwye7gypnb" path="res://components/GroundMarkComponent.tscn" id="11_yv1g6"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_qv8iy"]
+[ext_resource type="Script" path="res://ressources/effects/FrameFreezeEffectResource.gd" id="2_sq400"]
+[ext_resource type="Script" path="res://ressources/effects/BloodHurtEffectResource.gd" id="3_wvs4l"]
+[ext_resource type="Script" path="res://ressources/effects/DisplayDamageHurtEffectResource.gd" id="4_6na6r"]
+[ext_resource type="PackedScene" uid="uid://ckkpcqh3iqxfq" path="res://components/TopDownControllerComponent.tscn" id="5_dqn7f"]
+[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="6_jj24a"]
+[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="7_bfnfy"]
+[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="8_b0i41"]
+[ext_resource type="PackedScene" uid="uid://dki5bbyx48u21" path="res://levels/weapons/Sword.tscn" id="9_xi1vf"]
+[ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://components/LifebarComponent.tscn" id="10_r1ggg"]
+[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="11_uec05"]
+[ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="12_tl58t"]
+[ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="13_gep33"]
+[ext_resource type="PackedScene" uid="uid://iuxwye7gypnb" path="res://components/GroundMarkComponent.tscn" id="14_gxyiw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c7cg2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m38c8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grhka"]
 transparency = 1
 albedo_color = Color(0, 0.392157, 0.588235, 0.572549)
 
 [node name="PlayerCharacterBody3D" type="CharacterBody3D" groups=["heroes"]]
-collision_layer = 12
-collision_mask = 15
-script = ExtResource("1_erxv6")
-die_effects = Array[Resource]([ExtResource("2_21g3s")])
-hurt_effects = Array[Resource]([ExtResource("2_3u12d"), ExtResource("3_anef1")])
+collision_layer = 140
+collision_mask = 239
+script = ExtResource("1_qv8iy")
+die_effects = Array[Resource]([ExtResource("2_sq400")])
+hurt_effects = Array[Resource]([ExtResource("3_wvs4l"), ExtResource("4_6na6r")])
 
-[node name="TopDownControllerComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("10_sfgug")]
+[node name="TopDownControllerComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("5_dqn7f")]
 lookAtComponent = NodePath("../LookAtComponent")
 velocityComponent = NodePath("../VelocityComponent")
 
-[node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_8pl2c")]
+[node name="AnimatedSkinComponent" parent="." instance=ExtResource("6_jj24a")]
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_yxpjp")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_bfnfy")]
 shape = SubResource("CapsuleShape3D_c7cg2")
 health_component = NodePath("../HealthComponent")
 
-[node name="WeaponSlotComponent" parent="." node_paths=PackedStringArray("weaponEquiped") instance=ExtResource("7_5d3ua")]
+[node name="WeaponSlotComponent" parent="." node_paths=PackedStringArray("weaponEquiped") instance=ExtResource("8_b0i41")]
 transform = Transform3D(-0.183426, 0.779681, -0.598709, 0.875052, -0.148013, -0.460842, -0.447927, -0.608432, -0.655112, 0.529853, 0.0140834, 0.240563)
 weaponEquiped = NodePath("Sword")
 
-[node name="Sword" parent="WeaponSlotComponent" instance=ExtResource("6_ehf80")]
+[node name="Sword" parent="WeaponSlotComponent" instance=ExtResource("9_xi1vf")]
+collision_layer = 56
+collision_mask = 56
 
-[node name="LifebarComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("7_ukeuy")]
+[node name="LifebarComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("10_r1ggg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27905, 0)
 healthComponent = NodePath("../HealthComponent")
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_r2nnm")]
+[node name="HealthComponent" parent="." instance=ExtResource("11_uec05")]
 MAX_HEALTH = 30.0
 health = 30.0
 
-[node name="VelocityComponent" parent="." instance=ExtResource("8_lwfvi")]
+[node name="VelocityComponent" parent="." instance=ExtResource("12_tl58t")]
 
-[node name="LookAtComponent" parent="." node_paths=PackedStringArray("observer") instance=ExtResource("9_mjckh")]
+[node name="LookAtComponent" parent="." node_paths=PackedStringArray("observer") instance=ExtResource("13_gep33")]
 observer = NodePath("..")
 
-[node name="GroundMarkComponent" parent="." instance=ExtResource("11_yv1g6")]
-surface_material_override/0 = SubResource("StandardMaterial3D_m38c8")
+[node name="GroundMarkComponent" parent="." instance=ExtResource("14_gxyiw")]
+surface_material_override/0 = SubResource("StandardMaterial3D_grhka")
 color_mark = Color(0, 0.392157, 0.588235, 0.572549)

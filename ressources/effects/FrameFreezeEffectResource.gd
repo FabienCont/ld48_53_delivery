@@ -1,6 +1,6 @@
 extends EffectResource
 
-static func trigger_effect(node :Node3D,params)->void:
+static func trigger_effect(node :Node3D,_params)->void:
 	var timeScale = 0.4
 	var duration = 1.5
 	Engine.time_scale = timeScale

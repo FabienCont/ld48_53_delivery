@@ -26,6 +26,6 @@ func on_velocity_computed(_velocity :Vector3):
 	pass
 
 func look_at_target(delta:float):
-	if target :
+	if target !=null :
 		lookAtComponent.update_rotation_with_target_position(target.global_position,delta)
 		lookAtComponent.look()

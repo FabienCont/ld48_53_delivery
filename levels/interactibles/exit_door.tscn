@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cw83dv00j8h7p"]
 
-[ext_resource type="Script" path="res://scripts/interactibles/exit_door.gd" id="1_qtbyp"]
+[ext_resource type="Script" path="res://scripts/interactibles/exit_door.gd" id="1_3nwil"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7iunm"]
 size = Vector3(1, 4, 3)
@@ -26,12 +26,12 @@ size = Vector3(1, 4, 3)
 data = PackedVector3Array(-0.5, 2, 1.5, 0.5, 2, 1.5, -0.5, -2, 1.5, 0.5, 2, 1.5, 0.5, -2, 1.5, -0.5, -2, 1.5, 0.5, 2, -1.5, -0.5, 2, -1.5, 0.5, -2, -1.5, -0.5, 2, -1.5, -0.5, -2, -1.5, 0.5, -2, -1.5, 0.5, 2, 1.5, 0.5, 2, -1.5, 0.5, -2, 1.5, 0.5, 2, -1.5, 0.5, -2, -1.5, 0.5, -2, 1.5, -0.5, 2, -1.5, -0.5, 2, 1.5, -0.5, -2, -1.5, -0.5, 2, 1.5, -0.5, -2, 1.5, -0.5, -2, -1.5, 0.5, 2, 1.5, -0.5, 2, 1.5, 0.5, 2, -1.5, -0.5, 2, 1.5, -0.5, 2, -1.5, 0.5, 2, -1.5, -0.5, -2, 1.5, 0.5, -2, 1.5, -0.5, -2, -1.5, 0.5, -2, 1.5, 0.5, -2, -1.5, -0.5, -2, -1.5)
 
 [node name="door" type="Node3D" groups=["doors"]]
-script = ExtResource("1_qtbyp")
+script = ExtResource("1_3nwil")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, -7.45058e-09, 0, 1, 0, 0, 0)
-collision_layer = 260
-collision_mask = 260
+collision_layer = 0
+collision_mask = 192
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 2.32831e-10, 1, 0, -4.47035e-08, 0, 1, 0, 0, 0)
@@ -44,8 +44,8 @@ transparency = 0.42
 mesh = SubResource("BoxMesh_dcvpr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-collision_layer = 4
-collision_mask = 0
+collision_layer = 160
+collision_mask = 160
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_p4s3v")

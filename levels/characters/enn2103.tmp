@@ -1,0 +1,138 @@
+[gd_scene load_steps=32 format=3 uid="uid://bbm8rkie5wy2j"]
+
+[ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_2no7k"]
+[ext_resource type="Script" path="res://ressources/effects/BloodHurtEffectResource.gd" id="2_5ylm7"]
+[ext_resource type="Script" path="res://ressources/effects/DisplayDamageHurtEffectResource.gd" id="3_uy8tj"]
+[ext_resource type="PackedScene" uid="uid://iuxwye7gypnb" path="res://components/GroundMarkComponent.tscn" id="4_h4i4p"]
+[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="5_vqm8u"]
+[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="6_7nms0"]
+[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="7_mo47q"]
+[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="8_7psd8"]
+[ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://components/LifebarComponent.tscn" id="9_r0b5y"]
+[ext_resource type="PackedScene" uid="uid://dsgade72q8iyn" path="res://components/PathFindComponent.tscn" id="10_0154f"]
+[ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="11_7ai2f"]
+[ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="12_v1w0x"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="13_alh2f"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="14_vxyg8"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="15_cxu2p"]
+[ext_resource type="PackedScene" uid="uid://dhwo5ly2yhfqt" path="res://ressources/beehave/conditions/PatrolCondition.tscn" id="16_ysjya"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="17_1m3sc"]
+[ext_resource type="PackedScene" uid="uid://dqru61obhpgbx" path="res://ressources/beehave/actions/PatrolAction.tscn" id="17_520oe"]
+[ext_resource type="PackedScene" uid="uid://dnm1kmdspscx" path="res://ressources/beehave/conditions/CombatCondition.tscn" id="19_axlwi"]
+[ext_resource type="PackedScene" uid="uid://dj7p634ox6isf" path="res://ressources/beehave/conditions/IsReadyAttack.tscn" id="21_5e8rh"]
+[ext_resource type="PackedScene" uid="uid://7dkb535em8fn" path="res://ressources/beehave/conditions/IsInRange.tscn" id="22_w8ym3"]
+[ext_resource type="PackedScene" uid="uid://co5x4jdi0vv6o" path="res://ressources/beehave/actions/AttackAction.tscn" id="23_37tu8"]
+[ext_resource type="PackedScene" uid="uid://csifnj6tq0igs" path="res://ressources/beehave/conditions/MoveCondition.tscn" id="24_thpee"]
+[ext_resource type="PackedScene" uid="uid://bsa2ucq5gerif" path="res://ressources/beehave/conditions/MoveNearPlayerCondition.tscn" id="24_xc25h"]
+[ext_resource type="PackedScene" uid="uid://bhfqn753jsk57" path="res://ressources/beehave/actions/MoveAction.tscn" id="25_c3vtg"]
+[ext_resource type="PackedScene" uid="uid://dha6lfsk2al17" path="res://ressources/beehave/actions/MoveNearPlayerAction.tscn" id="25_f4no0"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="26_ai5l5"]
+[ext_resource type="Script" path="res://components/scripts/InteractionAreaComponent.gd" id="27_tddhc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnkk5"]
+transparency = 1
+albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0ml67"]
+radius = 7.0
+
+[node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
+collision_layer = 36
+collision_mask = 495
+script = ExtResource("1_2no7k")
+life = 5
+hurt_effects = Array[Resource]([ExtResource("2_5ylm7"), ExtResource("3_uy8tj")])
+
+[node name="GroundMarkComponent" parent="." instance=ExtResource("4_h4i4p")]
+surface_material_override/0 = SubResource("StandardMaterial3D_bnkk5")
+color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
+
+[node name="AnimatedSkinComponent" parent="." instance=ExtResource("5_vqm8u")]
+
+[node name="WeaponSlotComponent" parent="." instance=ExtResource("6_7nms0")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_mo47q")]
+shape = SubResource("CapsuleShape3D_5x11s")
+health_component = NodePath("../HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("8_7psd8")]
+
+[node name="LifebarComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("9_r0b5y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14265, 0)
+healthComponent = NodePath("../HealthComponent")
+
+[node name="PathFindComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("10_0154f")]
+target_desired_distance = 2.0
+lookAtComponent = NodePath("../LookAtComponent")
+velocityComponent = NodePath("../VelocityComponent")
+
+[node name="LookAtComponent" parent="." node_paths=PackedStringArray("observer") instance=ExtResource("11_7ai2f")]
+observer = NodePath("..")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("12_v1w0x")]
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
+script = ExtResource("13_alh2f")
+actor_node_path = NodePath("..")
+blackboard = NodePath("../Blackboard")
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree"]
+script = ExtResource("14_vxyg8")
+
+[node name="PatrolComposite" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("15_cxu2p")
+
+[node name="PatrolCondition" parent="BeehaveTree/SelectorComposite/PatrolComposite" instance=ExtResource("16_ysjya")]
+
+[node name="TimeLimiterDecorator" type="Node" parent="BeehaveTree/SelectorComposite/PatrolComposite"]
+script = ExtResource("17_1m3sc")
+wait_time = 2.0
+
+[node name="PatrolAction" parent="BeehaveTree/SelectorComposite/PatrolComposite/TimeLimiterDecorator" instance=ExtResource("17_520oe")]
+
+[node name="CombatComposite" type="Node" parent="BeehaveTree/SelectorComposite"]
+script = ExtResource("15_cxu2p")
+
+[node name="CombatCondition" parent="BeehaveTree/SelectorComposite/CombatComposite" instance=ExtResource("19_axlwi")]
+
+[node name="AttackSequenceComposite" type="Node" parent="BeehaveTree/SelectorComposite/CombatComposite"]
+script = ExtResource("15_cxu2p")
+
+[node name="IsReadyAttack" parent="BeehaveTree/SelectorComposite/CombatComposite/AttackSequenceComposite" instance=ExtResource("21_5e8rh")]
+
+[node name="IsInRange" parent="BeehaveTree/SelectorComposite/CombatComposite/AttackSequenceComposite" instance=ExtResource("22_w8ym3")]
+
+[node name="AttackAction" parent="BeehaveTree/SelectorComposite/CombatComposite/AttackSequenceComposite" instance=ExtResource("23_37tu8")]
+
+[node name="MoveSequenceComposite" type="Node" parent="BeehaveTree/SelectorComposite/CombatComposite"]
+script = ExtResource("15_cxu2p")
+
+[node name="MoveCondition" parent="BeehaveTree/SelectorComposite/CombatComposite/MoveSequenceComposite" instance=ExtResource("24_thpee")]
+
+[node name="MoveAction" parent="BeehaveTree/SelectorComposite/CombatComposite/MoveSequenceComposite" instance=ExtResource("25_c3vtg")]
+
+[node name="MoveNearTargetSequenceComposite" type="Node" parent="BeehaveTree/SelectorComposite/CombatComposite"]
+script = ExtResource("15_cxu2p")
+
+[node name="MoveNearPlayerCondition" parent="BeehaveTree/SelectorComposite/CombatComposite/MoveNearTargetSequenceComposite" instance=ExtResource("24_xc25h")]
+
+[node name="MoveNearPlayerAction" parent="BeehaveTree/SelectorComposite/CombatComposite/MoveNearTargetSequenceComposite" instance=ExtResource("25_f4no0")]
+
+[node name="Blackboard" type="Node" parent="."]
+script = ExtResource("26_ai5l5")
+
+[node name="InteractionArea3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 192
+script = ExtResource("27_tddhc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea3D"]
+shape = SubResource("SphereShape3D_0ml67")
+
+[connection signal="navigation_finished" from="PathFindComponent" to="." method="_on_path_find_component_navigation_finished"]
+[connection signal="path_changed" from="PathFindComponent" to="." method="_on_path_find_component_path_changed"]
+[connection signal="target_reached" from="PathFindComponent" to="." method="_on_path_find_component_target_reached"]
+[connection signal="velocity_computed" from="PathFindComponent" to="." method="_on_path_find_component_velocity_computed"]
+[connection signal="body_entered" from="InteractionArea3D" to="InteractionArea3D" method="_on_body_entered"]

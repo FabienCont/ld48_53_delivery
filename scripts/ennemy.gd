@@ -14,6 +14,7 @@ extends CharacterBody3D
 @onready var pathFindComponent: PathFindComponent = $PathFindComponent
 @onready var tree := $BeehaveTree
 @onready var blackboard := $Blackboard
+@onready var interactionArea3D: InteractionArea3d = $InteractionArea3D
 
 @export var life = 10
 @export var hurt_effects: Array[Resource]
@@ -25,6 +26,7 @@ var reloading = false;
 var target: Node3D
 var isDie:bool= false
 var isStun:bool= false
+var has_target_to_attack: bool = false
 
 @export var aimHero:bool =false
 
@@ -67,6 +69,19 @@ func hurt(attack :Attack):
 func end_hurt():
 	isStun=false
 
+func move_to_target(delta: float):
+	pathFindComponent.follow_path(self,delta)
+	pathFindComponent.look_at_target(delta)
+	var animation_blend = Vector2(velocityComponent.current_velocity.x,-velocityComponent.current_velocity.y).rotated(-rotation.y).normalized()
+	animatedSkinComponent.walk(animation_blend,delta)
+	velocityComponent.move(self,delta)
+
+func decelerate(delta :float):
+	velocityComponent.decelerate(delta)
+	velocityComponent.move(self,delta)
+	var animation_blend = Vector2(velocityComponent.current_velocity.x,-velocityComponent.current_velocity.y).rotated(-rotation.y).normalized()
+	animatedSkinComponent.walk(animation_blend,delta)
+				
 func die():
 	if isDie == true:
 		return
@@ -104,16 +119,33 @@ func _physics_process(delta):
 		velocityComponent.move(self,delta)
 		return
 
-func update_target_location(target_node: Node3D,hero_node: Node3D):
-	if aimHero == true:
-		target = hero_node
-	else:
-		target=target_node
+func select_target():
+	var nb_potential_target = interactionArea3D.get_body_count_in_area();
+	
+	if nb_potential_target == 0 :
+		has_target_to_attack = false
+		return
+	
+	var nearestBody = interactionArea3D.get_nearest_body()
+	if nearestBody == null :
+		has_target_to_attack = false
+		return
+		
+	target=nearestBody
 	pathFindComponent.set_target_position_node(target)
+	has_target_to_attack = true
+
+func update_target_location(_target_node: Node3D,_hero_node: Node3D):
+	return
+	#if aimHero == true:
+	#	target = hero_node
+	#else:
+	#	target=target_node
+	#pathFindComponent.set_target_position_node(target)
 
 func _on_path_find_component_velocity_computed(safe_velocity):
 	pathFindComponent.on_velocity_computed(safe_velocity)
-	pass # Replace with function body.
+	pass
 
 func _on_path_find_component_target_reached():
 	in_range = true
@@ -121,10 +153,9 @@ func _on_path_find_component_target_reached():
 
 func _on_path_find_component_path_changed():
 	in_range = false
-	pass # Replace with function body.
-
+	pass
 
 func _on_path_find_component_navigation_finished():
 	in_range = true
 	print("path_finished")
-	pass # Replace with function body.
+	pass

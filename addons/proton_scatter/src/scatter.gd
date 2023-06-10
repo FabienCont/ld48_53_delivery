@@ -172,7 +172,7 @@ func is_thread_running() -> bool:
 func get_physics_helper() -> ProtonScatterPhysicsHelper:
 	if not is_instance_valid(_physics_helper):
 		_physics_helper = ProtonScatterPhysicsHelper.new()
-		add_child(_physics_helper)
+		call_deferred("add_child",_physics_helper)
 
 	return _physics_helper
 

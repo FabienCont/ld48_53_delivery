@@ -20,8 +20,8 @@ var maxAttackCombo = 1
 
 func _ready():
 	stats = GlobalInfo.stats
-	healthComponent.MAX_HEALTH = 1.0
-	healthComponent.health = 1.0
+	healthComponent.MAX_HEALTH = stats.max_health
+	healthComponent.health = stats.life
 	if animatedSkinComponent != null && weaponSlotComponent != null:
 		weaponSlotComponent.set_external_skeleton(animatedSkinComponent.get_skeleton())
 		weaponSlotComponent.bone_idx=animatedSkinComponent.get_right_hand_bone_index()

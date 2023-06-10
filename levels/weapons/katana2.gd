@@ -2,11 +2,10 @@ extends Node3D
 class_name Weapon
 
 @onready var audioStreamPlayer: AudioStreamPlayer3D = $attackAudioStreamPlayer;
-@onready var collider: CollisionShape3D = $Area3D/CollisionShape3D
+@onready var collider: CollisionShape3D = $CollisionShape3D
 @onready var touched_ennemies= {}
 @onready var attack_can_hurt : bool = false
 @onready var trail :GPUParticles3D = $AttackTrail
-
 signal hit(attack:Attack)
 
 func is_parent_recursive(node:Node3D,body:Node3D) -> bool :
@@ -43,12 +42,12 @@ func damage(hurtboxComponent :HurtboxComponent):
 	hurtboxComponent.damage(attack)
 	hit.emit(attack)
 	
-func _on_area_3d_body_shape_entered(_body_rid: RID, body: Node3D, body_shape_index:int, _local_shape_index:int):
-	if touched_ennemies.get(_body_rid) != null || attack_can_hurt == false:
+func _on_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index:int, _local_shape_index:int):
+	if touched_ennemies.get(body_rid) != null || attack_can_hurt == false:
 		return
 	var body_shape_owner = body.shape_find_owner(body_shape_index)
 	var body_shape_node = body.shape_owner_get_owner(body_shape_owner)
-	touched_ennemies[_body_rid]=true
+	touched_ennemies[body_rid]=true
 	if body_shape_node is HurtboxComponent:
 		if(!is_parent_recursive(self,body)):
 			damage(body_shape_node)

@@ -1,105 +1,142 @@
-[gd_scene load_steps=26 format=3 uid="uid://bbm8rkie5wy2j"]
+[gd_scene load_steps=32 format=3 uid="uid://bbm8rkie5wy2j"]
 
-[ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_kf2cx"]
-[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="2_85vlx"]
-[ext_resource type="PackedScene" uid="uid://iuxwye7gypnb" path="res://components/GroundMarkComponent.tscn" id="2_cxk8e"]
-[ext_resource type="Script" path="res://ressources/effects/BloodHurtEffectResource.gd" id="2_xlfqt"]
-[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="3_suwv4"]
-[ext_resource type="Script" path="res://ressources/effects/DisplayDamageHurtEffectResource.gd" id="3_vu4sg"]
-[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="4_nchdk"]
-[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="5_w7uk5"]
-[ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://components/LifebarComponent.tscn" id="6_1ro1a"]
-[ext_resource type="PackedScene" uid="uid://dsgade72q8iyn" path="res://components/PathFindComponent.tscn" id="7_f0v5f"]
-[ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="8_wabxq"]
-[ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="9_qrb8r"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="13_vgjxr"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="14_x3xxs"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="15_yxllg"]
-[ext_resource type="PackedScene" uid="uid://dj7p634ox6isf" path="res://ressources/beehave/conditions/IsReadyAttack.tscn" id="16_hnh0e"]
-[ext_resource type="PackedScene" uid="uid://7dkb535em8fn" path="res://ressources/beehave/conditions/IsInRange.tscn" id="16_nn6er"]
-[ext_resource type="PackedScene" uid="uid://co5x4jdi0vv6o" path="res://ressources/beehave/actions/AttackAction.tscn" id="17_wklhh"]
-[ext_resource type="PackedScene" uid="uid://csifnj6tq0igs" path="res://ressources/beehave/conditions/MoveCondition.tscn" id="19_gdedw"]
-[ext_resource type="PackedScene" uid="uid://bhfqn753jsk57" path="res://ressources/beehave/actions/MoveAction.tscn" id="20_h41li"]
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="21_dvdpq"]
-[ext_resource type="PackedScene" uid="uid://chlx16btt5tll" path="res://ressources/beehave/conditions/SlowCondition.tscn" id="21_mj7rh"]
-[ext_resource type="PackedScene" uid="uid://bcqdvmppwhvfn" path="res://ressources/beehave/actions/SlowAction.tscn" id="23_kog0f"]
+[ext_resource type="Script" path="res://scripts/ennemy.gd" id="1_0xr8d"]
+[ext_resource type="Script" path="res://ressources/effects/BloodHurtEffectResource.gd" id="2_j6jnr"]
+[ext_resource type="Script" path="res://ressources/effects/DisplayDamageHurtEffectResource.gd" id="3_ihpbk"]
+[ext_resource type="PackedScene" uid="uid://iuxwye7gypnb" path="res://components/GroundMarkComponent.tscn" id="4_ewk5t"]
+[ext_resource type="PackedScene" uid="uid://dl3pvkbomrgb6" path="res://components/AnimatedSkinComponent.tscn" id="5_3j8hh"]
+[ext_resource type="PackedScene" uid="uid://do63u6aq4bbox" path="res://components/WeaponSlotComponent.tscn" id="6_nelxp"]
+[ext_resource type="PackedScene" uid="uid://drqndqsdbxxc7" path="res://components/HurtboxComponent.tscn" id="7_xurv4"]
+[ext_resource type="PackedScene" uid="uid://donmb7syeemi1" path="res://components/HealthComponent.tscn" id="8_qaynm"]
+[ext_resource type="PackedScene" uid="uid://chpsfjftfdckn" path="res://components/LifebarComponent.tscn" id="9_r4a42"]
+[ext_resource type="PackedScene" uid="uid://dsgade72q8iyn" path="res://components/PathFindComponent.tscn" id="10_0vs21"]
+[ext_resource type="PackedScene" uid="uid://dqpnh7ljyp072" path="res://components/LookAtComponent.tscn" id="11_kiliu"]
+[ext_resource type="PackedScene" uid="uid://bmalh26f56216" path="res://components/VelocityComponent.tscn" id="12_slexs"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="13_4vkdi"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="15_qffq3"]
+[ext_resource type="PackedScene" uid="uid://dhwo5ly2yhfqt" path="res://ressources/beehave/conditions/PatrolCondition.tscn" id="16_8vb10"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="17_76jlq"]
+[ext_resource type="PackedScene" uid="uid://dqru61obhpgbx" path="res://ressources/beehave/actions/PatrolAction.tscn" id="18_qxss4"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector_reactive.gd" id="19_hpcnp"]
+[ext_resource type="PackedScene" uid="uid://dnm1kmdspscx" path="res://ressources/beehave/conditions/CombatCondition.tscn" id="19_sc0ow"]
+[ext_resource type="PackedScene" uid="uid://dj7p634ox6isf" path="res://ressources/beehave/conditions/IsReadyAttack.tscn" id="20_ea70r"]
+[ext_resource type="PackedScene" uid="uid://7dkb535em8fn" path="res://ressources/beehave/conditions/IsInRange.tscn" id="21_6sxc4"]
+[ext_resource type="PackedScene" uid="uid://co5x4jdi0vv6o" path="res://ressources/beehave/actions/AttackAction.tscn" id="22_tadjd"]
+[ext_resource type="PackedScene" uid="uid://csifnj6tq0igs" path="res://ressources/beehave/conditions/MoveCondition.tscn" id="23_aavrf"]
+[ext_resource type="PackedScene" uid="uid://bhfqn753jsk57" path="res://ressources/beehave/actions/MoveAction.tscn" id="24_8ner8"]
+[ext_resource type="PackedScene" uid="uid://bsa2ucq5gerif" path="res://ressources/beehave/conditions/MoveNearPlayerCondition.tscn" id="25_ysfqw"]
+[ext_resource type="PackedScene" uid="uid://dha6lfsk2al17" path="res://ressources/beehave/actions/MoveNearPlayerAction.tscn" id="26_046du"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="27_kuupv"]
+[ext_resource type="Script" path="res://components/scripts/InteractionAreaComponent.gd" id="28_00m7q"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjv1i"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3qtq"]
 transparency = 1
 albedo_color = Color(0.701961, 0, 0.0117647, 0.572549)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5x11s"]
 
-[node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
-collision_layer = 12
-collision_mask = 15
-script = ExtResource("1_kf2cx")
-life = 5
-hurt_effects = Array[Resource]([ExtResource("2_xlfqt"), ExtResource("3_vu4sg")])
+[sub_resource type="SphereShape3D" id="SphereShape3D_0ml67"]
+radius = 7.0
 
-[node name="GroundMarkComponent" parent="." instance=ExtResource("2_cxk8e")]
-surface_material_override/0 = SubResource("StandardMaterial3D_gjv1i")
+[node name="EnnemyCharacterBody3D" type="CharacterBody3D" groups=["ennemies"]]
+collision_layer = 36
+collision_mask = 495
+script = ExtResource("1_0xr8d")
+life = 5
+hurt_effects = Array[Resource]([ExtResource("2_j6jnr"), ExtResource("3_ihpbk")])
+
+[node name="GroundMarkComponent" parent="." instance=ExtResource("4_ewk5t")]
+surface_material_override/0 = SubResource("StandardMaterial3D_w3qtq")
 color_mark = Color(0.701961, 0, 0.0117647, 0.572549)
 
-[node name="AnimatedSkinComponent" parent="." instance=ExtResource("2_85vlx")]
+[node name="AnimatedSkinComponent" parent="." instance=ExtResource("5_3j8hh")]
 
-[node name="WeaponSlotComponent" parent="." instance=ExtResource("3_suwv4")]
+[node name="WeaponSlotComponent" parent="." instance=ExtResource("6_nelxp")]
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_nchdk")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_xurv4")]
 shape = SubResource("CapsuleShape3D_5x11s")
 health_component = NodePath("../HealthComponent")
 
-[node name="HealthComponent" parent="." instance=ExtResource("5_w7uk5")]
+[node name="HealthComponent" parent="." instance=ExtResource("8_qaynm")]
 
-[node name="LifebarComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("6_1ro1a")]
+[node name="LifebarComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("9_r4a42")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14265, 0)
 healthComponent = NodePath("../HealthComponent")
 
-[node name="PathFindComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("7_f0v5f")]
+[node name="PathFindComponent" parent="." node_paths=PackedStringArray("lookAtComponent", "velocityComponent") instance=ExtResource("10_0vs21")]
 target_desired_distance = 2.0
 lookAtComponent = NodePath("../LookAtComponent")
 velocityComponent = NodePath("../VelocityComponent")
 
-[node name="LookAtComponent" parent="." node_paths=PackedStringArray("observer") instance=ExtResource("8_wabxq")]
+[node name="LookAtComponent" parent="." node_paths=PackedStringArray("observer") instance=ExtResource("11_kiliu")]
 observer = NodePath("..")
 
-[node name="VelocityComponent" parent="." instance=ExtResource("9_qrb8r")]
+[node name="VelocityComponent" parent="." instance=ExtResource("12_slexs")]
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
-script = ExtResource("13_vgjxr")
+script = ExtResource("13_4vkdi")
 actor_node_path = NodePath("..")
 blackboard = NodePath("../Blackboard")
 
 [node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree"]
-script = ExtResource("14_x3xxs")
+script = ExtResource("19_hpcnp")
 
-[node name="IdleSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
-script = ExtResource("15_yxllg")
+[node name="PatrolComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("15_qffq3")
 
-[node name="SlowCondition" parent="BeehaveTree/SelectorReactiveComposite/IdleSequenceComposite" instance=ExtResource("21_mj7rh")]
+[node name="PatrolCondition" parent="BeehaveTree/SelectorReactiveComposite/PatrolComposite" instance=ExtResource("16_8vb10")]
 
-[node name="SlowAction" parent="BeehaveTree/SelectorReactiveComposite/IdleSequenceComposite" instance=ExtResource("23_kog0f")]
+[node name="TimeLimiterDecorator" type="Node" parent="BeehaveTree/SelectorReactiveComposite/PatrolComposite"]
+script = ExtResource("17_76jlq")
+wait_time = 2.0
 
-[node name="AttackSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
-script = ExtResource("15_yxllg")
+[node name="PatrolAction" parent="BeehaveTree/SelectorReactiveComposite/PatrolComposite/TimeLimiterDecorator" instance=ExtResource("18_qxss4")]
 
-[node name="IsReadyAttack" parent="BeehaveTree/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("16_hnh0e")]
+[node name="SequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
+script = ExtResource("15_qffq3")
 
-[node name="IsInRange" parent="BeehaveTree/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("16_nn6er")]
+[node name="CombatCondition" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite" instance=ExtResource("19_sc0ow")]
 
-[node name="AttackAction" parent="BeehaveTree/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("17_wklhh")]
+[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite"]
+script = ExtResource("19_hpcnp")
 
-[node name="MoveSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite"]
-script = ExtResource("15_yxllg")
+[node name="AttackSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite"]
+script = ExtResource("15_qffq3")
 
-[node name="MoveCondition" parent="BeehaveTree/SelectorReactiveComposite/MoveSequenceComposite" instance=ExtResource("19_gdedw")]
+[node name="IsReadyAttack" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("20_ea70r")]
 
-[node name="MoveAction" parent="BeehaveTree/SelectorReactiveComposite/MoveSequenceComposite" instance=ExtResource("20_h41li")]
+[node name="IsInRange" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("21_6sxc4")]
+
+[node name="AttackAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite/AttackSequenceComposite" instance=ExtResource("22_tadjd")]
+
+[node name="MoveSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite"]
+script = ExtResource("15_qffq3")
+
+[node name="MoveCondition" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite/MoveSequenceComposite" instance=ExtResource("23_aavrf")]
+
+[node name="MoveAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite/MoveSequenceComposite" instance=ExtResource("24_8ner8")]
+
+[node name="MoveNearTargetSequenceComposite" type="Node" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite"]
+script = ExtResource("15_qffq3")
+
+[node name="MoveNearPlayerCondition" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite/MoveNearTargetSequenceComposite" instance=ExtResource("25_ysfqw")]
+
+[node name="MoveNearPlayerAction" parent="BeehaveTree/SelectorReactiveComposite/SequenceComposite/SelectorReactiveComposite/MoveNearTargetSequenceComposite" instance=ExtResource("26_046du")]
 
 [node name="Blackboard" type="Node" parent="."]
-script = ExtResource("21_dvdpq")
+script = ExtResource("27_kuupv")
+
+[node name="InteractionArea3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 192
+script = ExtResource("28_00m7q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea3D"]
+shape = SubResource("SphereShape3D_0ml67")
 
 [connection signal="navigation_finished" from="PathFindComponent" to="." method="_on_path_find_component_navigation_finished"]
 [connection signal="path_changed" from="PathFindComponent" to="." method="_on_path_find_component_path_changed"]
 [connection signal="target_reached" from="PathFindComponent" to="." method="_on_path_find_component_target_reached"]
 [connection signal="velocity_computed" from="PathFindComponent" to="." method="_on_path_find_component_velocity_computed"]
+[connection signal="body_entered" from="InteractionArea3D" to="InteractionArea3D" method="_on_body_entered"]
+[connection signal="body_exited" from="InteractionArea3D" to="InteractionArea3D" method="_on_body_exited"]

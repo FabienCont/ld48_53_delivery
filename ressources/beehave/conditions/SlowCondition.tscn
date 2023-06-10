@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://chlx16btt5tll"]
 
-[ext_resource type="Script" path="res://ressources/beehave/conditions/SlowCondition.gd" id="1_tc1fh"]
+[ext_resource type="Script" path="res://ressources/beehave/conditions/SlowCondition.gd" id="1_70btb"]
 
 [node name="SlowCondition" type="Node"]
-script = ExtResource("1_tc1fh")
+script = ExtResource("1_70btb")
