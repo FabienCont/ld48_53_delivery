@@ -8,7 +8,7 @@ extends CharacterBody3D
 @onready var animationTree : AnimationTree = $AnimationTree
 @export var hurt_effects: Array[Resource]
 
-const SPEED = 3.0
+const SPEED = 2.0
 const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var isDie= false

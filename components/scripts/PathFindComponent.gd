@@ -4,10 +4,10 @@ class_name PathFindComponent
 @export var lookAtComponent: LookAtComponent
 @export var velocityComponent: VelocityComponent
 
-@onready var target: Node3D
-
+func set_target_position_with_vector(position: Vector3):
+	set_target_position(position)
+	
 func set_target_position_node(node: Node3D):
-	target=node
 	set_target_position(node.global_position)
 
 func follow_path(node: Node3D,delta: float):
@@ -26,6 +26,6 @@ func on_velocity_computed(_velocity :Vector3):
 	pass
 
 func look_at_target(delta:float):
-	if target !=null :
-		lookAtComponent.update_rotation_with_target_position(target.global_position,delta)
+	if target_position !=null :
+		lookAtComponent.update_rotation_with_target_position(target_position,delta)
 		lookAtComponent.look()

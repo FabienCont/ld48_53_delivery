@@ -1,7 +1,7 @@
 extends ActionLeaf
 
 func before_run(actor: Node, _blackboard: Blackboard) -> void:
-	actor.select_target()
+	actor.select_random_target_point_around_spawn() 
 	
 func tick(actor: Node, blackboard: Blackboard) -> int:
 	var delta = blackboard.get_value("delta")

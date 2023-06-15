@@ -17,7 +17,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c7cg2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grhka"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45kyq"]
 transparency = 1
 albedo_color = Color(0, 0.392157, 0.588235, 0.572549)
 
@@ -60,5 +60,5 @@ health = 30.0
 observer = NodePath("..")
 
 [node name="GroundMarkComponent" parent="." instance=ExtResource("14_gxyiw")]
-surface_material_override/0 = SubResource("StandardMaterial3D_grhka")
+surface_material_override/0 = SubResource("StandardMaterial3D_45kyq")
 color_mark = Color(0, 0.392157, 0.588235, 0.572549)

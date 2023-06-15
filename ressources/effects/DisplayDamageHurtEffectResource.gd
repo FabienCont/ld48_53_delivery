@@ -8,4 +8,3 @@ static func trigger_effect(node :Node3D,attack :Attack)->void:
 	node.add_child(attackDamageParticuleScene)
 	attackDamageParticuleScene.global_transform.origin = attack.attack_position
 	return
-	

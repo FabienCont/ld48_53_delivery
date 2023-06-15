@@ -256,7 +256,6 @@ fadein_time = 0.01
 fadeout_time = 0.01
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0nj0x"]
-graph_offset = Vector2(-410, 76)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_aoy35")
 nodes/Animation/position = Vector2(-340, 120)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_5sis8")
@@ -266,7 +265,7 @@ nodes/hurt/position = Vector2(60, 140)
 node_connections = [&"output", 0, &"hurt", &"hurt", 0, &"Animation", &"hurt", 1, &"Animation 2"]
 
 [node name="AllyCharacterBody3D" type="CharacterBody3D" groups=["allies"]]
-collision_layer = 68
+collision_layer = 100
 collision_mask = 239
 script = ExtResource("1_io7v8")
 hurt_effects = Array[Resource]([ExtResource("2_q0y45")])
@@ -277,27 +276,28 @@ shape = SubResource("BoxShape3D_8ntli")
 health_component = NodePath("../HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_8rkyl")]
+MAX_HEALTH = 8.0
+health = 8.0
 
 [node name="LifebarComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("5_1xn52")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54783, 0)
-visible = false
 healthComponent = NodePath("../HealthComponent")
 
 [node name="cart" type="Node3D" parent="."]
 transform = Transform3D(0.999946, -0.0104276, 0, 0.0104276, 0.999946, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="body" type="Node3D" parent="cart"]
-transform = Transform3D(0.999958, -0.00916214, 0, 0.00916214, 0.999958, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.999884, -0.0152244, 0, 0.0152244, 0.999884, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="gold" type="Node3D" parent="cart/body"]
-transform = Transform3D(0.999996, -0.00256856, 0, 0.00256856, 0.999996, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.998998, -0.0447324, 0, 0.0447324, 0.998998, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MeshInstance3D7" parent="cart/body/gold" instance=ExtResource("6_jry74")]
-transform = Transform3D(0.122803, -0.895247, 0.919115, 0.278766, 0.335256, -0.693433, 0.0354428, 0.465008, 2.26945, -0.246182, 0.246241, -0.0549841)
+transform = Transform3D(0.122803, -0.895247, 0.919115, 0.278766, 0.335256, -0.693433, 0.0354428, 0.465008, 2.26945, -0.249416, 0.257896, -0.0549976)
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D12" parent="cart/body/gold" instance=ExtResource("6_jry74")]
-transform = Transform3D(-1.16091e-08, -0.920637, 1.2724, 0.291284, 0.166253, 0.68933, -0.0959216, 0.50486, 2.09328, 0.246611, 0.242469, 0.397652)
+transform = Transform3D(-1.16091e-08, -0.920637, 1.2724, 0.291284, 0.166253, 0.68933, -0.0959216, 0.50486, 2.09328, 0.241011, 0.248849, 0.399641)
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D11" parent="cart/body/gold" instance=ExtResource("6_jry74")]
@@ -309,11 +309,11 @@ transform = Transform3D(-0.0883596, 0.645053, 1.8852, -0.277027, -0.455984, 0, 0
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D9" parent="cart/body/gold" instance=ExtResource("6_jry74")]
-transform = Transform3D(-0.0165245, 0.743417, 1.81387, -0.275228, -0.368734, 0.693372, 0.134253, -0.664426, 1.64472, -0.101639, 0.213058, -0.468223)
+transform = Transform3D(-0.0165245, 0.743417, 1.81387, -0.275228, -0.368734, 0.693372, 0.134253, -0.664426, 1.64472, -0.117193, 0.22741, -0.468034)
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D10" parent="cart/body/gold" instance=ExtResource("6_jry74")]
-transform = Transform3D(-0.0883596, 0.645053, 1.8852, -0.277027, -0.455984, 4.39228e-07, 0.0974471, -0.711394, 1.7094, 0.297526, 0.282509, -0.374017)
+transform = Transform3D(-0.0883596, 0.645053, 1.8852, -0.277027, -0.455984, 4.39228e-07, 0.0974471, -0.711394, 1.7094, 0.299622, 0.297326, -0.374003)
 skeleton = NodePath("../../../..")
 
 [node name="MeshInstance3D13" type="MeshInstance3D" parent="cart/body"]

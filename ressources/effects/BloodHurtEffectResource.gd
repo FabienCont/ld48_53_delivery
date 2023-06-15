@@ -7,4 +7,3 @@ static func trigger_effect(node :Node3D,attack :Attack)->void:
 	node.add_child(blood)
 	blood.global_transform.origin = attack.attack_position
 	return
-	

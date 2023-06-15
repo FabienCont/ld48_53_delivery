@@ -26,7 +26,7 @@ func get_nearest_body() -> PhysicsBody3D:
 		if (body != null && body.isDie == true):
 			indicesToRemove.push_back(index)
 		else :
-			var distance = (body.global_transform.origin - global_transform.origin).length_squared()
+			var distance = body.global_transform.origin.distance_to(global_transform.origin)
 			if distance < min_distance:
 				min_distance = distance
 				nearest_body = body
@@ -49,3 +49,5 @@ func _on_body_exited(body) -> void:
 	var index = _body_in_area.find(body)
 	if index != -1:
 		_body_in_area.remove_at(index)
+	if parent.has_method("select_target") :
+			parent.select_target()

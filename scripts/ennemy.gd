@@ -27,8 +27,9 @@ var target: Node3D
 var isDie:bool= false
 var isStun:bool= false
 var has_target_to_attack: bool = false
-
 @export var aimHero:bool =false
+
+@onready var spawnOrigin = Vector3(global_transform.origin)
 
 func _ready():
 	healthComponent.health = life
@@ -93,8 +94,12 @@ func die():
 	get_tree().call_group("level","ennemy_die",self)
 	await get_tree().create_timer(3).timeout
 	queue_free()
-	
 
+func get_random_point_around_spawn_point():
+	var x_rand = rng.randf_range(-3, 3)
+	var z_rand = rng.randf_range(-3.0, 3)
+	return Vector3(spawnOrigin) + Vector3(x_rand,spawnOrigin.y,z_rand)
+	
 func get_random_time():
 	return rng.randf_range(2,3)
 
@@ -119,6 +124,14 @@ func _physics_process(delta):
 		velocityComponent.move(self,delta)
 		return
 
+func select_random_target_point_around_spawn():
+	var target_position = get_random_point_around_spawn_point()
+	target = null
+	pathFindComponent.set_target_position_with_vector(target_position)
+
+func update_target_position():
+	pathFindComponent.set_target_position_node(target)
+	
 func select_target():
 	var nb_potential_target = interactionArea3D.get_body_count_in_area();
 	
@@ -130,7 +143,8 @@ func select_target():
 	if nearestBody == null :
 		has_target_to_attack = false
 		return
-		
+	
+	print("target_to_attack")
 	target=nearestBody
 	pathFindComponent.set_target_position_node(target)
 	has_target_to_attack = true
